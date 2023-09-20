@@ -257,6 +257,107 @@ describe("InsightFacade", function () {
 				expect(error).to.be.instanceof(InsightError);
 			}
 		});
+		it("should successfully list zero added datasets", async function () {
+			const result = await facade.listDatasets();
+			expect(result).to.be.an("array");
+			expect(result.length).to.equal(0);
+		});
+
+		// it ("should successfully list one added dataset", function() {
+		//     const result = facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+		//     expect(result).to.eventually.have.members(["ubc"]);
+		//     const result2 = facade.listDatasets();
+		//     return expect(result2).to.eventually.have.deep.members([{
+		//         id: "ubc",
+		//         kind: InsightDatasetKind.Sections,
+		//         numRows: 64612
+		//     }]);
+		// });
+
+		it("should successfully list one added dataset using async/await and deep", async function () {
+			const result = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			expect(result).to.have.members(["ubc"]);
+			const result2 = await facade.listDatasets();
+			expect(result2).to.have.deep.members([{
+				id: "ubc",
+				kind: InsightDatasetKind.Sections,
+				numRows: 64612
+			}]);
+		});
+
+		it("should successfully list one added dataset using async/await", async function () {
+			const resultAdd = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			expect(resultAdd).to.have.members(["ubc"]);
+
+			const result = await facade.listDatasets();
+			expect(result).to.be.an("array");
+			expect(result.length).to.equal(1);
+			expect(result[0]).to.deep.equal({
+				id: "ubc",
+				kind: InsightDatasetKind.Sections,
+				numRows: 64612
+			});
+		});
+
+		it("should successfully list two added dataset using async/await", async function () {
+			const resultAdd = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			expect(resultAdd).to.have.members(["ubc"]);
+
+			const resultAdd2 = await facade.addDataset("ubc2", sectionsTwo, InsightDatasetKind.Sections);
+			expect(resultAdd2).to.have.members(["ubc", "ubc2"]);
+
+			const result = await facade.listDatasets();
+			expect(result).to.be.an("array");
+			expect(result.length).to.equal(2);
+			expect(result).to.deep.include.members([
+				{
+					id: "ubc",
+					kind: InsightDatasetKind.Sections,
+					numRows: 64612
+				},
+				{
+					id: "ubc2",
+					kind: InsightDatasetKind.Sections,
+					numRows: 36
+				}
+			]);
+		});
+
+		it("should add two datasets remove one and list one", async function () {
+			const resultAdd = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			expect(resultAdd).to.have.members(["ubc"]);
+
+			const resultAdd2 = await facade.addDataset("ubc2", sectionsTwo, InsightDatasetKind.Sections);
+			expect(resultAdd2).to.have.members(["ubc", "ubc2"]);
+
+			const result = await facade.listDatasets();
+			expect(result).to.be.an("array");
+			expect(result.length).to.equal(2);
+			expect(result).to.deep.include.members([
+				{
+					id: "ubc",
+					kind: InsightDatasetKind.Sections,
+					numRows: 64612
+				},
+				{
+					id: "ubc2",
+					kind: InsightDatasetKind.Sections,
+					numRows: 36
+				}
+			]);
+
+			const resultRemove = await facade.removeDataset("ubc2");
+			expect(resultRemove).to.equal("ubc2");
+
+			const result2 = await facade.listDatasets();
+			expect(result2).to.be.an("array");
+			expect(result2.length).to.equal(1);
+			expect(result2[0]).to.deep.equal({
+				id: "ubc",
+				kind: InsightDatasetKind.Sections,
+				numRows: 64612
+			});
+		});
 	});
 
 	/*

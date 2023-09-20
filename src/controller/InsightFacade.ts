@@ -19,16 +19,17 @@ export default class InsightFacade implements IInsightFacade {
 	constructor() {
 		console.log("InsightFacadeImpl::init()");
 	}
-
-	private datasets: Map<string, unknown> = new Map();
+	private datasets: InsightDataset[] = [];
+	// private datasets: Map<string, unknown> = new Map();
 	public async addDataset(id: string, content: string, kind: InsightDatasetKind): Promise<string[]> {
 		if (!this.isValidId(id)) {
 			return Promise.reject(new InsightError("Invalid id"));
 		}
 
-		if (this.datasets.has(id)) {
+		if (this.datasets.find((dataset) => dataset.id === id)) {
 			return Promise.reject(new InsightError("Dataset ID already exists"));
 		}
+
 
 		let extractedContent;
 		try {
@@ -44,10 +45,19 @@ export default class InsightFacade implements IInsightFacade {
 		if (kind !== InsightDatasetKind.Sections) {
 			return Promise.reject(new InsightError("Is not of kind Sections"));
 		}
+		let numRows = 0;
 
-		this.datasets.set(id, extractedContent);
+		for (let coursePath in extractedContent) {
+			numRows += extractedContent[coursePath].result.length;
+		}
+		const newDataset: InsightDataset = {
+			id: id,
+			kind: kind,
+			numRows: numRows,
+		};
+		this.datasets.push(newDataset);
 
-		return Promise.resolve(Array.from(this.datasets.keys()));
+		return Promise.resolve(this.datasets.map((dataset) => dataset.id));
 	}
 
 	private async extractFromZip(content: string): Promise<ExtractedContent> {
@@ -123,13 +133,17 @@ export default class InsightFacade implements IInsightFacade {
 	public removeDataset(id: string): Promise<string> {
 		if (!this.isValidId(id)) {
 			return Promise.reject(new InsightError("Invalid id"));
-		} else if (!this.datasets.has(id)) {
+		}
+		const datasetIndex = this.datasets.findIndex((dataset) => dataset.id === id);
+
+		if (datasetIndex === -1) {
 			return Promise.reject(new NotFoundError("Dataset ID has not been added"));
 		} else {
-			this.datasets.delete(id);
+			this.datasets.splice(datasetIndex, 1);
 			return Promise.resolve(id);
 		}
 	}
+
 	public isValidId(id: string): boolean {
 		return !(!id || /^\s*$/.test(id) || id.includes("_"));
 	}
@@ -138,6 +152,6 @@ export default class InsightFacade implements IInsightFacade {
 	}
 
 	public listDatasets(): Promise<InsightDataset[]> {
-		return Promise.reject("Not implemented.");
+		return Promise.resolve(this.datasets);
 	}
 }
