@@ -22,7 +22,6 @@ export default class InsightFacade implements IInsightFacade {
 
 	private datasets: Map<string, unknown> = new Map();
 	public async addDataset(id: string, content: string, kind: InsightDatasetKind): Promise<string[]> {
-
 		if (!this.isValidId(id)) {
 			return Promise.reject(new InsightError("Invalid id"));
 		}
@@ -35,14 +34,14 @@ export default class InsightFacade implements IInsightFacade {
 		try {
 			extractedContent = await this.extractFromZip(content);
 
-			if(!this.checkTheExtracted(extractedContent)){
+			if (!this.checkTheExtracted(extractedContent)) {
 				return Promise.reject(new InsightError("The dataset is not valid zip file"));
 			}
 		} catch (error) {
 			return Promise.reject(new InsightError("Failed to extract content from ZIP"));
 		}
 
-		if(kind !== InsightDatasetKind.Sections){
+		if (kind !== InsightDatasetKind.Sections) {
 			return Promise.reject(new InsightError("Is not of kind Sections"));
 		}
 
@@ -60,7 +59,7 @@ export default class InsightFacade implements IInsightFacade {
 		} catch (e) {
 			return Promise.reject(new InsightError("Failed to load ZIP"));
 		}
-		if(!Object.keys(zip.files).length){
+		if (!Object.keys(zip.files).length) {
 			return Promise.reject(new InsightError("The zip file is empty"));
 		}
 		let foundCourses = false;
@@ -105,8 +104,6 @@ export default class InsightFacade implements IInsightFacade {
 		const requiredKeys = ["id", "Course", "Title", "Professor", "Subject", "Year", "Avg", "Pass", "Fail", "Audit"];
 
 		let hasValidSection = false;
-
-		console.log(extractedContent);
 		for (const coursePath in extractedContent) {
 			const courseData = extractedContent[coursePath];
 			for (const section of courseData.result) {
@@ -121,11 +118,17 @@ export default class InsightFacade implements IInsightFacade {
 		}
 
 		return hasValidSection;
-
 	}
 
 	public removeDataset(id: string): Promise<string> {
-		return Promise.reject("Not implemented.");
+		if (!this.isValidId(id)) {
+			return Promise.reject(new InsightError("Invalid id"));
+		} else if (!this.datasets.has(id)) {
+			return Promise.reject(new NotFoundError("Dataset ID has not been added"));
+		} else {
+			this.datasets.delete(id);
+			return Promise.resolve(id);
+		}
 	}
 	public isValidId(id: string): boolean {
 		return !(!id || /^\s*$/.test(id) || id.includes("_"));
