@@ -1,0 +1,100 @@
+{
+  "title": "testing IS with uuid",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "GT": {
+                "sections_avg": 95
+              }
+            },
+            {
+              "IS": {
+                "sections_uuid": "*35*"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 100
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_uuid",
+        "sections_avg",
+        "sections_pass"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "49635",
+      "sections_avg": 95.15,
+      "sections_pass": 20
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35950",
+      "sections_avg": 95.27,
+      "sections_pass": 15
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35951",
+      "sections_avg": 95.27,
+      "sections_pass": 15
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35988",
+      "sections_avg": 95.83,
+      "sections_pass": 6
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35989",
+      "sections_avg": 95.83,
+      "sections_pass": 6
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "5351",
+      "sections_avg": 96.44,
+      "sections_pass": 9
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "5352",
+      "sections_avg": 96.44,
+      "sections_pass": 9
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35870",
+      "sections_avg": 97.29,
+      "sections_pass": 14
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "35871",
+      "sections_avg": 97.29,
+      "sections_pass": 14
+    },
+    {
+      "sections_dept": "eece",
+      "sections_uuid": "10235",
+      "sections_avg": 98.75,
+      "sections_pass": 12
+    }
+  ]
+}

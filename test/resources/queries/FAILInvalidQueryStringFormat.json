@@ -1,0 +1,6 @@
+{
+  "title": "should fail because the value the key type in gt is not valid number thing",
+  "input": "This is an invalid Json format file",
+  "errorExpected": true,
+  "expected": "InsightError"
+}

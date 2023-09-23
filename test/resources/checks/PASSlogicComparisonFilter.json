@@ -1,0 +1,34 @@
+{
+  "title": "this should pass logicComparisonFilter",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "GT": {
+            "sections_avg": 97
+          }
+        },
+        {
+          "LT": {
+            "sections_pass": 5
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg",
+        "sections_pass"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    { "sections_dept": "math", "sections_avg": 97.25, "sections_pass": 4 },
+    { "sections_dept": "math", "sections_avg": 97.25, "sections_pass": 4 },
+    { "sections_dept": "crwr", "sections_avg": 98, "sections_pass": 1 },
+    { "sections_dept": "crwr", "sections_avg": 98, "sections_pass": 1 }
+  ]
+}

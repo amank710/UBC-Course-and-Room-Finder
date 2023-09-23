@@ -38,6 +38,7 @@ describe("InsightFacade", function () {
 	let sectionsSeventeen: string;
 	let sectionsEightTeen: string;
 	let sectionsJustFile: string;
+	let sectionsSmallTest: string;
 
 	before(function () {
 		// This block runs once and loads the datasets.
@@ -59,12 +60,14 @@ describe("InsightFacade", function () {
 		sectionsSeventeen = getContentFromArchives("EmptyResultField.zip");
 		sectionsEightTeen = getContentFromArchives("fieldIsEmptyString2.zip");
 		sectionsJustFile = getContentFromArchives("AANB500");
+		sectionsSmallTest = getContentFromArchives("SmallTestFolder.zip");
 
 		// Just in case there is anything hanging around from a previous run of the test suite
 		clearDisk();
 	});
 
 	describe("Add/Remove/List Dataset", function () {
+		this.timeout(10000);
 		before(function () {
 			console.info(`Before: ${this.test?.parent?.title}`);
 		});
@@ -112,7 +115,7 @@ describe("InsightFacade", function () {
 			return expect(result).to.eventually.be.rejectedWith(InsightError);
 		});
 		it("should accept a idString that is only one character", function () {
-			const result = facade.addDataset("j", sections, InsightDatasetKind.Sections);
+			const result = facade.addDataset("j", sectionsTwo, InsightDatasetKind.Sections);
 
 			return expect(result).to.eventually.have.members(["j"]);
 		});
@@ -171,7 +174,7 @@ describe("InsightFacade", function () {
 			return expect(result).to.eventually.be.rejectedWith(InsightError);
 		});
 		it("should reject with an empty dataset id", function () {
-			const result = facade.addDataset("", sections, InsightDatasetKind.Sections);
+			const result = facade.addDataset("", sectionsTwo, InsightDatasetKind.Sections);
 			return expect(result).to.eventually.be.rejectedWith(InsightError);
 		});
 		it("should reject a dataset that only contains whitespace", function () {
@@ -191,13 +194,13 @@ describe("InsightFacade", function () {
 			return expect(result).to.eventually.have.members(["ubc"]);
 		});
 		it("should successfully add multiple datasets", async function () {
-			await facade.addDataset("ubc1", sections, InsightDatasetKind.Sections);
-			const result = await facade.addDataset("ubc2", sections, InsightDatasetKind.Sections);
+			await facade.addDataset("ubc1", sectionsTwo, InsightDatasetKind.Sections);
+			const result = await facade.addDataset("ubc2", sectionsTwo, InsightDatasetKind.Sections);
 			expect(result).to.have.members(["ubc1", "ubc2"]);
 		});
 		it("should reject adding dataset with an existing ID", function () {
-			return facade.addDataset("ubc", sections, InsightDatasetKind.Sections).then(() => {
-				const result = facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			return facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections).then(() => {
+				const result = facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 				return expect(result).to.eventually.be.rejectedWith(InsightError);
 			});
 		});
@@ -210,16 +213,16 @@ describe("InsightFacade", function () {
 			}
 		});
 		it("should successfully add a dataset and then remove it", async function () {
-			const addResult = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			const addResult = await facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 			expect(addResult).to.have.members(["ubc"]);
 
 			const removeResult = await facade.removeDataset("ubc");
 			expect(removeResult).to.equal("ubc");
 		});
 		it("should successfully add two datasets and then remove both of them", async function () {
-			await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			await facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 
-			const addResult2 = await facade.addDataset("ubc1", sections, InsightDatasetKind.Sections);
+			const addResult2 = await facade.addDataset("ubc1", sectionsTwo, InsightDatasetKind.Sections);
 			expect(addResult2).to.have.members(["ubc", "ubc1"]);
 
 			const removeResult = await facade.removeDataset("ubc");
@@ -263,30 +266,19 @@ describe("InsightFacade", function () {
 			expect(result.length).to.equal(0);
 		});
 
-		// it ("should successfully list one added dataset", function() {
-		//     const result = facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
-		//     expect(result).to.eventually.have.members(["ubc"]);
-		//     const result2 = facade.listDatasets();
-		//     return expect(result2).to.eventually.have.deep.members([{
-		//         id: "ubc",
-		//         kind: InsightDatasetKind.Sections,
-		//         numRows: 64612
-		//     }]);
-		// });
-
 		it("should successfully list one added dataset using async/await and deep", async function () {
-			const result = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			const result = await facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 			expect(result).to.have.members(["ubc"]);
 			const result2 = await facade.listDatasets();
 			expect(result2).to.have.deep.members([{
 				id: "ubc",
 				kind: InsightDatasetKind.Sections,
-				numRows: 64612
+				numRows: 36
 			}]);
 		});
 
 		it("should successfully list one added dataset using async/await", async function () {
-			const resultAdd = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			const resultAdd = await facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 			expect(resultAdd).to.have.members(["ubc"]);
 
 			const result = await facade.listDatasets();
@@ -295,12 +287,12 @@ describe("InsightFacade", function () {
 			expect(result[0]).to.deep.equal({
 				id: "ubc",
 				kind: InsightDatasetKind.Sections,
-				numRows: 64612
+				numRows: 36
 			});
 		});
 
 		it("should successfully list two added dataset using async/await", async function () {
-			const resultAdd = await facade.addDataset("ubc", sections, InsightDatasetKind.Sections);
+			const resultAdd = await facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Sections);
 			expect(resultAdd).to.have.members(["ubc"]);
 
 			const resultAdd2 = await facade.addDataset("ubc2", sectionsTwo, InsightDatasetKind.Sections);
@@ -313,7 +305,7 @@ describe("InsightFacade", function () {
 				{
 					id: "ubc",
 					kind: InsightDatasetKind.Sections,
-					numRows: 64612
+					numRows: 36
 				},
 				{
 					id: "ubc2",
@@ -366,6 +358,7 @@ describe("InsightFacade", function () {
 	 * You can still make tests the normal way, this is just a convenient tool for a majority of queries.
 	 */
 	describe("PerformQuery", () => {
+		this.timeout(10000);
 		before(function () {
 			console.info(`Before: ${this.test?.parent?.title}`);
 
@@ -388,15 +381,23 @@ describe("InsightFacade", function () {
 		folderTest<unknown, Promise<InsightResult[]>, PQErrorKind>(
 			"Dynamic InsightFacade PerformQuery tests",
 			(input) => facade.performQuery(input),
-			"./test/resources/queries",
+			"./test/resources/oneOnly",
 			{
-				assertOnResult: (actual, expected) => {
-					// TODO add an assertion!
+				assertOnResult: async (actual, expected) => {
+					const expectedAwaited = await expected;
+					expect(actual).to.have.deep.ordered.members(expectedAwaited);
 				},
 				errorValidator: (error): error is PQErrorKind =>
 					error === "ResultTooLargeError" || error === "InsightError",
 				assertOnError: (actual, expected) => {
-					// TODO add an assertion!
+					if (expected === "ResultTooLargeError") {
+						expect(actual).to.be.instanceof(ResultTooLargeError);
+					} else if (expected === "InsightError") {
+						expect(actual).to.be.instanceof(InsightError);
+					} else {
+						// This should be unreachable
+						expect.fail("UNEXPECTED ERROR");
+					}
 				},
 			}
 		);

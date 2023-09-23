@@ -1,0 +1,23 @@
+{
+  "title": "Excess key in query inside",
+  "input": {
+    "title": "Invalid key thing in key in is inside",
+    "input": {
+      "WHERE": {
+        "IS": {
+          "sections_dept": "*"
+        }
+      },
+      "OPTIONS": {
+        "COLUMNS": [
+          "sections_avg",
+          "sections_id"
+        ]
+      }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

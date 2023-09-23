@@ -1,0 +1,18 @@
+{
+  "title": "this should fail because nothing in the LT part",
+  "input": {
+    "WHERE": {
+      "LT": {
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

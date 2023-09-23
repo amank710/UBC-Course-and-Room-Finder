@@ -1,0 +1,28 @@
+{
+  "title": "invalid key type in IS comparator thing 2",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "GT": {
+            "sections_year": 23
+          }
+        },
+        {
+          "IS": {
+            "sections_avg": "hi"
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

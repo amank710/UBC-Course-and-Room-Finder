@@ -1,37 +1,38 @@
 export interface Query {
-	BODY: Body;
+	WHERE: Where;
 	OPTIONS: Options;
 }
 
-export interface Body {
-	WHERE: Filter;
+export interface Where {
+	AND?: Filter[];
+	OR?: Filter[];
+	NOT?: Filter;
+	GT?: MComparison;
+	LT?: MComparison;
+	EQ?: MComparison;
+	IS?: SComparison;
 }
 
-export type Filter = LogicComparison | MComparison | SComparison | Negation;
-
-export interface LogicComparison {
-	[LOGIC: string]: Filter[];
-}
+export type Filter = Where;
 
 export interface MComparison {
-	[MCOMPARATOR: string]: {
-		[mkey: string]: number;
-	};
+	[mkey: string]: number;
 }
 
 export interface SComparison {
-	IS: {
-		[skey: string]: string;
-	};
-}
-
-export interface Negation {
-	NOT: Filter;
+	[skey: string]: string;
 }
 
 export interface Options {
 	COLUMNS: Columns;
-	ORDER?: string;
+	ORDER?: Order;
 }
 
+export type Order = string | ComplexOrder;
 export type Columns = string[];
+
+export interface ComplexOrder {
+	dir: "UP" | "DOWN";
+	keys: string[];
+}
+

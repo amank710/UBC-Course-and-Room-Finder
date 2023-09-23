@@ -1,0 +1,53 @@
+{
+  "title": "sections set to overall",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "IS": {
+                "sections_id": "overall"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 50
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg",
+        "sections_audit",
+        "sections_id"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "busi",
+      "sections_avg": 50,
+      "sections_audit": 0,
+      "sections_id": "441"
+    },
+    {
+      "sections_dept": "chbe",
+      "sections_avg": 50,
+      "sections_audit": 0,
+      "sections_id": "474"
+    },
+    {
+      "sections_dept": "psyc",
+      "sections_avg": 50,
+      "sections_audit": 0,
+      "sections_id": "315"
+    }
+  ]
+}

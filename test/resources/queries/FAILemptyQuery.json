@@ -1,0 +1,7 @@
+{
+  "title": "should fail because the input section doesn't contain a query",
+  "input": {
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

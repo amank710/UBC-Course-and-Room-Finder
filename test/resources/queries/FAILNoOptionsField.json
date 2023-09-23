@@ -1,0 +1,10 @@
+{
+  "title": "should fail because their is no options field",
+  "input": {
+    "WHERE": {
+      "GT": { "sections_avg": 50 }
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

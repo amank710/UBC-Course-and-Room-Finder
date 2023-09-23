@@ -1,0 +1,18 @@
+{
+  "title": "Invalid key thing in key in GT inside",
+  "input": {
+    "WHERE": {
+      "GT": {
+        "sections_bob": ""
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_avg",
+        "sections_id"
+      ]
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

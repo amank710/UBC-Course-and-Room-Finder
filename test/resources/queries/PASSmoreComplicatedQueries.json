@@ -1,0 +1,51 @@
+{
+  "title": "this should pass just more complicated more then 10 results",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "EQ": {
+                "sections_avg": 90
+              }
+            },
+            {
+              "IS": {
+                "sections_dept": "math"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 1
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_id",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    { "sections_dept": "wood", "sections_id": "475", "sections_avg": 1 },
+    { "sections_dept": "math", "sections_id": "423", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "423", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "503", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "503", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "516", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "516", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "523", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "523", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "532", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "532", "sections_avg": 90 },
+    { "sections_dept": "math", "sections_id": "589", "sections_avg": 90 }
+  ]
+}

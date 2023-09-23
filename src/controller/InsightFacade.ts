@@ -4,11 +4,16 @@ import {
 	InsightDatasetKind,
 	InsightError,
 	InsightResult,
-	NotFoundError,
+	NotFoundError, ResultTooLargeError,
 } from "./IInsightFacade";
 import JSZip from "jszip";
+import * as fs from "fs-extra";
 // import {Query} from "../interfaces/queryTypes";
 import {ExtractedContent} from "../interfaces/datasetType";
+import {Query} from "../interfaces/queryTypes";
+import ValidatingQuery from "./validingQuery";
+import GettingQuery from "./gettingQuery";
+
 
 /**
  * This is the main programmatic entry point for the project.
@@ -20,7 +25,9 @@ export default class InsightFacade implements IInsightFacade {
 		console.log("InsightFacadeImpl::init()");
 	}
 	private datasets: InsightDataset[] = [];
-	// private datasets: Map<string, unknown> = new Map();
+	private requiredKeysFile = ["id","Course","Title","Professor","Subject","Year", "Avg", "Pass", "Fail", "Audit"];
+	private columnsKeyList: string[] = [];
+	private dataSetsAccessed: string[] = [];
 	public async addDataset(id: string, content: string, kind: InsightDatasetKind): Promise<string[]> {
 		if (!this.isValidId(id)) {
 			return Promise.reject(new InsightError("Invalid id"));
@@ -55,7 +62,18 @@ export default class InsightFacade implements IInsightFacade {
 			kind: kind,
 			numRows: numRows,
 		};
-		this.datasets.push(newDataset);
+		try{
+			const dirPath = "./data";
+			if (!fs.existsSync(dirPath)) {
+				await fs.mkdir(dirPath);
+			}
+			this.datasets.push(newDataset);
+			const filePath = `${dirPath}/${id}.json`;
+			await fs.writeJson(filePath, extractedContent);
+		} catch (err) {
+			return Promise.reject(new InsightError("Failed to write dataset to disk"));
+		}
+
 
 		return Promise.resolve(this.datasets.map((dataset) => dataset.id));
 	}
@@ -111,19 +129,24 @@ export default class InsightFacade implements IInsightFacade {
 		return structuredContent;
 	}
 	private checkTheExtracted(extractedContent: ExtractedContent): boolean {
-		const requiredKeys = ["id", "Course", "Title", "Professor", "Subject", "Year", "Avg", "Pass", "Fail", "Audit"];
-
 		let hasValidSection = false;
 		for (const coursePath in extractedContent) {
-			const courseData = extractedContent[coursePath];
-			for (const section of courseData.result) {
-				if (requiredKeys.every((key) => Object.prototype.hasOwnProperty.call(section, key))) {
-					hasValidSection = true;
+			if (Object.prototype.hasOwnProperty.call(extractedContent, coursePath)) {
+				const courseData = extractedContent[coursePath];
+				for (const section of courseData.result) {
+					// If Section is 'overall', set year to 1900
+					if (section.Section === "overall") {
+						section.Year = 1900; // or section.year = 1900; (depending on the actual property name)
+					}
+
+					if (this.requiredKeysFile.every((key) => Object.prototype.hasOwnProperty.call(section, key))) {
+						hasValidSection = true;
+						break;
+					}
+				}
+				if (hasValidSection) {
 					break;
 				}
-			}
-			if (hasValidSection) {
-				break;
 			}
 		}
 
@@ -147,10 +170,36 @@ export default class InsightFacade implements IInsightFacade {
 	public isValidId(id: string): boolean {
 		return !(!id || /^\s*$/.test(id) || id.includes("_"));
 	}
-	public performQuery(query: unknown): Promise<InsightResult[]> {
-		return Promise.reject("Not implemented.");
-	}
+	public async performQuery(query: Query): Promise<InsightResult[]> {
+		let validating = new ValidatingQuery();
+		let getting = new GettingQuery();
+		this.columnsKeyList = [];
+		this.dataSetsAccessed = [];
 
+		try {
+			validating.validateQuery(query, this.columnsKeyList, this.dataSetsAccessed, this.datasets);
+
+			// Only considering datasets that are in dataSetsAccessed
+			const filteredDatasets = this.datasets.filter((dataset) => this.dataSetsAccessed.includes(dataset.id));
+
+			const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
+				const filePath = `./data/${datasetId}.json`;
+				const data: ExtractedContent = await fs.readJson(filePath);
+				return data;
+			});
+			const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
+
+
+			let result = getting.applyWhere(query, datasetsContents);
+			if(result && result.length > 5000){
+				return Promise.reject(new ResultTooLargeError("Result too large"));
+			}
+			return getting.applyOptions(query, result);
+
+		} catch (error) {
+			return Promise.reject(new InsightError("Error occurred"));
+		}
+	}
 	public listDatasets(): Promise<InsightDataset[]> {
 		return Promise.resolve(this.datasets);
 	}

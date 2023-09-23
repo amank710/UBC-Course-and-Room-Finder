@@ -1,0 +1,17 @@
+{
+  "title": "should fail because the value the key type in gt is not valid number thing",
+  "input": {
+    "WHERE": {
+      "GT": { "sections_dept": "high" }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

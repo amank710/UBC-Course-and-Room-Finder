@@ -1,0 +1,17 @@
+{
+  "title": "should fail because the value in MCOMPARISON is not a number In GT",
+  "input": {
+    "WHERE": {
+      "GT": { "sections_avg": "high" }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

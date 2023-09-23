@@ -1,0 +1,17 @@
+{
+  "title": "should fail because the sfield is invalid",
+  "input": {
+    "WHERE": {
+      "IS": { "sections_invalidField": "math" }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_invalidField"
+      ],
+      "ORDER": "sections_dept"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

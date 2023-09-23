@@ -1,0 +1,18 @@
+{
+  "title": "Invalid key thing in key in LT inside",
+  "input": {
+    "WHERE": {
+      "LT": {
+        "sections_bob": ""
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_avg",
+        "sections_id"
+      ]
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

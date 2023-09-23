@@ -1,0 +1,256 @@
+{
+  "title": "testing LT with year",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "LT": {
+                "sections_year": 2000
+              }
+            },
+            {
+              "IS": {
+                "sections_title": "japn*"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 100
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_title",
+        "sections_avg",
+        "sections_year"
+      ],
+      "ORDER": "sections_year"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 70.96,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 72.21,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.92,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.48,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.6,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.62,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.7,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 73.26,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.33,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 72.94,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.64,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 68.85,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 74.73,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 71.04,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 77.48,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 78.77,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.4,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.19,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 76.6,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.7,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 78.9,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 73.98,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.96,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.51,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.07,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 77.58,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 73.54,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.93,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 75.65,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.65,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 70.74,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.5,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.13,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 74.62,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 75.35,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 77,
+      "sections_year": 1900
+    }
+  ]
+}

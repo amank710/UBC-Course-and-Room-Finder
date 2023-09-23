@@ -1,0 +1,154 @@
+{
+  "title": "testing IS with title",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "GT": {
+                "sections_avg": 90
+              }
+            },
+            {
+              "IS": {
+                "sections_title": "*jo*"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 100
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_uuid",
+        "sections_avg",
+        "sections_title"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "math",
+      "sections_uuid": "73194",
+      "sections_avg": 90.57,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "rhsc",
+      "sections_uuid": "76519",
+      "sections_avg": 90.67,
+      "sections_title": "major proj prt 1"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "73193",
+      "sections_avg": 90.83,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "rhsc",
+      "sections_uuid": "60945",
+      "sections_avg": 90.83,
+      "sections_title": "major proj prt 1"
+    },
+    {
+      "sections_dept": "rhsc",
+      "sections_uuid": "60944",
+      "sections_avg": 91,
+      "sections_title": "major proj prt 1"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "5400",
+      "sections_avg": 91.5,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "97035",
+      "sections_avg": 91.5,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "rhsc",
+      "sections_uuid": "87136",
+      "sections_avg": 91.5,
+      "sections_title": "major proj prt 1"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "68520",
+      "sections_avg": 92,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "23179",
+      "sections_avg": 92.33,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "23180",
+      "sections_avg": 92.33,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "27509",
+      "sections_avg": 92.6,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "68521",
+      "sections_avg": 92.6,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "97036",
+      "sections_avg": 92.67,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "61312",
+      "sections_avg": 93.5,
+      "sections_title": "msc major essay"
+    },
+    {
+      "sections_dept": "nurs",
+      "sections_uuid": "35390",
+      "sections_avg": 94,
+      "sections_title": "msn major essay"
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_uuid": "1385",
+      "sections_avg": 95,
+      "sections_title": "m.sc major essay"
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_uuid": "1386",
+      "sections_avg": 95,
+      "sections_title": "m.sc major essay"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "34240",
+      "sections_avg": 96.33,
+      "sections_title": "msc major essay"
+    }
+  ]
+}

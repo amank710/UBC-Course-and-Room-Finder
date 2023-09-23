@@ -1,0 +1,30 @@
+{
+  "title": "this should fail because order key is a number",
+  "input": {
+    "WHERE": {
+      "NOT": {
+        "OR": [
+          {
+            "IS": {
+              "sections_dept": "ma*"
+            }
+          },
+          {
+            "GT": {
+              "sections_avg": 30
+            }
+          }
+        ]
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": 10
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

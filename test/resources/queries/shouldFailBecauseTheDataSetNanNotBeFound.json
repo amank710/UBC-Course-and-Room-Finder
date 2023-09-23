@@ -1,0 +1,15 @@
+{
+  "title": "shouldFailBecauseTheDataSetNanNotBeFound",
+  "input": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": [
+        "ubc_dept",
+        "ubc_avg"
+      ],
+      "ORDER": "ubc_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

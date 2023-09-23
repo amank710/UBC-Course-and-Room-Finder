@@ -11,6 +11,9 @@ export interface CourseSection {
 	Audit: unknown;
 	[key: string]: unknown;
 }
+export interface SectionsContainer {
+	section: CourseSection;
+}
 export interface CourseData {
 	result: CourseSection[];
 	[key: string]: unknown;

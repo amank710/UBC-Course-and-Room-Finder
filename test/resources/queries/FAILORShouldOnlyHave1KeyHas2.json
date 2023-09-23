@@ -1,0 +1,47 @@
+{
+  "title": "OR should only have one key but has 2 so it fails",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "OR": [
+            {
+              "EQ": {
+                "sections_avg": 90
+              }
+            },
+            {
+              "IS": {
+                "sections_id": "biology"
+              }
+            }
+          ],
+          "AND": [
+            {
+              "OR": [
+                {
+                  "EQ": {
+                    "sections_avg": 90
+                  }
+                },
+                {
+                  "IS": {
+                    "sections_id": "math"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_avg",
+        "sections_id"
+      ]
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

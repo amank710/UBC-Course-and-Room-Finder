@@ -1,0 +1,82 @@
+{
+  "title": "testing IS with instructor",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "GT": {
+                "sections_avg": 95
+              }
+            },
+            {
+              "IS": {
+                "sections_instructor": "*jo*"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 100
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_uuid",
+        "sections_avg",
+        "sections_instructor"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "psyc",
+      "sections_uuid": "25740",
+      "sections_avg": 95.25,
+      "sections_instructor": "wagner, john"
+    },
+    {
+      "sections_dept": "musc",
+      "sections_uuid": "7254",
+      "sections_avg": 95.38,
+      "sections_instructor": "girard, jonathan"
+    },
+    {
+      "sections_dept": "cnps",
+      "sections_uuid": "33374",
+      "sections_avg": 96,
+      "sections_instructor": "carter, john"
+    },
+    {
+      "sections_dept": "frst",
+      "sections_uuid": "55026",
+      "sections_avg": 96.36,
+      "sections_instructor": "timko, joleen"
+    },
+    {
+      "sections_dept": "musc",
+      "sections_uuid": "78041",
+      "sections_avg": 96.5,
+      "sections_instructor": "girard, jonathan"
+    },
+    {
+      "sections_dept": "epse",
+      "sections_uuid": "49677",
+      "sections_avg": 98.45,
+      "sections_instructor": "cannon, joanna"
+    },
+    {
+      "sections_dept": "math",
+      "sections_uuid": "5373",
+      "sections_avg": 99.78,
+      "sections_instructor": "gomez, jose"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Reference dataset cannot be an empty string",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "IS": {
+            "sections_dept": "*"
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sectionsdept",
+        "sectionsavg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

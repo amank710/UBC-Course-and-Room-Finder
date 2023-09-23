@@ -1,0 +1,37 @@
+{
+  "title": "This should be passing SComparison",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "IS": {
+            "sections_dept": "ma*"
+          }
+        },
+        {
+          "LT": {
+            "sections_avg": 50
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "math",
+      "sections_avg": 46.52
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 49.95
+    }
+  ]
+}

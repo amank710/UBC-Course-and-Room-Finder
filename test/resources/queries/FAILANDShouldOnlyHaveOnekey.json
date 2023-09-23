@@ -1,0 +1,47 @@
+{
+  "title": "AND should only have 1 key",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "OR": [
+            {
+              "EQ": {
+                "sections_avg": 90
+              }
+            },
+            {
+              "IS": {
+                "sections_id": "biology"
+              }
+            }
+          ],
+          "AND": [
+            {
+              "OR": [
+                {
+                  "EQ": {
+                    "sections_avg": 90
+                  }
+                },
+                {
+                  "IS": {
+                    "sections_id": "math"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_avg",
+        "sections_id"
+      ]
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

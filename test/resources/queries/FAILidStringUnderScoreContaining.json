@@ -1,0 +1,17 @@
+{
+  "title": "should fail because the idstring contains an underscore",
+  "input": {
+    "WHERE": {
+      "GT": { "invalid_id_sections_avg": 50 }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "invalid_id_sections_dept",
+        "invalid_id_sections_avg"
+      ],
+      "ORDER": "invalid_id_sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

@@ -1,0 +1,28 @@
+{
+  "title": "this should pass SComparisonFilter",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "IS": {
+            "sections_avg": 30
+          }
+        },
+        {
+          "LT": {
+            "sections_avg": 50
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

@@ -1,0 +1,667 @@
+{
+  "title": "Testing how many failed in math",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "IS": {
+            "sections_dept": "math"
+          }
+        },
+        {
+          "GT": {
+            "sections_fail": 50
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg",
+        "sections_fail",
+        "sections_title"
+      ],
+      "ORDER": "sections_fail"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "math",
+      "sections_avg": 59.11,
+      "sections_fail": 51,
+      "sections_title": "diff calculus"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 54.82,
+      "sections_fail": 51,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 60.17,
+      "sections_fail": 51,
+      "sections_title": "math proof"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.6,
+      "sections_fail": 52,
+      "sections_title": "multivrbl calc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.03,
+      "sections_fail": 53,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.36,
+      "sections_fail": 55,
+      "sections_title": "df calc app lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.42,
+      "sections_fail": 55,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.69,
+      "sections_fail": 55,
+      "sections_title": "multivrbl calc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.1,
+      "sections_fail": 55,
+      "sections_title": "diff equations"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.45,
+      "sections_fail": 55,
+      "sections_title": "partl diff equat"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 70.82,
+      "sections_fail": 56,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.88,
+      "sections_fail": 56,
+      "sections_title": "df calc app lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.43,
+      "sections_fail": 56,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.64,
+      "sections_fail": 56,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.38,
+      "sections_fail": 56,
+      "sections_title": "math proof"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.93,
+      "sections_fail": 58,
+      "sections_title": "diff calculus"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 61.27,
+      "sections_fail": 58,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.69,
+      "sections_fail": 59,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 75.11,
+      "sections_fail": 60,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.89,
+      "sections_fail": 61,
+      "sections_title": "df calc app lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.39,
+      "sections_fail": 61,
+      "sections_title": "int calc ap lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.41,
+      "sections_fail": 61,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.98,
+      "sections_fail": 62,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 62.15,
+      "sections_fail": 62,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.5,
+      "sections_fail": 62,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.67,
+      "sections_fail": 62,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 70.06,
+      "sections_fail": 64,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 59.8,
+      "sections_fail": 64,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.5,
+      "sections_fail": 64,
+      "sections_title": "int calc ap lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 60.12,
+      "sections_fail": 65,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 60.41,
+      "sections_fail": 66,
+      "sections_title": "diff calculus"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.37,
+      "sections_fail": 67,
+      "sections_title": "int calc ap lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.71,
+      "sections_fail": 67,
+      "sections_title": "elem diff eq i"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 70.75,
+      "sections_fail": 68,
+      "sections_title": "df calc app lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.76,
+      "sections_fail": 68,
+      "sections_title": "ord diff equtns"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 73.29,
+      "sections_fail": 70,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.89,
+      "sections_fail": 71,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.51,
+      "sections_fail": 71,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 72.56,
+      "sections_fail": 72,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 59.85,
+      "sections_fail": 73,
+      "sections_title": "diff calculus"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 57.11,
+      "sections_fail": 73,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 61.49,
+      "sections_fail": 75,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.23,
+      "sections_fail": 77,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 71.07,
+      "sections_fail": 78,
+      "sections_title": "df calc app lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 61.18,
+      "sections_fail": 78,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 59.13,
+      "sections_fail": 78,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.81,
+      "sections_fail": 80,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.81,
+      "sections_fail": 80,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.24,
+      "sections_fail": 81,
+      "sections_title": "int calc ap lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.98,
+      "sections_fail": 81,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.06,
+      "sections_fail": 82,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.85,
+      "sections_fail": 83,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 70.84,
+      "sections_fail": 84,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.3,
+      "sections_fail": 84,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.33,
+      "sections_fail": 85,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 61.35,
+      "sections_fail": 86,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.46,
+      "sections_fail": 87,
+      "sections_title": "matrix algebra"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 62.37,
+      "sections_fail": 90,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.73,
+      "sections_fail": 91,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.89,
+      "sections_fail": 91,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.08,
+      "sections_fail": 91,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.99,
+      "sections_fail": 93,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.28,
+      "sections_fail": 94,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 57.93,
+      "sections_fail": 94,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 70.63,
+      "sections_fail": 95,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.41,
+      "sections_fail": 95,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.57,
+      "sections_fail": 96,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 61.03,
+      "sections_fail": 97,
+      "sections_title": "dif calc phys ap"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.91,
+      "sections_fail": 98,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.99,
+      "sections_fail": 98,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 60.96,
+      "sections_fail": 99,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.86,
+      "sections_fail": 100,
+      "sections_title": "int calc ap lf s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.83,
+      "sections_fail": 100,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.48,
+      "sections_fail": 100,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.16,
+      "sections_fail": 100,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.32,
+      "sections_fail": 101,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.98,
+      "sections_fail": 102,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.8,
+      "sections_fail": 106,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.74,
+      "sections_fail": 107,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.46,
+      "sections_fail": 107,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.41,
+      "sections_fail": 107,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 67.16,
+      "sections_fail": 107,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.51,
+      "sections_fail": 107,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.06,
+      "sections_fail": 108,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.13,
+      "sections_fail": 108,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.09,
+      "sections_fail": 110,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.13,
+      "sections_fail": 111,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66,
+      "sections_fail": 112,
+      "sections_title": "linear systems"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 69.27,
+      "sections_fail": 113,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 60.66,
+      "sections_fail": 114,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.12,
+      "sections_fail": 114,
+      "sections_title": "calc socsci comm"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.18,
+      "sections_fail": 115,
+      "sections_title": "calculus 3"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.63,
+      "sections_fail": 120,
+      "sections_title": "df calc ap ph sc"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.46,
+      "sections_fail": 122,
+      "sections_title": "dff calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 68.65,
+      "sections_fail": 145,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.43,
+      "sections_fail": 147,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.63,
+      "sections_fail": 147,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 62.88,
+      "sections_fail": 170,
+      "sections_title": "int calc ap c&ss"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.12,
+      "sections_fail": 180,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 63.51,
+      "sections_fail": 186,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.31,
+      "sections_fail": 190,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 66.28,
+      "sections_fail": 190,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.21,
+      "sections_fail": 193,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 64.55,
+      "sections_fail": 203,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.99,
+      "sections_fail": 205,
+      "sections_title": "int calc ap ph s"
+    },
+    {
+      "sections_dept": "math",
+      "sections_avg": 65.38,
+      "sections_fail": 222,
+      "sections_title": "int calc ap ph s"
+    }
+  ]
+}

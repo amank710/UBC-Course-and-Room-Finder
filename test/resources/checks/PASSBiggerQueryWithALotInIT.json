@@ -1,0 +1,351 @@
+{
+  "title": "Larger query with a lot in it and a lot going on inside",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "OR": [
+            {
+              "IS": {
+                "sections_dept": "*cpsc*"
+              }
+            },
+            {
+              "GT": {
+                "sections_avg": 90
+              }
+            }
+          ]
+        },
+        {
+          "LT": {
+            "sections_year": 2022
+          }
+        },
+        {
+          "NOT": {
+            "IS": {
+              "sections_instructor": "*smith*"
+            }
+          }
+        },
+        {
+          "EQ": {
+            "sections_fail": 6
+          }
+        },
+        {
+          "AND": [
+            {
+              "NOT": {
+                "OR": [
+                  {
+                    "IS": {
+                      "sections_title": "Introduction*"
+                    }
+                  },
+                  {
+                    "LT": {
+                      "sections_pass": 10
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "EQ": {
+                "sections_audit": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg",
+        "sections_instructor",
+        "sections_title",
+        "sections_year",
+        "sections_fail",
+        "sections_pass",
+        "sections_audit"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 67.48,
+      "sections_instructor": "conati, cristina",
+      "sections_title": "artificial intel",
+      "sections_year": 2011,
+      "sections_fail": 6,
+      "sections_pass": 60,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 69,
+      "sections_instructor": "",
+      "sections_title": "artificial intel",
+      "sections_year": 2008,
+      "sections_fail": 6,
+      "sections_pass": 47,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 69.24,
+      "sections_instructor": "allen, meghan",
+      "sections_title": "comptn, progrmng",
+      "sections_year": 2015,
+      "sections_fail": 6,
+      "sections_pass": 23,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 70.83,
+      "sections_instructor": "feeley, michael",
+      "sections_title": "sftwr constructn",
+      "sections_year": 2011,
+      "sections_fail": 6,
+      "sections_pass": 74,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 70.92,
+      "sections_instructor": "belleville, patrice",
+      "sections_title": "comp hard&os",
+      "sections_year": 2012,
+      "sections_fail": 6,
+      "sections_pass": 100,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 70.96,
+      "sections_instructor": "conati, cristina",
+      "sections_title": "artificial intel",
+      "sections_year": 2010,
+      "sections_fail": 6,
+      "sections_pass": 70,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 70.98,
+      "sections_instructor": "knorr, edwin max",
+      "sections_title": "basic alg&data",
+      "sections_year": 2007,
+      "sections_fail": 6,
+      "sections_pass": 55,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 71.39,
+      "sections_instructor": "wolfman, steven",
+      "sections_title": "basic alg&data",
+      "sections_year": 2009,
+      "sections_fail": 6,
+      "sections_pass": 53,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 71.4,
+      "sections_instructor": "kiczales, gregor",
+      "sections_title": "comptn, progrmng",
+      "sections_year": 2009,
+      "sections_fail": 6,
+      "sections_pass": 36,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 71.66,
+      "sections_instructor": "",
+      "sections_title": "internet comp",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 100,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 71.97,
+      "sections_instructor": "",
+      "sections_title": "adv rel databse",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 90,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 72.27,
+      "sections_instructor": "allen, meghan",
+      "sections_title": "intr sftwr eng",
+      "sections_year": 2012,
+      "sections_fail": 6,
+      "sections_pass": 101,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 72.77,
+      "sections_instructor": "",
+      "sections_title": "intr rel databse",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 144,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 73.72,
+      "sections_instructor": "",
+      "sections_title": "comp hard&os",
+      "sections_year": 2008,
+      "sections_fail": 6,
+      "sections_pass": 89,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 74.62,
+      "sections_instructor": "conati, cristina",
+      "sections_title": "artificial intel",
+      "sections_year": 2014,
+      "sections_fail": 6,
+      "sections_pass": 98,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 74.93,
+      "sections_instructor": "de freitas, joao",
+      "sections_title": "machine lrn mine",
+      "sections_year": 2011,
+      "sections_fail": 6,
+      "sections_pass": 68,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 74.93,
+      "sections_instructor": "",
+      "sections_title": "machine lrn mine",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 68,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.02,
+      "sections_instructor": "",
+      "sections_title": "comp hard&os",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 167,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.16,
+      "sections_instructor": "",
+      "sections_title": "comp graphics",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 114,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.23,
+      "sections_instructor": "poole, david",
+      "sections_title": "artificial intel",
+      "sections_year": 2015,
+      "sections_fail": 6,
+      "sections_pass": 139,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.34,
+      "sections_instructor": "belleville, patrice",
+      "sections_title": "model comptn",
+      "sections_year": 2011,
+      "sections_fail": 6,
+      "sections_pass": 81,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.54,
+      "sections_instructor": "",
+      "sections_title": "intr sftwr eng",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 178,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.57,
+      "sections_instructor": "fritz, thomas",
+      "sections_title": "intr sftwr eng",
+      "sections_year": 2010,
+      "sections_fail": 6,
+      "sections_pass": 62,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 75.91,
+      "sections_instructor": "",
+      "sections_title": "artificial intel",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 122,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 77.06,
+      "sections_instructor": "tsiknis, georgios",
+      "sections_title": "model comptn",
+      "sections_year": 2012,
+      "sections_fail": 6,
+      "sections_pass": 162,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 77.64,
+      "sections_instructor": "carter, paul martin",
+      "sections_title": "sftwr constructn",
+      "sections_year": 2011,
+      "sections_fail": 6,
+      "sections_pass": 49,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "cpsc",
+      "sections_avg": 77.64,
+      "sections_instructor": "",
+      "sections_title": "sftwr constructn",
+      "sections_year": 1900,
+      "sections_fail": 6,
+      "sections_pass": 49,
+      "sections_audit": 0
+    }
+  ]
+}

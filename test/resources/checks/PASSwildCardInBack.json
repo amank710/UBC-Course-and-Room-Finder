@@ -1,0 +1,38 @@
+{
+  "title": "this should pass and is testing wildcard in the back",
+  "input": {
+    "WHERE": {
+      "NOT": {
+        "OR": [
+          {
+            "IS": {
+              "sections_dept": "ma*"
+            }
+          },
+          {
+            "GT": {
+              "sections_avg": 30
+            }
+          }
+        ]
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    { "sections_dept": "frst", "sections_avg": 0 },
+    { "sections_dept": "lfs", "sections_avg": 0 },
+    { "sections_dept": "lfs", "sections_avg": 0 },
+    { "sections_dept": "wood", "sections_avg": 1 },
+    { "sections_dept": "busi", "sections_avg": 4 },
+    { "sections_dept": "busi", "sections_avg": 4 },
+    { "sections_dept": "fopr", "sections_avg": 4.5 }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title": "this should fail because OR can only take two filters when comparing",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "EQ": {
+            "sections_avg": 90
+          }
+        },
+        {
+          "IS": {
+            "sections_dept": "math"
+          }
+        },
+        {
+          "GR": {
+            "sections_fail": 30
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

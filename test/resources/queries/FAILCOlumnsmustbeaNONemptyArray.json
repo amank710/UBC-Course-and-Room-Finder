@@ -1,0 +1,17 @@
+{
+  "title": "columns must be a non empty array inside",
+  "input": {
+    "WHERE": {
+      "IS": {
+        "sdf": {
+          "sections_avg": 99
+        }
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": []
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

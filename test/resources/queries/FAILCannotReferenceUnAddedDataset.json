@@ -1,0 +1,28 @@
+{
+  "title": "Cannot Reference A dataset That hasnt been added",
+  "input": {
+    "WHERE": {
+      "AND": [
+        {
+          "GT": {
+            "sections_year": 2000
+          }
+        },
+        {
+          "LT": {
+            "sections_avg": 50
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections1_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

@@ -1,0 +1,28 @@
+{
+  "title": "this should return nothing from the query because GT and LT on the same number",
+  "input":  {
+    "WHERE": {
+      "AND": [
+        {
+          "GT": {
+            "sections_avg": 30
+          }
+        },
+        {
+          "LT": {
+            "sections_avg": 30
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": []
+}

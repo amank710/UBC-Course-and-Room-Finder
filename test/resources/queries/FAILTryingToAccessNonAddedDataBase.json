@@ -1,0 +1,17 @@
+{
+  "title": "should fail because we are trying to access a database that has not been added",
+  "input": {
+    "WHERE": {
+      "IS": { "ubc1_dept": "math" }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "ubc1_dept",
+        "ubc1_avg"
+      ],
+      "ORDER": "ubc1_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

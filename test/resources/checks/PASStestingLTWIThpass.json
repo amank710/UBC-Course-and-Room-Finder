@@ -1,0 +1,706 @@
+{
+  "title": "testing LT with pass",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "LT": {
+                "sections_pass": 200
+              }
+            },
+            {
+              "IS": {
+                "sections_title": "ja*"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 100
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_title",
+        "sections_avg",
+        "sections_year"
+      ],
+      "ORDER": "sections_year"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 70.96,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 72.21,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.92,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.48,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.6,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.62,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.7,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 73.26,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.33,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 72.94,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.64,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 84.57,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 81.71,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 76.89,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 84.92,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 68.85,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 74.73,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 71.04,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 77.48,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 78.77,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.4,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.19,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 76.6,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.7,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 78.9,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 73.98,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.96,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.51,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.07,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 77.58,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "hist",
+      "sections_title": "japan since 1800",
+      "sections_avg": 74.02,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "hist",
+      "sections_title": "japan since 1800",
+      "sections_avg": 72.2,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 73.54,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.93,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 75.65,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.65,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 70.74,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.5,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.13,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 74.62,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 75.35,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 77,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.45,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.36,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.29,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.04,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.86,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.4,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.94,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.46,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89.03,
+      "sections_year": 1900
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.7,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 84.57,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.19,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.07,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89.27,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 86.23,
+      "sections_year": 2007
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 81.71,
+      "sections_year": 2008
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 71.04,
+      "sections_year": 2008
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.75,
+      "sections_year": 2008
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.17,
+      "sections_year": 2008
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 76.89,
+      "sections_year": 2009
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.7,
+      "sections_year": 2009
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 77.58,
+      "sections_year": 2009
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.67,
+      "sections_year": 2009
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.15,
+      "sections_year": 2009
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.48,
+      "sections_year": 2010
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 72.94,
+      "sections_year": 2010
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 76.6,
+      "sections_year": 2010
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89.13,
+      "sections_year": 2010
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 85.74,
+      "sections_year": 2010
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.6,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.64,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 74.73,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 73.98,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 75.65,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 74.62,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 90.19,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.67,
+      "sections_year": 2011
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 77.48,
+      "sections_year": 2012
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 73.54,
+      "sections_year": 2012
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.5,
+      "sections_year": 2012
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89,
+      "sections_year": 2012
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 88.89,
+      "sections_year": 2012
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 71.92,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 74.33,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 68.85,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 78.9,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.93,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 76.13,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.47,
+      "sections_year": 2013
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 70.96,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 75.62,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 75.4,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "hist",
+      "sections_title": "japan since 1800",
+      "sections_avg": 72.2,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 70.74,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 77,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89.46,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.63,
+      "sections_year": 2014
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn pop culture",
+      "sections_avg": 72.21,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "anth",
+      "sections_title": "japn cul&society",
+      "sections_avg": 73.26,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "arth",
+      "sections_title": "japanese art",
+      "sections_avg": 84.92,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn fdl to mod",
+      "sections_avg": 78.77,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.51,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "hist",
+      "sections_title": "japan since 1800",
+      "sections_avg": 74.02,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof life i",
+      "sections_avg": 74.65,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "japn",
+      "sections_title": "japn prof lif ii",
+      "sections_avg": 75.35,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 89.33,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "musc",
+      "sections_title": "jazz ensemble",
+      "sections_avg": 87.23,
+      "sections_year": 2015
+    },
+    {
+      "sections_dept": "asia",
+      "sections_title": "japn religions",
+      "sections_avg": 76.96,
+      "sections_year": 2016
+    }
+  ]
+}

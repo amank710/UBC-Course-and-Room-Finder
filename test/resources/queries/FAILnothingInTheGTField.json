@@ -1,0 +1,18 @@
+{
+  "title": "this should fail because nothing in the GT part",
+  "input": {
+    "WHERE": {
+      "GT": {
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

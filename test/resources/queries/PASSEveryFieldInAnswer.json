@@ -1,0 +1,118 @@
+{
+  "title": "this should pass just more complicated every field is in the answer",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "EQ": {
+                "sections_avg": 92
+              }
+            },
+            {
+              "IS": {
+                "sections_dept": "math"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "sections_avg": 1
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_id",
+        "sections_avg",
+        "sections_uuid",
+        "sections_title",
+        "sections_instructor",
+        "sections_year",
+        "sections_pass",
+        "sections_fail",
+        "sections_audit"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": [
+    {
+      "sections_dept": "wood",
+      "sections_id": "475",
+      "sections_avg": 1,
+      "sections_uuid": "49835",
+      "sections_title": "prpty,ident&uses",
+      "sections_instructor": "",
+      "sections_year": 1900,
+      "sections_pass": 0,
+      "sections_fail": 2,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "math",
+      "sections_id": "515",
+      "sections_avg": 92,
+      "sections_uuid": "73145",
+      "sections_title": "ptl dif eqn flud",
+      "sections_instructor": "tsai, tai-peng",
+      "sections_year": 2010,
+      "sections_pass": 4,
+      "sections_fail": 0,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "math",
+      "sections_id": "515",
+      "sections_avg": 92,
+      "sections_uuid": "73146",
+      "sections_title": "ptl dif eqn flud",
+      "sections_instructor": "",
+      "sections_year": 1900,
+      "sections_pass": 4,
+      "sections_fail": 0,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "math",
+      "sections_id": "525",
+      "sections_avg": 92,
+      "sections_uuid": "34201",
+      "sections_title": "diff geometry i",
+      "sections_instructor": "chen, jingyi",
+      "sections_year": 2013,
+      "sections_pass": 12,
+      "sections_fail": 0,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "math",
+      "sections_id": "525",
+      "sections_avg": 92,
+      "sections_uuid": "34202",
+      "sections_title": "diff geometry i",
+      "sections_instructor": "",
+      "sections_year": 1900,
+      "sections_pass": 12,
+      "sections_fail": 0,
+      "sections_audit": 0
+    },
+    {
+      "sections_dept": "math",
+      "sections_id": "589",
+      "sections_avg": 92,
+      "sections_uuid": "68520",
+      "sections_title": "msc major essay",
+      "sections_instructor": "",
+      "sections_year": 2008,
+      "sections_pass": 4,
+      "sections_fail": 0,
+      "sections_audit": 0
+    }
+  ]
+}
