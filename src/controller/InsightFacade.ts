@@ -23,7 +23,31 @@ import GettingQuery from "./gettingQuery";
 export default class InsightFacade implements IInsightFacade {
 	constructor() {
 		console.log("InsightFacadeImpl::init()");
+		const dirPath = "./data";
+		if (fs.existsSync(dirPath)) {
+			fs.readdirSync(dirPath).forEach((file) => {
+				if (file.endsWith(".json")) {
+					try {
+						const datasetId = file.replace(".json", "");
+						const filePath = `${dirPath}/${file}`;
+						const data = fs.readJsonSync(filePath);
+						const numRows = Object.values(data)
+							.map((content: any) => content.result.length)
+							.reduce((a, b) => a + b, 0);
+						const dataset: InsightDataset = {
+							id: datasetId,
+							kind: InsightDatasetKind.Sections,
+							numRows: numRows,
+						};
+						this.datasets.push(dataset);
+					} catch (err) {
+						console.error(`Failed to load dataset from ${file}`, err);
+					}
+				}
+			});
+		}
 	}
+
 	private datasets: InsightDataset[] = [];
 	private requiredKeysFile = ["id","Course","Title","Professor","Subject","Year", "Avg", "Pass", "Fail", "Audit"];
 	private columnsKeyList: string[] = [];
@@ -128,44 +152,53 @@ export default class InsightFacade implements IInsightFacade {
 
 		return structuredContent;
 	}
+
 	private checkTheExtracted(extractedContent: ExtractedContent): boolean {
 		let hasValidSection = false;
 		for (const coursePath in extractedContent) {
 			if (Object.prototype.hasOwnProperty.call(extractedContent, coursePath)) {
 				const courseData = extractedContent[coursePath];
 				for (const section of courseData.result) {
-					// If Section is 'overall', set year to 1900
-					if (section.Section === "overall") {
-						section.Year = 1900; // or section.year = 1900; (depending on the actual property name)
+					if (section.Section && section.Section === "overall") {
+						section.Year = "1900"; // Modify the Year directly in extractedContent
 					}
-
 					if (this.requiredKeysFile.every((key) => Object.prototype.hasOwnProperty.call(section, key))) {
 						hasValidSection = true;
-						break;
 					}
-				}
-				if (hasValidSection) {
-					break;
 				}
 			}
 		}
-
 		return hasValidSection;
 	}
-
-	public removeDataset(id: string): Promise<string> {
+	public async removeDataset(id: string): Promise<string> {
 		if (!this.isValidId(id)) {
 			return Promise.reject(new InsightError("Invalid id"));
 		}
+
 		const datasetIndex = this.datasets.findIndex((dataset) => dataset.id === id);
 
 		if (datasetIndex === -1) {
 			return Promise.reject(new NotFoundError("Dataset ID has not been added"));
-		} else {
+		}
+
+		const dirPath = "./data";
+		const filePath = `${dirPath}/${id}.json`;
+
+		try {
+			if (await fs.pathExists(filePath)) {
+				await fs.unlink(filePath);
+			} else {
+				console.warn(`File ${filePath} does not exist on the disk, but the dataset is in the datasets array.`);
+			}
+
 			this.datasets.splice(datasetIndex, 1);
 			return Promise.resolve(id);
+
+		} catch (err) {
+			return Promise.reject(new InsightError("Failed to remove dataset from disk. Error"));
 		}
 	}
+
 
 	public isValidId(id: string): boolean {
 		return !(!id || /^\s*$/.test(id) || id.includes("_"));
@@ -179,7 +212,6 @@ export default class InsightFacade implements IInsightFacade {
 		try {
 			validating.validateQuery(query, this.columnsKeyList, this.dataSetsAccessed, this.datasets);
 
-			// Only considering datasets that are in dataSetsAccessed
 			const filteredDatasets = this.datasets.filter((dataset) => this.dataSetsAccessed.includes(dataset.id));
 
 			const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
@@ -188,7 +220,6 @@ export default class InsightFacade implements IInsightFacade {
 				return data;
 			});
 			const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
-
 
 			let result = getting.applyWhere(query, datasetsContents);
 			if(result && result.length > 5000){

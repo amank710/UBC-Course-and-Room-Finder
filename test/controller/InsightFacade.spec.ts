@@ -12,6 +12,7 @@ import {folderTest} from "@ubccpsc310/folder-test";
 import {expect, use} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {clearDisk, getContentFromArchives} from "../TestUtil";
+import * as fs from "fs-extra";
 
 use(chaiAsPromised);
 
@@ -39,6 +40,8 @@ describe("InsightFacade", function () {
 	let sectionsEightTeen: string;
 	let sectionsJustFile: string;
 	let sectionsSmallTest: string;
+	let sectionsANTH: string;
+	let SectionsOverall: string;
 
 	before(function () {
 		// This block runs once and loads the datasets.
@@ -61,7 +64,8 @@ describe("InsightFacade", function () {
 		sectionsEightTeen = getContentFromArchives("fieldIsEmptyString2.zip");
 		sectionsJustFile = getContentFromArchives("AANB500");
 		sectionsSmallTest = getContentFromArchives("SmallTestFolder.zip");
-
+		sectionsANTH = getContentFromArchives("ANTH215.zip");
+		SectionsOverall = getContentFromArchives("SectionsOverall.zip");
 		// Just in case there is anything hanging around from a previous run of the test suite
 		clearDisk();
 	});
@@ -93,6 +97,23 @@ describe("InsightFacade", function () {
 			const result = facade.addDataset("ubc", sectionsJustFile, InsightDatasetKind.Sections);
 
 			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("should persist datasets after a crash", function () {
+			const datasetId = "testDataset";
+			const datasetKind = InsightDatasetKind.Sections;
+
+			return facade.addDataset(datasetId, sectionsTwo, datasetKind)
+				.then((ids) => {
+					expect(ids).to.include(datasetId);
+					const filePath = `./data/${datasetId}.json`;
+					expect(fs.existsSync(filePath)).to.be.true;
+
+					const secondInstance = new InsightFacade();
+					return secondInstance.listDatasets();
+				})
+				.then((datasets) => {
+					expect(datasets.some((dataset) => dataset.id === datasetId)).to.be.true;
+				});
 		});
 		it("should accept a dataset that has fields all contain empty strings", function () {
 			const result = facade.addDataset("ubc", sectionsEightTeen, InsightDatasetKind.Sections);
@@ -381,11 +402,11 @@ describe("InsightFacade", function () {
 		folderTest<unknown, Promise<InsightResult[]>, PQErrorKind>(
 			"Dynamic InsightFacade PerformQuery tests",
 			(input) => facade.performQuery(input),
-			"./test/resources/oneOnly",
+			"./test/resources/queries",
 			{
 				assertOnResult: async (actual, expected) => {
 					const expectedAwaited = await expected;
-					expect(actual).to.have.deep.ordered.members(expectedAwaited);
+					expect(actual).to.have.deep.members(expectedAwaited);
 				},
 				errorValidator: (error): error is PQErrorKind =>
 					error === "ResultTooLargeError" || error === "InsightError",

@@ -95,7 +95,6 @@ export default class GettingQuery{
 		if (isNaN(numValue)) {
 			throw new Error(`Value for ${mappedKey} is not a number`);
 		}
-
 		return numValue > value;
 	}
 
@@ -119,7 +118,6 @@ export default class GettingQuery{
 		if (isNaN(numericComparisonValue)) {
 			throw new Error(`Comparison value ${value} is not a number`);
 		}
-
 		return numValue < numericComparisonValue;
 	}
 
@@ -151,22 +149,19 @@ export default class GettingQuery{
 		const [key, value] = Object.entries(comparison)[0];
 		const keyPart = key.split("_")[1];
 		const mappedKey = this.mapKey(keyPart);
-		if (typeof item[mappedKey as keyof CourseSection] === "string") {
-			const itemValue = item[mappedKey as keyof CourseSection] as string;
-			if (value.startsWith("*") && value.endsWith("*")) {
-				const actualString = value.slice(1, -1);
-				return itemValue.includes(actualString);
-			} else if (value.startsWith("*")) {
-				const actualString = value.slice(1);
-				return itemValue.endsWith(actualString);
-			} else if (value.endsWith("*")) {
-				const actualString = value.slice(0, -1);
-				return itemValue.startsWith(actualString);
-			} else {
-				return itemValue === value;
-			}
+		const itemValue = String(item[mappedKey as keyof CourseSection]);
+		if (value.startsWith("*") && value.endsWith("*")) {
+			const actualString = value.slice(1, -1);
+			return itemValue.includes(actualString);
+		} else if (value.startsWith("*")) {
+			const actualString = value.slice(1);
+			return itemValue.endsWith(actualString);
+		} else if (value.endsWith("*")) {
+			const actualString = value.slice(0, -1);
+			return itemValue.startsWith(actualString);
+		} else {
+			return itemValue === value;
 		}
-		return false;
 	}
 
 
