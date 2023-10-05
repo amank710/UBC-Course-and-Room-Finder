@@ -1,0 +1,12 @@
+{
+	"title": "missing_options_error",
+	"input": {
+		"WHERE": {
+			"EQ": {
+				"sections_fail": 20
+			}
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "options_missing_columns_error",
+  "input": {
+    "WHERE": {
+      "EQ": {
+        "sections_fail": 20
+      }
+    },
+    "OPTIONS": {}
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

@@ -12,6 +12,15 @@ export default class ValidatingQuery {
 		if(!query){
 			throw new InsightError("Query is null");
 		}
+		if(Object.keys(query).length !== 2){
+			throw new InsightError("to many keys in the input layer");
+		}
+		const allowedKeys = ["WHERE", "OPTIONS"];
+		for (let key in query) {
+			if (!allowedKeys.includes(key)) {
+				throw new InsightError(`Invalid key found: ${key}. Only WHERE and OPTIONS are allowed.`);
+			}
+		}
 		if(!cKL){
 			throw new InsightError("columnsKeyList is null");
 		} else {
@@ -34,7 +43,7 @@ export default class ValidatingQuery {
 		}
 		if(!query.WHERE){
 			throw new InsightError("BODY is null");
-		} else{
+		} else {
 			this.checkWhere(query.WHERE);
 		}
 		return true;
@@ -156,19 +165,33 @@ export default class ValidatingQuery {
 
 
 	private checkOptions(options: Options): void {
-		if(!options.COLUMNS){
+		const allowedKeys = ["COLUMNS", "ORDER"];
+		for (let key in options) {
+			if (!allowedKeys.includes(key)) {
+				throw new InsightError(`Invalid key found: ${key}. Only COLUMNS and ORDER are allowed.`);
+			}
+		}
+
+		if (!options.COLUMNS) {
 			throw new InsightError("COLUMNS is null");
 		} else {
 			this.checkColumns(options.COLUMNS);
-		} if(options.ORDER){
+		}
+
+		if (options.ORDER) {
 			this.checkOrder(options.ORDER);
 		}
 	}
 	private checkColumns(columns: Columns): boolean {
+		if (!columns || columns.length === 0) {
+			throw new Error("Columns parameter is empty!");
+		}
+
 		columns.forEach((column) => {
 			this.checkKey(column, this.requireKeysDataset);
 			this.columnsKeyList.push(column);
 		});
+
 		return true;
 	}
 	private checkOrder(order: Order): boolean {

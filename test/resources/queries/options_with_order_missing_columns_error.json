@@ -1,0 +1,15 @@
+{
+  "title": "options_with_order_missing_columns_error",
+  "input": {
+    "WHERE": {
+      "EQ": {
+        "sections_fail": 20
+      }
+    },
+    "OPTIONS": {
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

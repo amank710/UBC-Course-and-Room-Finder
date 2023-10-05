@@ -1,0 +1,19 @@
+{
+  "title": "asterisk_in_middle_error",
+  "input": {
+    "WHERE": {
+      "IS": {
+        "sections_dept": "a*s"
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

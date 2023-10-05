@@ -1,0 +1,18 @@
+{
+  "title": "invalid_key_in_columns_error",
+  "input": {
+    "WHERE": {
+      "GT": {
+        "sections_avg": 97
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dummy"
+      ],
+      "ORDER": "sections_id"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

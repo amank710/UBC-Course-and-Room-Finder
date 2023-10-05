@@ -1,0 +1,19 @@
+{
+  "title": "simple_example_query",
+  "input": {
+    "WHERE": {
+      "dummy": {
+        "sections_avg": 97
+      }
+    },
+    "dummy2": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

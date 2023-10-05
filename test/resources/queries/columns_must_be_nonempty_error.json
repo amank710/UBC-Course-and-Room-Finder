@@ -1,0 +1,15 @@
+{
+	"title": "columns_must_be_nonempty_error",
+	"input": {
+		"WHERE": {
+			"EQ": {
+				"sections_avg": 97
+			}
+		},
+		"OPTIONS": {
+			"COLUMNS": []
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

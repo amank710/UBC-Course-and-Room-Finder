@@ -1,0 +1,19 @@
+{
+  "title": "empty_return_set_success",
+  "input": {
+    "WHERE": {
+      "IS": {
+        "sections_title": "nothing"
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": false,
+  "expected": []
+}

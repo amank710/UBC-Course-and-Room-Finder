@@ -1,0 +1,19 @@
+{
+  "title": "invalid_keys_in_options_error.json",
+  "input": {
+    "WHERE": {
+      "GT": {
+        "sections_avg": 97
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_dept",
+        "sections_avg"
+      ],
+      "DUMMY": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

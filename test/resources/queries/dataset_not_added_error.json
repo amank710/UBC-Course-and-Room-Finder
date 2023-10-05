@@ -1,0 +1,38 @@
+{
+  "title": "dataset_not_added_error",
+  "input": {
+    "WHERE": {
+      "OR": [
+        {
+          "AND": [
+            {
+              "GT": {
+                "dummy_avg": 90
+              }
+            },
+            {
+              "IS": {
+                "dummy_dept": "adhe"
+              }
+            }
+          ]
+        },
+        {
+          "EQ": {
+            "dummy_avg": 95
+          }
+        }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "dummy_dept",
+        "dummy_id",
+        "dummy_avg"
+      ],
+      "ORDER": "dummy_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}

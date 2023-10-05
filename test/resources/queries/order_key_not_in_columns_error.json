@@ -1,0 +1,18 @@
+{
+  "title": "order_key_not_in_columns",
+  "input": {
+    "WHERE": {
+      "GT": {
+        "sections_avg": 97
+      }
+    },
+    "OPTIONS": {
+      "COLUMNS": [
+        "sections_id"
+      ],
+      "ORDER": "sections_avg"
+    }
+  },
+  "errorExpected": true,
+  "expected": "InsightError"
+}
