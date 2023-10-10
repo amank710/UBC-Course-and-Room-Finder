@@ -12,9 +12,9 @@ export default class ValidatingQuery {
 		if(!query){
 			throw new InsightError("Query is null");
 		}
-		if(Object.keys(query).length !== 2){
-			throw new InsightError("to many keys in the input layer");
-		}
+		// if(Object.keys(query).length !== 2){
+		// 	throw new InsightError("to many keys in the input layer");
+		// }
 		const allowedKeys = ["WHERE", "OPTIONS"];
 		for (let key in query) {
 			if (!allowedKeys.includes(key)) {
