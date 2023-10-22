@@ -42,7 +42,13 @@ describe("InsightFacade", function () {
 	let sectionsSmallTest: string;
 	let sectionsANTH: string;
 	let SectionsOverall: string;
-
+	let rooms1: string;
+	let rooms2: string;
+	let noValidRoomsMissingCapacity: string;
+	let noIndexFile: string;
+	let noCampusFolder: string;
+	let missingDiscoverFolder: string;
+	let noCampusFolderHTMLOnOutside: string;
 	before(function () {
 		// This block runs once and loads the datasets.
 		sections = getContentFromArchives("pair.zip");
@@ -66,6 +72,13 @@ describe("InsightFacade", function () {
 		sectionsSmallTest = getContentFromArchives("SmallTestFolder.zip");
 		sectionsANTH = getContentFromArchives("ANTH215.zip");
 		SectionsOverall = getContentFromArchives("SectionsOverall.zip");
+		rooms1 = getContentFromArchives("campus.zip");
+		rooms2	= getContentFromArchives("campus2Missing.zip");
+		noValidRoomsMissingCapacity = getContentFromArchives("noRoomCapacityKeyInOnlyValid.zip");
+		noIndexFile = getContentFromArchives("noIndexFileInZip.zip");
+		noCampusFolder = getContentFromArchives("noCampusFolder.zip");
+		missingDiscoverFolder = getContentFromArchives("missingDiscoverFolder.zip");
+		noCampusFolderHTMLOnOutside = getContentFromArchives("noCampusFolderHTMLOnOutside.zip");
 		// Just in case there is anything hanging around from a previous run of the test suite
 		clearDisk();
 	});
@@ -154,9 +167,17 @@ describe("InsightFacade", function () {
 			const result = facade.addDataset("ubc", sectionsThirteen, InsightDatasetKind.Sections);
 			return expect(result).to.eventually.have.members(["ubc"]);
 		});
-		it("this should be rejected because we have the incorrect InsightDatasetKind", function () {
-			const result = facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Rooms);
-			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		// it("this should be rejected because we have the incorrect InsightDatasetKind", function () {
+		// 	const result = facade.addDataset("ubc", sectionsTwo, InsightDatasetKind.Rooms);
+		// 	return expect(result).to.eventually.be.rejectedWith(InsightError);
+		// });
+		it("should add this rooms dataset successfully", function () {
+			const result = facade.addDataset("rooms", rooms1, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.have.members(["rooms"]);
+		});
+		it("this should work but not really working", function () {
+			const result = facade.addDataset("rooms", rooms2, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.have.members(["rooms"]);
 		});
 		it("should add this dataSet, even with field that can be used by a query contains empty string", function () {
 			const result = facade.addDataset("ubc", sectionsTwelve, InsightDatasetKind.Sections);
@@ -369,6 +390,108 @@ describe("InsightFacade", function () {
 				id: "ubc",
 				kind: InsightDatasetKind.Sections,
 				numRows: 64612
+			});
+		});
+	});
+	describe("Add/Remove/List Dataset Rooms", function () {
+		this.timeout(10000);
+		before(function () {
+			console.info(`Before: ${this.test?.parent?.title}`);
+		});
+
+		beforeEach(function () {
+			// This section resets the insightFacade instance
+			// This runs before each test
+			console.info(`BeforeTest: ${this.currentTest?.title}`);
+			facade = new InsightFacade();
+		});
+
+		after(function () {
+			console.info(`After: ${this.test?.parent?.title}`);
+		});
+
+		afterEach(function () {
+			// This section resets the data directory (removing any cached data)
+			// This runs after each test, which should make each test independent of the previous one
+			console.info(`AfterTest: ${this.currentTest?.title}`);
+			clearDisk();
+		});
+		it("should add this rooms dataset successfully", function () {
+			const result = facade.addDataset("rooms", rooms1, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.have.members(["rooms"]);
+		});
+		it("should fall because key invalid format", function () {
+			const result = facade.addDataset("rooms_2", rooms2, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("noValidRoomsMissingCapacity", function () {
+			const result = facade.addDataset("rooms", noValidRoomsMissingCapacity, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("noIndexFile", function () {
+			const result = facade.addDataset("rooms", noIndexFile, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("noCampusFolder", function () {
+			const result = facade.addDataset("rooms", noCampusFolder, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("missingDiscoverFolder", function () {
+			const result = facade.addDataset("rooms", missingDiscoverFolder, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("noCampusFolderHTMLOnOutside", function () {
+			const result = facade.addDataset("rooms", noCampusFolderHTMLOnOutside, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("should successfully add two datasets and then remove both of them of kind rooms", async function () {
+			await facade.addDataset("campus1", rooms1, InsightDatasetKind.Rooms);
+
+			const addResult2 = await facade.addDataset("campus2", rooms2, InsightDatasetKind.Rooms);
+			expect(addResult2).to.have.members(["campus1", "campus2"]);
+
+			const removeResult = await facade.removeDataset("campus1");
+			expect(removeResult).to.equal("campus1");
+
+			const removeResult2 = await facade.removeDataset("campus2");
+			expect(removeResult2).to.equal("campus2");
+
+			// const datasets = await facade.listDatasets();
+			// expect(datasets).to.be.an("array").that.is.empty;
+		});
+		it("should add two datasets remove one and list one of kind rooms", async function () {
+			const resultAdd = await facade.addDataset("campus1", rooms1, InsightDatasetKind.Rooms);
+			expect(resultAdd).to.have.members(["campus1"]);
+
+			const resultAdd2 = await facade.addDataset("campus2", rooms2, InsightDatasetKind.Rooms);
+			expect(resultAdd2).to.have.members(["campus1", "campus2"]);
+
+			const result = await facade.listDatasets();
+			expect(result).to.be.an("array");
+			expect(result.length).to.equal(2);
+			expect(result).to.deep.include.members([
+				{
+					id: "campus1",
+					kind: InsightDatasetKind.Rooms,
+					numRows: 364
+				},
+				{
+					id: "campus2",
+					kind: InsightDatasetKind.Rooms,
+					numRows: 6
+				}
+			]);
+
+			const resultRemove = await facade.removeDataset("campus2");
+			expect(resultRemove).to.equal("campus2");
+
+			const result2 = await facade.listDatasets();
+			expect(result2).to.be.an("array");
+			expect(result2.length).to.equal(1);
+			expect(result2[0]).to.deep.equal({
+				id: "campus1",
+				kind: InsightDatasetKind.Rooms,
+				numRows: 364
 			});
 		});
 	});

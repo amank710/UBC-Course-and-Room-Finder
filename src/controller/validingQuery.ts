@@ -48,6 +48,7 @@ export default class ValidatingQuery {
 		}
 		return true;
 	}
+
 	private checkWhere(where: Where): boolean {
 		const keys = Object.keys(where);
 		if (keys.length > 1) {
@@ -126,6 +127,7 @@ export default class ValidatingQuery {
 		}
 		return true;
 	}
+
 	private checkComparisonOperatorString(comparison: SComparison): boolean {
 		const keys = Object.keys(comparison);
 		if (keys.length !== 1) {
@@ -182,6 +184,7 @@ export default class ValidatingQuery {
 			this.checkOrder(options.ORDER);
 		}
 	}
+
 	private checkColumns(columns: Columns): boolean {
 		if (!columns || columns.length === 0) {
 			throw new Error("Columns parameter is empty!");
@@ -194,6 +197,7 @@ export default class ValidatingQuery {
 
 		return true;
 	}
+
 	private checkOrder(order: Order): boolean {
 		if (typeof order === "string") {
 			this.checkKey(order, this.requireKeysDataset);
@@ -219,6 +223,7 @@ export default class ValidatingQuery {
 		}
 		return true;
 	}
+
 	private checkKey(key: string, keys: string[]): boolean {
 		let parts = key.split("_");
 
@@ -241,6 +246,7 @@ export default class ValidatingQuery {
 		}
 		return true;
 	}
+
 	private datasetNameExists(datasetName: string): boolean {
 		if (this.dataSetsAccessed.includes(datasetName)) {
 			return true;

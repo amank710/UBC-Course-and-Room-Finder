@@ -1,6 +1,6 @@
 import {Columns, Filter, MComparison, Options, Order, Query, SComparison, Where} from "../interfaces/queryTypes";
 import {InsightDataset, InsightError, InsightResult, ResultTooLargeError} from "./IInsightFacade";
-import {ExtractedContent, CourseData, CourseSection, SectionsContainer} from "../interfaces/datasetType";
+import {ExtractedContent, CourseData, CourseSection, SectionsContainer} from "../interfaces/datasetSectionsType";
 
 export default class GettingQuery{
 	private requireKeysDataset = ["uuid", "id", "title", "instructor","dept", "year", "avg", "pass", "fail", "audit"];
@@ -227,7 +227,6 @@ export default class GettingQuery{
 		}
 	}
 
-
 	private applyColumns(record: CourseSection, columns: Columns): InsightResult {
 		const selectedRecord: InsightResult = {};
 		for (const column of columns) {
@@ -272,6 +271,7 @@ export default class GettingQuery{
 		}
 		return selectedRecord;
 	}
+
 	private mapKey(fromKey: string): string | null {
 		const index = this.requireKeysDataset.indexOf(fromKey);
 		if (index === -1) {
