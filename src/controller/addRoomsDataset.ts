@@ -1,42 +1,59 @@
-import {BuildingInfo, RoomContainer} from "../interfaces/datasetRoomsType";
 import * as parse5 from "parse5";
 import JSZip from "jszip";
 import * as fs from "fs-extra";
 import GettingTheRooms from "./gettingTheRooms";
 import {InsightDataset, InsightDatasetKind, InsightError} from "./IInsightFacade";
-export default class AddingTheRoomsDataset {
+import {BuildingInfo, ExtractedContentRooms, Rooms} from "../interfaces/datasetRoomsType"; // Import the new interfaces
 
-	public async addRoomsDataset(id: string, content: string, kind: InsightDatasetKind, datasets: InsightDataset[]){
-		let extractedContent;
+export default class AddingTheRoomsDataset {
+	public async addRoomsDataset(
+		id: string,
+		content: string,
+		kind: InsightDatasetKind,
+		datasets: InsightDataset[]
+	): Promise<void> {
 		try {
-			extractedContent = await this.extractFromZipRooms(content);
-		} catch (error) {
-			return Promise.reject(new InsightError("Failed to extract content from ZIP"));
-		}
-		let numRows = extractedContent.rooms.length;
-		if(numRows === 0){
-			return Promise.reject(new InsightError("The dataset is not valid zip file"));
-		}
-		const newDataset: InsightDataset = {
-			id: id,
-			kind: kind,
-			numRows: numRows,
-		};
-		try{
+			const extractedContent = await this.extractFromZipRooms(content);
+
+			// ChatGPT code that calculates the number of rows in a weird way
+			const numRows = Object.values(extractedContent)
+				.reduce((acc, building) => acc + building.rooms.length, 0);
+			// Make sure that there is at least one room in the dataset
+			if(numRows === 0){
+				return Promise.reject(new InsightError("The dataset is not valid zip file"));
+			}
+			const newDataset: InsightDataset = {
+				id: id,
+				kind: kind,
+				numRows: numRows,
+			};
+
 			const dirPath = "./data";
-			if (!fs.existsSync(dirPath)) {
+			if (!await fs.pathExists(dirPath)) {
 				await fs.mkdir(dirPath);
 			}
+
 			datasets.push(newDataset);
+
 			const filePath = `${dirPath}/${id}.json`;
 			await fs.writeJson(filePath, extractedContent);
-		} catch (err) {
-			return Promise.reject(new InsightError("Failed to write dataset to disk"));
+
+		} catch (error: any) {
+			if (error instanceof Error) {
+				if (error.message.includes("Failed to extract")) {
+					throw new InsightError("Failed to extract content from ZIP");
+				} else {
+					throw new InsightError(`Failed to write dataset to disk: ${error.message}`);
+				}
+			} else {
+				throw new InsightError("An unknown error occurred.");
+			}
 		}
-		return Promise.resolve();
+
 	}
 
-	private async extractFromZipRooms(content: string): Promise<RoomContainer> {
+
+	private async extractFromZipRooms(content: string): Promise<ExtractedContentRooms> {
 		const zip = new JSZip();
 		try {
 			await zip.loadAsync(content, {base64: true});
@@ -54,9 +71,7 @@ export default class AddingTheRoomsDataset {
 		if (buildingInfoList.length === 0) {
 			return Promise.reject(new InsightError("No valid building links found in index.htm"));
 		}
-		const roomContainer: RoomContainer = {
-			rooms: []
-		};
+		const structuredRooms: ExtractedContentRooms = {};
 		const loadingPromises = buildingInfoList.map(async (building: BuildingInfo) => {
 			if(typeof building.roomsAddress === "string"){
 				const buildingFile = zip.file(building.roomsAddress.slice(2));
@@ -64,13 +79,13 @@ export default class AddingTheRoomsDataset {
 					const buildingContent = await buildingFile.async("text");
 					const gettingRooms = new GettingTheRooms();
 					const partialRoomsData = gettingRooms.extractRoomsFromBuilding(buildingContent);
-					await gettingRooms.constructRooms(building, partialRoomsData, roomContainer);
+					structuredRooms[building.shortname] = await gettingRooms.constructRooms(building, partialRoomsData);
 				}
 			}
 		});
 
 		await Promise.all(loadingPromises);
-		return roomContainer;
+		return structuredRooms;
 	}
 
 	// The traversal code is based on code from ChatGPT
@@ -91,7 +106,7 @@ export default class AddingTheRoomsDataset {
 
 		const buildingInfo: BuildingInfo = {
 			fullname: undefined,
-			shortname: undefined,
+			shortname: "",
 			address: undefined,
 			roomsAddress: undefined
 		};

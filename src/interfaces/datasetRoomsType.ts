@@ -1,3 +1,5 @@
+import {CourseData} from "./datasetSectionsType";
+
 export interface Room {
 	fullname: unknown;
 	shortname: unknown;
@@ -20,7 +22,7 @@ export interface PartialRoom {
 	furniture: unknown;
 	href: unknown;
 }
-export interface RoomContainer {
+export interface Rooms {
 	rooms: Room[];
 }
 
@@ -29,7 +31,7 @@ export interface PartialRoomsContainer {
 }
 export interface BuildingInfo{
 	fullname: unknown;
-	shortname: unknown;
+	shortname: string;
 	address: unknown;
 	roomsAddress: unknown;
 }
@@ -37,4 +39,7 @@ export interface GeoResponse {
 	lat?: number;
 	lon?: number;
 	error?: string;
+}
+export interface ExtractedContentRooms {
+	[buildings: string]: Rooms;
 }

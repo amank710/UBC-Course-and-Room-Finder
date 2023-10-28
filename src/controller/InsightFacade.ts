@@ -4,16 +4,18 @@ import {
 	InsightDatasetKind,
 	InsightError,
 	InsightResult,
-	NotFoundError, ResultTooLargeError,
+	NotFoundError,
+	ResultTooLargeError,
 } from "./IInsightFacade";
-import JSZip from "jszip";
 import * as fs from "fs-extra";
 // import {Query} from "../interfaces/queryTypes";
 import {ExtractedContent} from "../interfaces/datasetSectionsType";
 import {Query} from "../interfaces/queryTypes";
 import ValidatingQuery from "./validingQuery";
-import GettingQuery from "./gettingQuery";
+import GettingQuerySections from "./gettingQuerySections";
 import AddingTheDataset from "./addingTheDataset";
+import {ExtractedContentRooms} from "../interfaces/datasetRoomsType";
+import GettingQueryRooms from "./gettingQueryRooms";
 
 
 /**
@@ -95,31 +97,69 @@ export default class InsightFacade implements IInsightFacade {
 
 	public async performQuery(query: Query): Promise<InsightResult[]> {
 		let validating = new ValidatingQuery();
-		let getting = new GettingQuery();
 		this.columnsKeyList = [];
 		this.dataSetsAccessed = [];
+		let datasetKind: InsightDatasetKind | null = null;
 
 		try {
 			validating.validateQuery(query, this.columnsKeyList, this.dataSetsAccessed, this.datasets);
 
 			const filteredDatasets = this.datasets.filter((dataset) => this.dataSetsAccessed.includes(dataset.id));
-
-			const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
-				const filePath = `./data/${datasetId}.json`;
-				const data: ExtractedContent = await fs.readJson(filePath);
-				return data;
-			});
-			const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
-
-			let result = getting.applyWhere(query, datasetsContents);
-			if(result && result.length > 5000){
-				return Promise.reject(new ResultTooLargeError("Result too large"));
+			if(filteredDatasets.length !== 1) {
+				return Promise.reject(new InsightError("No dataset added or more than one dataset added"));
 			}
-			return getting.applyOptions(query, result);
-
+			for (const dataset of this.datasets) {
+				if (dataset.id === this.dataSetsAccessed[0]) {
+					datasetKind = dataset.kind;
+				}
+			}
+			if(datasetKind === null){
+				return Promise.reject(new InsightError("Dataset kind is null"));
+			}
+			if(datasetKind === InsightDatasetKind.Sections){
+				let result = await this.handleSectionsQuery(query);
+				if(result && result.length > 5000){
+					return Promise.reject(new ResultTooLargeError("Result too large"));
+				} else {
+					let gettingSections = new GettingQuerySections();
+					return gettingSections.applyOptions(query, result);
+				}
+			} else if(datasetKind === InsightDatasetKind.Rooms){
+				let result = await this.handleRoomsQuery(query);
+				if(result && result.length > 5000){
+					return Promise.reject(new ResultTooLargeError("Result too large"));
+				} else {
+					let gettingRooms = new GettingQueryRooms();
+					return gettingRooms.applyOptions(query, result);
+				}
+			} else{
+				return Promise.reject(new InsightError("Invalid dataset kind"));
+			}
 		} catch (error) {
 			return Promise.reject(new InsightError("Error occurred"));
 		}
+	}
+
+	public async handleSectionsQuery(query: Query){
+		const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
+			const filePath = `./data/${datasetId}.json`;
+			const data: ExtractedContent = await fs.readJson(filePath);
+			return data;
+		});
+		const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
+		let gettingSections = new GettingQuerySections();
+		return gettingSections.applyWhere(query, datasetsContents);
+	}
+
+	public async handleRoomsQuery(query: Query){
+		const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
+			const filePath = `./data/${datasetId}.json`;
+			const data: ExtractedContentRooms = await fs.readJson(filePath);
+			return data;
+		});
+		const datasetsContents: ExtractedContentRooms[] = await Promise.all(readPromises);
+		let gettingRooms = new GettingQueryRooms();
+		return gettingRooms.applyWhere(query, datasetsContents);
 	}
 
 	public listDatasets(): Promise<InsightDataset[]> {

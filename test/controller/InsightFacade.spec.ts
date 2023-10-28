@@ -13,6 +13,7 @@ import {expect, use} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {clearDisk, getContentFromArchives} from "../TestUtil";
 import * as fs from "fs-extra";
+import {setFlagsFromString} from "v8";
 
 use(chaiAsPromised);
 
@@ -416,7 +417,7 @@ describe("InsightFacade", function () {
 			console.info(`AfterTest: ${this.currentTest?.title}`);
 			clearDisk();
 		});
-		it("should add this rooms dataset successfully", function () {
+		it("should add this rooms dataset successfully 1", function () {
 			const result = facade.addDataset("rooms", rooms1, InsightDatasetKind.Rooms);
 			return expect(result).to.eventually.have.members(["rooms"]);
 		});
@@ -510,7 +511,8 @@ describe("InsightFacade", function () {
 
 			// Load the datasets specified in datasetsToQuery and add them to InsightFacade.
 			// Will *fail* if there is a problem reading ANY dataset.
-			const loadDatasetPromises = [facade.addDataset("sections", sections, InsightDatasetKind.Sections)];
+			const loadDatasetPromises = [facade.addDataset("sections", sections, InsightDatasetKind.Sections),
+				facade.addDataset("rooms", rooms1, InsightDatasetKind.Rooms)];
 
 			return Promise.all(loadDatasetPromises);
 		});
@@ -525,7 +527,7 @@ describe("InsightFacade", function () {
 		folderTest<unknown, Promise<InsightResult[]>, PQErrorKind>(
 			"Dynamic InsightFacade PerformQuery tests",
 			(input) => facade.performQuery(input),
-			"./test/resources/queries",
+			"./test/resources/roomQueries",
 			{
 				assertOnResult: async (actual, expected) => {
 					const expectedAwaited = await expected;

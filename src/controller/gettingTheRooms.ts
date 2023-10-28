@@ -1,9 +1,10 @@
-import {BuildingInfo, RoomContainer, PartialRoomsContainer, PartialRoom, GeoResponse
-} from "../interfaces/datasetRoomsType";
+import {BuildingInfo, Rooms, PartialRoomsContainer, PartialRoom, GeoResponse} from "../interfaces/datasetRoomsType";
 import * as parse5 from "parse5";
 import {get} from "http";
-export default class GettingTheRooms{
-	public async constructRooms(build: BuildingInfo, PRD: PartialRoomsContainer, RC: RoomContainer) {
+
+export default class GettingTheRooms {
+	public async constructRooms(build: BuildingInfo, PRD: PartialRoomsContainer): Promise<Rooms> {
+		const RC: Rooms = {rooms: []};
 		if (PRD.partialRooms.length > 0) {
 			let lat;
 			let lon;
@@ -11,7 +12,7 @@ export default class GettingTheRooms{
 				const geoResponse: GeoResponse = await this.getGeoLocation(131, build.address);
 				if (geoResponse.error) {
 					console.error(`Failed to fetch geolocation for address
-								${build.address}: ${geoResponse.error}`);
+                                ${build.address}: ${geoResponse.error}`);
 				} else {
 					lat = geoResponse.lat;
 					lon = geoResponse.lon;
@@ -31,11 +32,12 @@ export default class GettingTheRooms{
 					type: partialRoom.type,
 					furniture: partialRoom.furniture,
 					href: partialRoom.href,
-					name: build.shortname + "_" + partialRoom.number,
+					name: `${build.shortname}_${partialRoom.number}`
 				};
 				RC.rooms.push(room);
 			}
 		}
+		return RC;
 	}
 
 	// Got ChatGPT to refactor the next four functions so there is no longer callback hell

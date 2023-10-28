@@ -2,7 +2,7 @@ import {Columns, Filter, MComparison, Options, Order, Query, SComparison, Where}
 import {InsightDataset, InsightError, InsightResult, ResultTooLargeError} from "./IInsightFacade";
 import {ExtractedContent, CourseData, CourseSection, SectionsContainer} from "../interfaces/datasetSectionsType";
 
-export default class GettingQuery{
+export default class GettingQuerySections {
 	private requireKeysDataset = ["uuid", "id", "title", "instructor","dept", "year", "avg", "pass", "fail", "audit"];
 	private requiredKeysFile = ["id","Course","Title","Professor","Subject","Year", "Avg", "Pass", "Fail", "Audit"];
 	private stringKeys = ["id", "Course", "Title", "Professor", "Subject"];

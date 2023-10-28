@@ -1,6 +1,7 @@
 export interface Query {
 	WHERE: Where;
 	OPTIONS: Options;
+	TRANSFORMATIONS?: Transformations; // Making TRANSFORMATIONS optional
 }
 
 export interface Where {
@@ -35,4 +36,27 @@ export interface ComplexOrder {
 	dir: "UP" | "DOWN";
 	keys: string[];
 }
+
+// Added Transofrmations and its related interfaces
+
+export interface Transformations {
+	GROUP: KeyList;
+	APPLY: ApplyRuleList;
+}
+
+export type KeyList = string[];
+export type ApplyRuleList = ApplyRule[];
+
+export interface ApplyRule {
+	[applyKey: string]: ApplyTokenWithKey;
+}
+
+export interface ApplyTokenWithKey {
+	MAX?: string;
+	MIN?: string;
+	AVG?: string;
+	COUNT?: string;
+	SUM?: string;
+}
+
 
