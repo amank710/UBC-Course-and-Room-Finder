@@ -1,0 +1,35 @@
+{
+	"title": "FAIL_IncorrectDirectionField",
+	"input": {
+		"WHERE": {
+			"AND": [
+				{
+					"IS": {
+						"rooms_furniture": "*Tables*"
+					}
+				},
+				{
+					"GT": {
+						"rooms_seats": 200
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"rooms_shortname",
+				"rooms_seats",
+				"rooms_number"
+			],
+			"ORDER": {
+				"dir": "FEED",
+				"keys": [
+					"rooms_seats",
+					"rooms_number"
+				]
+			}
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

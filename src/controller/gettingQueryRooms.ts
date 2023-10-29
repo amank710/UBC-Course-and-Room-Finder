@@ -275,4 +275,25 @@ export default class GettingQueryRooms {
 		}
 		return this.requireKeysDataset[index];
 	}
+
+	public groupResults(data: Room[], query: Query): {[key: string]: Room[]} {
+		// This assumes the structure of the query object. Modify it according to your actual query structure.
+		const groupKeys: string[] = query.TRANSFORMATIONS?.GROUP || [];
+		const groupedData: {[key: string]: Room[]} = {};
+
+		for (const room of data) {
+			// Construct the group key
+			let groupKey = groupKeys.map((key) => {
+				return room[key as keyof Room];
+			}).join("-");
+
+			// Initialize the group array if not already
+			if (!groupedData[groupKey]) {
+				groupedData[groupKey] = [];
+			}
+			// Add the current room to its group
+			groupedData[groupKey].push(room);
+		}
+		return groupedData;
+	}
 }

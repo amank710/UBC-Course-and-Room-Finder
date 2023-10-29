@@ -13,7 +13,6 @@ import {expect, use} from "chai";
 import chaiAsPromised from "chai-as-promised";
 import {clearDisk, getContentFromArchives} from "../TestUtil";
 import * as fs from "fs-extra";
-import {setFlagsFromString} from "v8";
 
 use(chaiAsPromised);
 
@@ -112,14 +111,31 @@ describe("InsightFacade", function () {
 
 			return expect(result).to.eventually.be.rejectedWith(InsightError);
 		});
-		it("should persist datasets after a crash", function () {
+		it("should persist datasets after a crash Sections", function () {
 			const datasetId = "testDataset";
 			const datasetKind = InsightDatasetKind.Sections;
 
 			return facade.addDataset(datasetId, sectionsTwo, datasetKind)
 				.then((ids) => {
 					expect(ids).to.include(datasetId);
-					const filePath = `./data/${datasetId}.json`;
+					const filePath = `./data/Sections/${datasetId}.json`;
+					expect(fs.existsSync(filePath)).to.be.true;
+
+					const secondInstance = new InsightFacade();
+					return secondInstance.listDatasets();
+				})
+				.then((datasets) => {
+					expect(datasets.some((dataset) => dataset.id === datasetId)).to.be.true;
+				});
+		});
+		it("should persist datasets after a crash Rooms", function () {
+			const datasetId = "testDataset1";
+			const datasetKind = InsightDatasetKind.Rooms;
+
+			return facade.addDataset(datasetId, rooms1, datasetKind)
+				.then((ids) => {
+					expect(ids).to.include(datasetId);
+					const filePath = `./data/Rooms/${datasetId}.json`;
 					expect(fs.existsSync(filePath)).to.be.true;
 
 					const secondInstance = new InsightFacade();
@@ -420,6 +436,14 @@ describe("InsightFacade", function () {
 		it("should add this rooms dataset successfully 1", function () {
 			const result = facade.addDataset("rooms", rooms1, InsightDatasetKind.Rooms);
 			return expect(result).to.eventually.have.members(["rooms"]);
+		});
+		it("should fail when trying to add a sections dataset with kind rooms", function () {
+			const result = facade.addDataset("rooms", sectionsTwo, InsightDatasetKind.Rooms);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
+		});
+		it("should fail when trying to add a rooms dataset with kind sections", function () {
+			const result = facade.addDataset("rooms", rooms1, InsightDatasetKind.Sections);
+			return expect(result).to.eventually.be.rejectedWith(InsightError);
 		});
 		it("should fall because key invalid format", function () {
 			const result = facade.addDataset("rooms_2", rooms2, InsightDatasetKind.Rooms);

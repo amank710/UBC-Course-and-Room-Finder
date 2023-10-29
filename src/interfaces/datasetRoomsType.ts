@@ -1,5 +1,3 @@
-import {CourseData} from "./datasetSectionsType";
-
 export interface Room {
 	fullname: unknown;
 	shortname: unknown;

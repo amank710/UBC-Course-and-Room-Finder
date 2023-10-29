@@ -1,0 +1,35 @@
+{
+	"title": "FAIL_IncorrectKeyTypeInIS",
+	"input": {
+		"WHERE": {
+			"AND": [
+				{
+					"IS": {
+						"rooms_lat": "*Tables*"
+					}
+				},
+				{
+					"GT": {
+						"rooms_seats": 200
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"rooms_shortname",
+				"rooms_seats",
+				"rooms_number"
+			],
+			"ORDER": {
+				"dir": "UP",
+				"keys": [
+					"rooms_seats",
+					"rooms_number"
+				]
+			}
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

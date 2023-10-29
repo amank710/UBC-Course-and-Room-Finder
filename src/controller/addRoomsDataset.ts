@@ -6,9 +6,7 @@ import {InsightDataset, InsightDatasetKind, InsightError} from "./IInsightFacade
 import {BuildingInfo, ExtractedContentRooms, Rooms} from "../interfaces/datasetRoomsType"; // Import the new interfaces
 
 export default class AddingTheRoomsDataset {
-	public async addRoomsDataset(
-		id: string,
-		content: string,
+	public async addRoomsDataset(id: string, content: string,
 		kind: InsightDatasetKind,
 		datasets: InsightDataset[]
 	): Promise<void> {
@@ -16,8 +14,13 @@ export default class AddingTheRoomsDataset {
 			const extractedContent = await this.extractFromZipRooms(content);
 
 			// ChatGPT code that calculates the number of rows in a weird way
-			const numRows = Object.values(extractedContent)
-				.reduce((acc, building) => acc + building.rooms.length, 0);
+			const numRows = Object.values(extractedContent).reduce((acc, building) => {
+				// Using a type guard to ensure we are working with Rooms
+				if ((building as Rooms).rooms !== undefined) {
+					return acc + (building as Rooms).rooms.length;
+				}
+				return acc;
+			}, 0);
 			// Make sure that there is at least one room in the dataset
 			if(numRows === 0){
 				return Promise.reject(new InsightError("The dataset is not valid zip file"));
@@ -28,14 +31,20 @@ export default class AddingTheRoomsDataset {
 				numRows: numRows,
 			};
 
-			const dirPath = "./data";
-			if (!await fs.pathExists(dirPath)) {
-				await fs.mkdir(dirPath);
+			const dataDirPath = "./data";
+			if (!fs.existsSync(dataDirPath)) {
+				await fs.mkdir(dataDirPath);
+			}
+
+			// Ensure ./data/Sections directory exists
+			const roomsDirPath = "./data/Rooms";
+			if (!fs.existsSync(roomsDirPath)) {
+				await fs.mkdir(roomsDirPath);
 			}
 
 			datasets.push(newDataset);
 
-			const filePath = `${dirPath}/${id}.json`;
+			const filePath = `${roomsDirPath}/${id}.json`;
 			await fs.writeJson(filePath, extractedContent);
 
 		} catch (error: any) {
@@ -72,6 +81,7 @@ export default class AddingTheRoomsDataset {
 			return Promise.reject(new InsightError("No valid building links found in index.htm"));
 		}
 		const structuredRooms: ExtractedContentRooms = {};
+
 		const loadingPromises = buildingInfoList.map(async (building: BuildingInfo) => {
 			if(typeof building.roomsAddress === "string"){
 				const buildingFile = zip.file(building.roomsAddress.slice(2));

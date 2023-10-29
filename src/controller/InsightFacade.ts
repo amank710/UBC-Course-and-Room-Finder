@@ -14,7 +14,7 @@ import {Query} from "../interfaces/queryTypes";
 import ValidatingQuery from "./validingQuery";
 import GettingQuerySections from "./gettingQuerySections";
 import AddingTheDataset from "./addingTheDataset";
-import {ExtractedContentRooms} from "../interfaces/datasetRoomsType";
+import {ExtractedContentRooms, Rooms} from "../interfaces/datasetRoomsType";
 import GettingQueryRooms from "./gettingQueryRooms";
 
 
@@ -24,34 +24,58 @@ import GettingQueryRooms from "./gettingQueryRooms";
  *
  */
 export default class InsightFacade implements IInsightFacade {
+	private datasets: InsightDataset[] = [];
+
 	constructor() {
 		console.log("InsightFacadeImpl::init()");
-		const dirPath = "./data";
-		if (fs.existsSync(dirPath)) {
-			fs.readdirSync(dirPath).forEach((file) => {
-				if (file.endsWith(".json")) {
-					try {
-						const datasetId = file.replace(".json", "");
-						const filePath = `${dirPath}/${file}`;
-						const data = fs.readJsonSync(filePath);
-						const numRows = Object.values(data)
-							.map((content: any) => content.result.length)
-							.reduce((a, b) => a + b, 0);
-						const dataset: InsightDataset = {
-							id: datasetId,
-							kind: InsightDatasetKind.Sections,
-							numRows: numRows,
-						};
-						this.datasets.push(dataset);
-					} catch (err) {
-						console.error(`Failed to load dataset from ${file}`, err);
+		const baseDirPath = "./data";
+		const sectionDir = `${baseDirPath}/Sections`;
+		const roomDir = `${baseDirPath}/Rooms`;
+
+		const readAndProcessFiles = (dirPath: string, datasetKind: InsightDatasetKind) => {
+			if (fs.existsSync(dirPath)) {
+				fs.readdirSync(dirPath).forEach((file) => {
+					if (file.endsWith(".json")) {
+						try {
+							const datasetId = file.replace(".json", "");
+							const filePath = `${dirPath}/${file}`;
+							const data = fs.readJsonSync(filePath);
+
+							let numRows = 0; // Initialize numRows as 0 (or as a number type)
+
+							// Calculate numRows based on the dataset kind
+							if (datasetKind === InsightDatasetKind.Sections) {
+								numRows = Object.values(data)
+									.map((content: any) => content.result.length)
+									.reduce((a, b) => a + b, 0);
+							} else if (datasetKind === InsightDatasetKind.Rooms) {
+								numRows = Object.values(data).reduce((acc: number, building: any) => {
+									if ((building as Rooms).rooms !== undefined) {
+										return acc + (building as Rooms).rooms.length;
+									}
+									return acc;
+								}, 0);
+							}
+
+							const dataset: InsightDataset = {
+								id: datasetId,
+								kind: datasetKind,
+								numRows: numRows // This should now satisfy the expected type
+							};
+
+							this.datasets.push(dataset);
+						} catch (err) {
+							console.error(`Failed to load dataset from ${file}`, err);
+						}
 					}
-				}
-			});
-		}
+				});
+			}
+		};
+
+		readAndProcessFiles(sectionDir, InsightDatasetKind.Sections);
+		readAndProcessFiles(roomDir, InsightDatasetKind.Rooms);
 	}
 
-	private datasets: InsightDataset[] = [];
 	private requiredKeysFile = ["id","Course","Title","Professor","Subject","Year", "Avg", "Pass", "Fail", "Audit"];
 	private columnsKeyList: string[] = [];
 	private dataSetsAccessed: string[] = [];
@@ -72,14 +96,25 @@ export default class InsightFacade implements IInsightFacade {
 			return Promise.reject(new NotFoundError("Dataset ID has not been added"));
 		}
 
-		const dirPath = "./data";
-		const filePath = `${dirPath}/${id}.json`;
+		const baseDirPath = "./data";
+		const sectionFilePath = `${baseDirPath}/Sections/${id}.json`;
+		const roomFilePath = `${baseDirPath}/Rooms/${id}.json`;
 
 		try {
-			if (await fs.pathExists(filePath)) {
-				await fs.unlink(filePath);
-			} else {
-				console.warn(`File ${filePath} does not exist on the disk, but the dataset is in the datasets array.`);
+			let fileRemoved = false;
+
+			if (await fs.pathExists(sectionFilePath)) {
+				await fs.unlink(sectionFilePath);
+				fileRemoved = true;
+			}
+
+			if (await fs.pathExists(roomFilePath)) {
+				await fs.unlink(roomFilePath);
+				fileRemoved = true;
+			}
+
+			if (!fileRemoved) {
+				console.warn(`File for ${id} does not exist on the disk, but the dataset is in the datasets array.`);
 			}
 
 			this.datasets.splice(datasetIndex, 1);
@@ -89,7 +124,6 @@ export default class InsightFacade implements IInsightFacade {
 			return Promise.reject(new InsightError("Failed to remove dataset from disk. Error"));
 		}
 	}
-
 
 	public isValidId(id: string): boolean {
 		return !(!id || /^\s*$/.test(id) || id.includes("_"));
@@ -140,26 +174,30 @@ export default class InsightFacade implements IInsightFacade {
 		}
 	}
 
-	public async handleSectionsQuery(query: Query){
+	public async handleSectionsQuery(query: Query) {
 		const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
-			const filePath = `./data/${datasetId}.json`;
+			const filePath = `./data/Sections/${datasetId}.json`;
 			const data: ExtractedContent = await fs.readJson(filePath);
 			return data;
 		});
 		const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
 		let gettingSections = new GettingQuerySections();
 		return gettingSections.applyWhere(query, datasetsContents);
+		// let groupedData = gettingSections.groupResults(filteredData, query.GROUP);
+		// return groupedData;
 	}
 
-	public async handleRoomsQuery(query: Query){
+	public async handleRoomsQuery(query: Query) {
 		const readPromises = this.dataSetsAccessed.map(async (datasetId) => {
-			const filePath = `./data/${datasetId}.json`;
+			const filePath = `./data/Rooms/${datasetId}.json`;
 			const data: ExtractedContentRooms = await fs.readJson(filePath);
 			return data;
 		});
 		const datasetsContents: ExtractedContentRooms[] = await Promise.all(readPromises);
 		let gettingRooms = new GettingQueryRooms();
-		return gettingRooms.applyWhere(query, datasetsContents);
+		let filteredData = gettingRooms.applyWhere(query, datasetsContents);
+		let groupedData = gettingRooms.groupResults(filteredData, query);
+		return filteredData; // or further processing if needed
 	}
 
 	public listDatasets(): Promise<InsightDataset[]> {

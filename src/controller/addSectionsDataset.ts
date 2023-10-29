@@ -1,4 +1,4 @@
-import {ExtractedContent} from "../interfaces/datasetSectionsType";
+import {CourseData, ExtractedContent} from "../interfaces/datasetSectionsType";
 import JSZip from "jszip";
 import {InsightDataset, InsightDatasetKind, InsightError} from "./IInsightFacade";
 import * as fs from "fs-extra";
@@ -15,25 +15,44 @@ export default class AddingTheSectionsDataset {
 		} catch (error) {
 			return Promise.reject(new InsightError("Failed to extract content from ZIP"));
 		}
-		let numRows = 0;
+		let numRows = 0; // make sure numRows is defined
 
 		for (let coursePath in extractedContent) {
-			numRows += extractedContent[coursePath].result.length;
+			const courseDataOrKind = extractedContent[coursePath];
+
+			// Using a type guard to ensure we are working with CourseData
+			if ((courseDataOrKind as CourseData).result !== undefined) {
+				numRows += (courseDataOrKind as CourseData).result.length;
+			}
 		}
 		const newDataset: InsightDataset = {
 			id: id,
 			kind: kind,
 			numRows: numRows,
 		};
-		try{
-			const dirPath = "./data";
-			if (!fs.existsSync(dirPath)) {
-				await fs.mkdir(dirPath);
+		try {
+			const dataDirPath = "./data";
+			if (!fs.existsSync(dataDirPath)) {
+				await fs.mkdir(dataDirPath);
 			}
-			datasets.push(newDataset);
-			const filePath = `${dirPath}/${id}.json`;
-			await fs.writeJson(filePath, extractedContent);
+
+			// Ensure ./data/Sections directory exists
+			const sectionsDirPath = "./data/Sections";
+			if (!fs.existsSync(sectionsDirPath)) {
+				await fs.mkdir(sectionsDirPath);
+			}
+
+			// Write the dataset to disk
+			try {
+				datasets.push(newDataset); // Assuming `datasets` and `newDataset` are defined elsewhere
+				const filePath = `./data/Sections/${id}.json`; // Assuming `id` is defined elsewhere
+				await fs.writeJson(filePath, extractedContent); // Assuming `extractedContent` is defined elsewhere
+			} catch (err) {
+				console.error("Failed to write dataset to disk:", err);
+				return Promise.reject(new InsightError("Failed to write dataset to disk"));
+			}
 		} catch (err) {
+			console.error(err); // Log the actual error
 			return Promise.reject(new InsightError("Failed to write dataset to disk"));
 		}
 		return Promise.resolve();
@@ -90,19 +109,29 @@ export default class AddingTheSectionsDataset {
 
 	private checkTheExtractedSections(extractedContent: ExtractedContent): boolean {
 		let hasValidSection = false;
+
 		for (const coursePath in extractedContent) {
 			if (Object.prototype.hasOwnProperty.call(extractedContent, coursePath)) {
 				const courseData = extractedContent[coursePath];
-				for (const section of courseData.result) {
-					if (section.Section && section.Section === "overall") {
-						section.Year = "1900"; // Modify the Year directly in extractedContent
-					}
-					if (this.requiredSectionKeys.every((key) => Object.prototype.hasOwnProperty.call(section, key))) {
-						hasValidSection = true;
+
+				// Use a type guard to make sure courseData is of type CourseData
+				if ((courseData as CourseData).result !== undefined) {
+					for (const section of (courseData as CourseData).result) {
+						// Assuming section has a 'Section' and a 'Year' property. Adjust as needed.
+						if (section.Section && section.Section === "overall") {
+							section.Year = "1900"; // Modify the Year directly in extractedContent
+						}
+
+						if (this.requiredSectionKeys.every((key) =>
+							Object.prototype.hasOwnProperty.call(section, key))) {
+							hasValidSection = true;
+						}
 					}
 				}
 			}
 		}
+
 		return hasValidSection;
 	}
+
 }

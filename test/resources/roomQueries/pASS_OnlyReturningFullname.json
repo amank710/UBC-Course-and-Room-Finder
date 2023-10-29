@@ -1,0 +1,61 @@
+{
+	"title": "PASS_OnlyReturningFullname",
+	"input": {
+		"WHERE": {
+			"AND": [
+				{
+					"IS": {
+						"rooms_fullname": "*chool*"
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"rooms_fullname"
+			]
+		}
+	},
+	"errorExpected": false,
+	"expected": [
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "Jack Bell Building for the School of Social Work"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		},
+		{
+			"rooms_fullname": "School of Population and Public Health"
+		}
+	]
+}
