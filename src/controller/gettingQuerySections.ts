@@ -164,14 +164,12 @@ export default class GettingQuerySections {
 		}
 	}
 
-
-	public applyOptions(query: Query, result: SectionsContainer[]): InsightResult[] {
+	public applyOptions(query: Query, result: InsightResult[]): InsightResult[] {
 		const options = query.OPTIONS;
 
-		const selectedResults: InsightResult[] = result.map((container) =>
-			this.applyColumns(container.section, options.COLUMNS)
+		const selectedResults: InsightResult[] = (result).map((item: InsightResult) =>
+			this.applyColumns(item, options.COLUMNS)
 		);
-
 
 		const augmentedResults = selectedResults.map((el, idx) => ({...el, originalIdx: idx}));
 
@@ -182,7 +180,6 @@ export default class GettingQuerySections {
 
 		return selectedResults;
 	}
-
 
 	private applyOrder(result: InsightResult[], order: Order | string): InsightResult[] {
 		if (typeof order === "string") {
@@ -227,49 +224,69 @@ export default class GettingQuerySections {
 		}
 	}
 
-	private applyColumns(record: CourseSection, columns: Columns): InsightResult {
+	private applyColumns(record: InsightResult, columns: string[]): InsightResult {
 		const selectedRecord: InsightResult = {};
+
 		for (const column of columns) {
-			const keyPart = column.split("_")[1];
-			const mappedKey = this.mapKey(keyPart);
+			const {keyPart, mappedKey} = this.extractKeys(column);
+			this.applySelectedColumn(record, selectedRecord, column, keyPart, mappedKey);
+		}
 
-			if (mappedKey && mappedKey in record) {
-				let value = record[mappedKey];
+		return selectedRecord;
+	}
 
-				if (this.stringKeys.includes(mappedKey)) {
-					if (typeof value !== "string") {
-						try {
-							value = String(value);
-						} catch (e) {
-							console.error(`Failed to convert ${mappedKey} to string: ${e}`);
-						}
-					}
+	private extractKeys(column: string): {keyPart: string, mappedKey: string | undefined} {
+		let keyPart = column.includes("_") ? column.split("_")[1] : column;
+		let mappedKey;
+		if (column.includes("_")) {
+			mappedKey = this.mapKey(keyPart);
+		} else {
+			mappedKey = keyPart;
+		}
+		return {keyPart, mappedKey: mappedKey || undefined};
 
-					if (typeof value === "string") {
-						selectedRecord[column] = value;
-					} else {
-						console.error(`TypeErr: ${mappedKey}. Exp:str, got:${typeof value}.`);
-					}
-				} else if (this.numberKeys.includes(mappedKey)) {
-					if (typeof value !== "number") {
-						try {
-							value = Number(value);
-						} catch (e) {
-							console.error(`Failed to convert ${mappedKey} to number: ${e}`);
-						}
-					}
+	}
 
-					if (typeof value === "number") {
-						selectedRecord[column] = value;
-					} else {
-						console.error(`TypeErr: ${mappedKey}. Exp:num, got:${typeof value}.`);
-					}
-				}
-			} else {
-				console.error(`Invalid column: ${column}`);
+	private applySelectedColumn(
+		record: InsightResult,
+		selectedRecord: InsightResult,
+		column: string,
+		keyPart: string,
+		mappedKey: string | undefined
+	): void {
+		if (!mappedKey || !Object.prototype.hasOwnProperty.call(record, column)) {
+			console.error(`Invalid column: ${column}`);
+			return;
+		}
+
+		let value = record[column];
+		if (this.stringKeys.includes(mappedKey)) {
+			value = this.convertAndValidateType(value, "string");
+		} else if (this.numberKeys.includes(mappedKey)) {
+			value = this.convertAndValidateType(value, "number");
+		}
+
+		if (value !== null) {
+			selectedRecord[column] = value;
+		}
+	}
+
+	private convertAndValidateType(value: any, expectedType: "string" | "number"): any {
+		if (typeof value !== expectedType) {
+			try {
+				value = expectedType === "number" ? Number(value) : String(value);
+			} catch (e) {
+				console.error(`Failed to convert to ${expectedType}: ${e}`);
+				return null;
 			}
 		}
-		return selectedRecord;
+
+		if (typeof value !== expectedType) {
+			console.error(`TypeErr: Expected:${expectedType}, got:${typeof value}.`);
+			return null;
+		}
+
+		return value;
 	}
 
 	private mapKey(fromKey: string): string | null {

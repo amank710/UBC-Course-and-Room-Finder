@@ -14,18 +14,21 @@ export default class ValidatingWhere {
 	private numberKeysSections = ["year", "avg", "pass", "fail", "audit"];
 	private stringKeysRooms = ["fullname", "shortname", "number", "name", "address", "type", "furniture", "href"];
 	private numberKeysRooms = ["lat", "lon", "seats"];
-
+	private count = 0;
 	public checkWhere(where: Where): boolean {
 		const keys = Object.keys(where);
 		if (keys.length > 1) {
 			throw new InsightError("A Where condition should have exactly one key");
 		}
-
 		const key = keys[0];
 		if (!key) {
-			return true;
+			if(this.count === 0) {
+				return true;
+			} else {
+				throw new InsightError("Invalid WHERE condition");
+			}
 		}
-
+		this.count++;
 		if (key === "AND" || key === "OR") {
 			const condition = where[key];
 			if (condition === undefined) {
@@ -36,7 +39,6 @@ export default class ValidatingWhere {
 			if (where.NOT === undefined) {
 				throw new InsightError("NOT condition is missing");
 			}
-
 			const notKeys = Object.keys(where.NOT);
 			if (notKeys.length !== 1) {
 				throw new InsightError("NOT should only have 1 key");
@@ -61,7 +63,6 @@ export default class ValidatingWhere {
 		} else {
 			throw new InsightError("Invalid WHERE condition");
 		}
-
 		return true;
 	}
 

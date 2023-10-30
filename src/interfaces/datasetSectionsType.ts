@@ -14,6 +14,9 @@ export interface CourseSection {
 export interface SectionsContainer {
 	section: CourseSection;
 }
+export interface Sections {
+	sections: CourseSection[];
+}
 export interface CourseData {
 	result: CourseSection[];
 	[key: string]: unknown;

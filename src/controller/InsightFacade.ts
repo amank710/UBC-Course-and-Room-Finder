@@ -9,13 +9,21 @@ import {
 } from "./IInsightFacade";
 import * as fs from "fs-extra";
 // import {Query} from "../interfaces/queryTypes";
-import {ExtractedContent} from "../interfaces/datasetSectionsType";
+import {
+	CourseData,
+	CourseSection,
+	ExtractedContent,
+	Sections,
+	SectionsContainer
+} from "../interfaces/datasetSectionsType";
 import {Query} from "../interfaces/queryTypes";
 import ValidatingQuery from "./validingQuery";
 import GettingQuerySections from "./gettingQuerySections";
 import AddingTheDataset from "./addingTheDataset";
 import {ExtractedContentRooms, Rooms} from "../interfaces/datasetRoomsType";
 import GettingQueryRooms from "./gettingQueryRooms";
+import GettingTransformationsRooms from "./gettingTransformationsRooms";
+import GettingTransformationsSections from "./gettingTransformationsSections";
 
 
 /**
@@ -25,7 +33,6 @@ import GettingQueryRooms from "./gettingQueryRooms";
  */
 export default class InsightFacade implements IInsightFacade {
 	private datasets: InsightDataset[] = [];
-
 	constructor() {
 		console.log("InsightFacadeImpl::init()");
 		const baseDirPath = "./data";
@@ -76,6 +83,7 @@ export default class InsightFacade implements IInsightFacade {
 		readAndProcessFiles(roomDir, InsightDatasetKind.Rooms);
 	}
 
+	private requireKeysDataset = ["uuid", "id", "title", "instructor","dept", "year", "avg", "pass", "fail", "audit"];
 	private requiredKeysFile = ["id","Course","Title","Professor","Subject","Year", "Avg", "Pass", "Fail", "Audit"];
 	private columnsKeyList: string[] = [];
 	private dataSetsAccessed: string[] = [];
@@ -182,9 +190,14 @@ export default class InsightFacade implements IInsightFacade {
 		});
 		const datasetsContents: ExtractedContent[] = await Promise.all(readPromises);
 		let gettingSections = new GettingQuerySections();
-		return gettingSections.applyWhere(query, datasetsContents);
-		// let groupedData = gettingSections.groupResults(filteredData, query.GROUP);
-		// return groupedData;
+		let filteredData =  gettingSections.applyWhere(query, datasetsContents);
+		let newFilteredData = this.convertingData(filteredData);
+		if(query.TRANSFORMATIONS === undefined){
+			return this.transformToInsightResultSections(newFilteredData);
+		}
+		let transformingSections = new GettingTransformationsSections();
+		let groupedData = transformingSections.groupResults(newFilteredData, query);
+		return transformingSections.ApplyTransformations(query, groupedData, this.columnsKeyList);
 	}
 
 	public async handleRoomsQuery(query: Query) {
@@ -196,8 +209,59 @@ export default class InsightFacade implements IInsightFacade {
 		const datasetsContents: ExtractedContentRooms[] = await Promise.all(readPromises);
 		let gettingRooms = new GettingQueryRooms();
 		let filteredData = gettingRooms.applyWhere(query, datasetsContents);
-		let groupedData = gettingRooms.groupResults(filteredData, query);
-		return filteredData; // or further processing if needed
+		if(query.TRANSFORMATIONS === undefined){
+			return this.transformToInsightResultRooms(filteredData);
+		}
+		let transformingRooms = new GettingTransformationsRooms();
+		let groupedData = transformingRooms.groupResults(filteredData, query);
+		return transformingRooms.ApplyTransformations(query, groupedData, this.columnsKeyList); // or further processing if needed
+	}
+
+	private transformToInsightResultSections(filteredData: any[]): InsightResult[] {
+		let insightResults: InsightResult[] = [];
+		for (const data of filteredData) {
+			let insightResult: InsightResult = {};
+			for (const key of this.columnsKeyList) {
+				const newKey = this.mapToNewKey(key.split("_")[1]);
+				if (newKey !== null) {
+					insightResult[key] = data[newKey];
+				}
+			}
+			insightResults.push(insightResult);
+		}
+		return insightResults;
+	}
+
+	private transformToInsightResultRooms(filteredData: any[]): InsightResult[] {
+		let insightResults: InsightResult[] = [];
+		for (const data of filteredData) {
+			let insightResult: InsightResult = {};
+			for (const key of this.columnsKeyList) {
+				insightResult[key] = data[key.split("_")[1]];
+			}
+			insightResults.push(insightResult);
+		}
+		return insightResults;
+	}
+
+	private convertingData(filteredData: SectionsContainer[]): Sections[] {
+		const sectionsResults: any[] = [];
+
+		for (const data of filteredData) {
+			if (data.section) {
+				sectionsResults.push(data.section);
+			}
+		}
+
+		return sectionsResults as Sections[];
+	}
+
+	private mapToNewKey(fromKey: string): string|null {
+		const index = this.requireKeysDataset.indexOf(fromKey);
+		if (index === -1) {
+			return null;
+		}
+		return this.requiredKeysFile[index];
 	}
 
 	public listDatasets(): Promise<InsightDataset[]> {

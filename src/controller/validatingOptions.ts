@@ -46,24 +46,31 @@ export default class ValidatingOptions {
 		if (!columns || columns.length === 0) {
 			throw new Error("Columns parameter is empty!");
 		}
-
-		columns.forEach((column) => {
-			if (this.appliedKeys && this.appliedKeys.has(column)) {
-				this.columnsKeyList.push(column);
-			} else{
+		if(this.columnsKeyList.length > 0){
+			columns.forEach((column) => {
+				if (!this.columnsKeyList.includes(column)) {
+					throw new InsightError(`Column ${column} not in columns`);
+				}
+			});
+		} else if(this.columnsKeyList.length === 0){
+			columns.forEach((column) => {
 				this.checkKey(column);
 				this.columnsKeyList.push(column);
-			}
-		});
+			});
+		}
 
 		return true;
 	}
 
 	private checkOrder(order: Order): boolean {
 		if (typeof order === "string") {
-			this.checkKey(order);
-			if (!this.columnsKeyList.includes(order)) {
-				throw new InsightError("Order key not in columns");
+			if (this.appliedKeys && this.appliedKeys.has(order)) {
+				// Do nothing if order is in appliedKeys
+			} else {
+				this.checkKey(order);
+				if (!this.columnsKeyList.includes(order)) {
+					throw new InsightError("Order key not in columns");
+				}
 			}
 		} else if (typeof order === "object") {
 			const {dir, keys} = order;
@@ -74,9 +81,13 @@ export default class ValidatingOptions {
 				throw new InsightError("Invalid keys in order");
 			}
 			keys.forEach((key) => {
-				this.checkKey(key);
-				if (!this.columnsKeyList.includes(key)) {
-					throw new InsightError(`Order key ${key} not in columns`);
+				if (this.appliedKeys && this.appliedKeys.has(key)){
+					// Do nothing if order is in appliedKeys
+				} else {
+					this.checkKey(key);
+					if (!this.columnsKeyList.includes(key)) {
+						throw new InsightError("Order key not in columns");
+					}
 				}
 			});
 		} else {
@@ -125,7 +136,6 @@ export default class ValidatingOptions {
 				}
 			}
 		}
-
 		const existsInDatasets = this.datasets.some((dataset) => dataset.id === datasetName);
 		if (existsInDatasets) {
 			if (this.dataSetsAccessed.length > 0) {

@@ -1,0 +1,199 @@
+{
+	"title": "PASS_MultipleGroupsInTrans",
+	"input": {
+		"WHERE": {
+			"AND": [
+				{
+					"IS": {
+						"rooms_furniture": "*Tables*"
+					}
+				},
+				{
+					"GT": {
+						"rooms_seats": 100
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"rooms_shortname",
+				"maxSeats",
+				"rooms_name"
+			],
+			"ORDER": {
+				"dir": "DOWN",
+				"keys": [
+					"maxSeats"
+				]
+			}
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"rooms_shortname",
+				"rooms_seats",
+				"rooms_name"
+			],
+			"APPLY": [
+				{
+					"maxSeats": {
+						"MAX": "rooms_seats"
+					}
+				}
+			]
+		}
+	},
+	"errorExpected": false,
+	"expected": [
+		{
+			"rooms_shortname": "OSBO",
+			"maxSeats": 442,
+			"rooms_name": "OSBO_A"
+		},
+		{
+			"rooms_shortname": "HEBB",
+			"maxSeats": 375,
+			"rooms_name": "HEBB_100"
+		},
+		{
+			"rooms_shortname": "LSC",
+			"maxSeats": 350,
+			"rooms_name": "LSC_1001"
+		},
+		{
+			"rooms_shortname": "LSC",
+			"maxSeats": 350,
+			"rooms_name": "LSC_1002"
+		},
+		{
+			"rooms_shortname": "SRC",
+			"maxSeats": 299,
+			"rooms_name": "SRC_220A"
+		},
+		{
+			"rooms_shortname": "SRC",
+			"maxSeats": 299,
+			"rooms_name": "SRC_220B"
+		},
+		{
+			"rooms_shortname": "SRC",
+			"maxSeats": 299,
+			"rooms_name": "SRC_220C"
+		},
+		{
+			"rooms_shortname": "ANGU",
+			"maxSeats": 260,
+			"rooms_name": "ANGU_098"
+		},
+		{
+			"rooms_shortname": "PHRM",
+			"maxSeats": 236,
+			"rooms_name": "PHRM_1101"
+		},
+		{
+			"rooms_shortname": "LSK",
+			"maxSeats": 205,
+			"rooms_name": "LSK_200"
+		},
+		{
+			"rooms_shortname": "CHBE",
+			"maxSeats": 200,
+			"rooms_name": "CHBE_101"
+		},
+		{
+			"rooms_shortname": "SWNG",
+			"maxSeats": 190,
+			"rooms_name": "SWNG_221"
+		},
+		{
+			"rooms_shortname": "SWNG",
+			"maxSeats": 190,
+			"rooms_name": "SWNG_222"
+		},
+		{
+			"rooms_shortname": "SWNG",
+			"maxSeats": 188,
+			"rooms_name": "SWNG_122"
+		},
+		{
+			"rooms_shortname": "SWNG",
+			"maxSeats": 187,
+			"rooms_name": "SWNG_121"
+		},
+		{
+			"rooms_shortname": "LSK",
+			"maxSeats": 183,
+			"rooms_name": "LSK_201"
+		},
+		{
+			"rooms_shortname": "PHRM",
+			"maxSeats": 167,
+			"rooms_name": "PHRM_1201"
+		},
+		{
+			"rooms_shortname": "FRDM",
+			"maxSeats": 160,
+			"rooms_name": "FRDM_153"
+		},
+		{
+			"rooms_shortname": "DMP",
+			"maxSeats": 160,
+			"rooms_name": "DMP_310"
+		},
+		{
+			"rooms_shortname": "IBLC",
+			"maxSeats": 154,
+			"rooms_name": "IBLC_182"
+		},
+		{
+			"rooms_shortname": "MCLD",
+			"maxSeats": 136,
+			"rooms_name": "MCLD_228"
+		},
+		{
+			"rooms_shortname": "LSC",
+			"maxSeats": 125,
+			"rooms_name": "LSC_1003"
+		},
+		{
+			"rooms_shortname": "MCLD",
+			"maxSeats": 123,
+			"rooms_name": "MCLD_202"
+		},
+		{
+			"rooms_shortname": "DMP",
+			"maxSeats": 120,
+			"rooms_name": "DMP_110"
+		},
+		{
+			"rooms_shortname": "WOOD",
+			"maxSeats": 120,
+			"rooms_name": "WOOD_1"
+		},
+		{
+			"rooms_shortname": "WOOD",
+			"maxSeats": 120,
+			"rooms_name": "WOOD_4"
+		},
+		{
+			"rooms_shortname": "WOOD",
+			"maxSeats": 120,
+			"rooms_name": "WOOD_5"
+		},
+		{
+			"rooms_shortname": "IBLC",
+			"maxSeats": 112,
+			"rooms_name": "IBLC_261"
+		},
+		{
+			"rooms_shortname": "BUCH",
+			"maxSeats": 108,
+			"rooms_name": "BUCH_A202"
+		},
+		{
+			"rooms_shortname": "BUCH",
+			"maxSeats": 108,
+			"rooms_name": "BUCH_A203"
+		}
+	]
+}

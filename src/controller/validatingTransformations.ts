@@ -5,10 +5,12 @@ export default class ValidatingTransformations {
 	private datasets: InsightDataset[];
 	private dataSetsAccessed: string[];
 	private appliedKeys: Set<string>;  // A set to keep track of keys used in APPLY
+	private columnsKeyList: string[];
 	private datasetKind: InsightDatasetKind | null = null;
 
-	constructor(datasets: InsightDataset[] = [], dataSetsAccessed: string[] = []) {
+	constructor(datasets: InsightDataset[] = [], columnsKeyList: string[], dataSetsAccessed: string[] = []) {
 		this.datasets = datasets;
+		this.columnsKeyList = columnsKeyList;
 		this.dataSetsAccessed = dataSetsAccessed;
 		this.appliedKeys = new Set<string>();
 	}
@@ -31,7 +33,14 @@ export default class ValidatingTransformations {
 			throw new InsightError("Invalid GROUP in TRANSFORMATIONS");
 		}
 
-		GROUP.forEach((key: string) => this.checkKey(key));
+		GROUP.forEach((key: string) => {
+			if (this.checkKey(key)) {
+				this.columnsKeyList.push(key);
+			} else {
+				throw new InsightError("Invalid GROUP in TRANSFORMATIONS");
+			}
+		});
+
 
 		if (!APPLY || !Array.isArray(APPLY)) {
 			throw new InsightError("Invalid APPLY in TRANSFORMATIONS");
@@ -78,7 +87,7 @@ export default class ValidatingTransformations {
 			throw new InsightError(`Duplicate APPLY key: ${applyKey}`);
 		}
 		this.appliedKeys.add(applyKey);
-
+		this.columnsKeyList.push(applyKey);
 		const applyTokenObj = applyRule[applyKey] as {[token: string]: string};
 		const applyToken = Object.keys(applyTokenObj)[0];
 		const key = applyTokenObj[applyToken];
@@ -93,6 +102,25 @@ export default class ValidatingTransformations {
 
 		this.checkKey(key);
 
+		if (["MAX", "MIN", "AVG", "SUM"].includes(applyToken)) {
+			const parts = key.split("_");
+
+			if (parts.length !== 2) {
+				throw new InsightError("Invalid KEY format");
+			}
+			const [datasetName, field] = parts;
+			if (this.datasetKind !== null && this.datasetKind === InsightDatasetKind.Sections) {
+				if (!this.numberKeysSections.includes(field)) {
+					throw new InsightError(`key needs to be a numeric value: ${field}`);
+				}
+			} else if (this.datasetKind !== null && this.datasetKind === InsightDatasetKind.Rooms) {
+				if (!this.numberKeysRooms.includes(field)) {
+					throw new InsightError(`key needs to be a numeric value: ${field}`);
+				}
+			} else {
+				throw new InsightError("Invalid dataset kind");
+			}
+		}
 		return true;
 	}
 

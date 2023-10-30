@@ -37,7 +37,7 @@ export default class ValidatingQuery {
 		}
 		if(query.TRANSFORMATIONS){
 			let validatingTransformations = new ValidatingTransformations(this.datasets,
-				this.dataSetsAccessed);
+				this.columnsKeyList, this.dataSetsAccessed);
 			this.appliedKeys = validatingTransformations.checkTransformations(query.TRANSFORMATIONS);
 		}
 		if(!query.OPTIONS){
