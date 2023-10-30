@@ -33,22 +33,25 @@ export default class GettingTransformationsSections {
 		groupedData: {[p: string]: Sections[]},
 		columnsKeyList: string[]
 	): InsightResult[] {
-		const APPLY = query.TRANSFORMATIONS!.APPLY;
+		let APPLY;
+		if (query.TRANSFORMATIONS) {
+			APPLY = query.TRANSFORMATIONS.APPLY;
+		}
 		const results: InsightResult[] = [];
 		const extractKey = (key: string) => key.split("_")[1];
+		if(APPLY){
+			for (const applyRule of APPLY) {
+				// Enforce that apply rule should only have 1 key
+				if (Object.keys(applyRule).length !== 1) {
+					throw new Error("Each apply rule should only have one key.");
+				}
 
-		for (const applyRule of APPLY) {
-			// Enforce that apply rule should only have 1 key
-			if (Object.keys(applyRule).length !== 1) {
-				throw new Error("Each apply rule should only have one key.");
-			}
-
-			for (const applyKey in applyRule) {
-				const token: ApplyTokenWithKey = applyRule[applyKey];
-				this.handleToken(token, groupedData, results, extractKey, applyKey, columnsKeyList);
+				for (const applyKey in applyRule) {
+					const token: ApplyTokenWithKey = applyRule[applyKey];
+					this.handleToken(token, groupedData, results, extractKey, applyKey, columnsKeyList);
+				}
 			}
 		}
-
 		return results;
 	}
 
