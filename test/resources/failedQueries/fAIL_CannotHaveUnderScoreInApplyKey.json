@@ -1,0 +1,48 @@
+{
+	"title": "FAIL_CannotHaveUnderScoreInApplyKey",
+	"input": {
+		"WHERE": {
+			"AND": [
+				{
+					"IS": {
+						"rooms_furniture": "*Tables*"
+					}
+				},
+				{
+					"GT": {
+						"rooms_seats": 150
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"rooms_shortname",
+				"max_Seats",
+				"rooms_name"
+			],
+			"ORDER": {
+				"dir": "DOWN",
+				"keys": [
+					"max_Seats",
+					"rooms_shortname"
+				]
+			}
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"rooms_shortname",
+				"rooms_name"
+			],
+			"APPLY": [
+				{
+					"max_Seats": {
+						"MAX": "rooms_seats"
+					}
+				}
+			]
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

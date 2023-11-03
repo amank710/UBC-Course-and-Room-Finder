@@ -36,32 +36,37 @@ export default class GettingTransformationsRooms {
 		groupedData: {[p: string]: Room[]},
 		columnsKeyList: string[]
 	): InsightResult[] {
-		let APPLY;
-		if (query.TRANSFORMATIONS) {
-			APPLY = query.TRANSFORMATIONS.APPLY;
-		}
 		const results: InsightResult[] = [];
+		const tempResults: {[key: string]: InsightResult} = {};
 		const extractKey = (key: string) => key.split("_")[1];
-		if(APPLY){
-			for (const applyRule of APPLY) {
-				// Enforce that apply rule should only have 1 key
-				if (Object.keys(applyRule).length !== 1) {
-					throw new Error("Each apply rule should only have one key.");
-				}
+		let APPLY = query.TRANSFORMATIONS?.APPLY;
 
+		if (!APPLY || APPLY.length === 0) {
+			// Handle the case when APPLY is not defined or empty
+			// Format the results without any transformations
+			this.formatResultsWithoutApply(groupedData, results, columnsKeyList);
+		} else {
+			// Handle APPLY transformations
+			for (const applyRule of APPLY) {
 				for (const applyKey in applyRule) {
 					const token: ApplyTokenWithKey = applyRule[applyKey];
-					this.handleToken(token, groupedData, results, extractKey, applyKey, columnsKeyList);
+					this.handleToken(token, groupedData, tempResults, extractKey, applyKey, columnsKeyList);
 				}
 			}
+
+			// Move all temp results to the results array
+			for (const key in tempResults) {
+				results.push(tempResults[key]);
+			}
 		}
+
 		return results;
 	}
 
 	private handleToken(
 		token: ApplyTokenWithKey,
 		groupedData: {[key: string]: Room[]},
-		results: InsightResult[],
+		tempResults: {[key: string]: InsightResult} = {},
 		extractKeyFn: (key: string) => string,
 		applyKey: string,
 		columnsKeyList: string[]
@@ -82,8 +87,8 @@ export default class GettingTransformationsRooms {
 		for (const groupKey in groupedData) {
 			const aggregator = aggregatorMap[Object.keys(token)[0]];
 			if (aggregator) {
-				this.handleCommonAggregations(token, groupedData,
-					results, extractKeyFn, applyKey, groupKey, columnsKeyList, aggregator);
+				this.handleCommonAggregations(token, groupedData, tempResults,
+					extractKeyFn, applyKey, groupKey, columnsKeyList, aggregator);
 			} else {
 				throw new InsightError("Invalid apply token");
 			}
@@ -93,7 +98,7 @@ export default class GettingTransformationsRooms {
 	private handleCommonAggregations(
 		token: ApplyTokenWithKey,
 		groupedData: {[key: string]: Room[]},
-		results: InsightResult[],
+		tempResults: {[key: string]: InsightResult},
 		extractKeyFn: (key: string) => string,
 		applyKey: string,
 		groupKey: string,
@@ -102,12 +107,20 @@ export default class GettingTransformationsRooms {
 	): void {
 		if (token) {
 			const actualKey = extractKeyFn(Object.values(token)[0]);
-			const result: InsightResult = {};
 
-			// Calculate aggregated value
-			result[applyKey] = aggregator(
+			const aggregatedValue = aggregator(
 				groupedData[groupKey].map((room) => room[actualKey as keyof Room] as unknown as number)
 			);
+
+			// Check if an existing result for the same groupKey exists
+			let result = tempResults[groupKey];
+			if (!result) {
+				result = {};
+				tempResults[groupKey] = result;
+			}
+
+			// Calculate aggregated value
+			result[applyKey] = aggregatedValue;
 
 			// Include additional data fields from the first object in each groupedData[groupKey]
 			const firstObject = groupedData[groupKey][0];
@@ -125,8 +138,26 @@ export default class GettingTransformationsRooms {
 					throw new InsightError(`Unexpected type for ${keyToUse}`);
 				}
 			}
+		}
+	}
 
-			// Push the result object to results array
+	private formatResultsWithoutApply(
+		groupedData: {[key: string]: Room[]},
+		results: InsightResult[],
+		columnsKeyList: string[]
+	): void {
+		for (const groupKey in groupedData) {
+			const result: InsightResult = {};
+			const firstObject = groupedData[groupKey][0];
+			for (const columnKey of columnsKeyList) {
+				const keyToUse = columnKey.includes("_") ? columnKey.split("_")[1] : columnKey;
+				const value = firstObject[keyToUse as keyof Room];
+				if (typeof value === "string" || typeof value === "number") {
+					result[columnKey] = value;
+				} else {
+					throw new InsightError(`Unexpected type for ${keyToUse}`);
+				}
+			}
 			results.push(result);
 		}
 	}

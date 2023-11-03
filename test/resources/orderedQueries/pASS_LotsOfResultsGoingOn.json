@@ -1,0 +1,205 @@
+{
+	"title": "PASS_LotsOfResultsGoingOn",
+	"input": {
+		"WHERE": {
+			"OR": [
+				{
+					"AND": [
+						{
+							"LT": {
+								"sections_year": 2000
+							}
+						},
+						{
+							"IS": {
+								"sections_title": "japn*"
+							}
+						}
+					]
+				},
+				{
+					"EQ": {
+						"sections_avg": 100
+					}
+				}
+			]
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"sections_dept",
+				"overallAvg"
+			],
+			"ORDER": {
+				"dir": "DOWN",
+				"keys": [
+					"overallAvg"
+				]
+			}
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"sections_dept",
+				"sections_avg"
+			],
+			"APPLY": [
+				{
+					"overallAvg": {
+						"AVG": "sections_avg"
+					}
+				},
+				{
+					"overallMax": {
+						"MAX": "sections_avg"
+					}
+				}
+			]
+		}
+	},
+	"errorExpected": false,
+	"expected": [
+		{
+			"sections_dept": "asia",
+			"overallAvg": 78.9
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 78.77
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 77.58
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 77.48
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 77
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 76.96
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 76.6
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 76.51
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 76.5
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 76.13
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 76.07
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 75.7
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 75.7
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 75.65
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 75.62
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 75.4
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 75.35
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 75.19
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 74.93
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 74.73
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 74.65
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 74.64
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 74.62
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 74.33
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 73.98
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 73.54
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 73.26
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 72.94
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 72.21
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 71.92
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 71.6
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 71.48
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 71.04
+		},
+		{
+			"sections_dept": "anth",
+			"overallAvg": 70.96
+		},
+		{
+			"sections_dept": "japn",
+			"overallAvg": 70.74
+		},
+		{
+			"sections_dept": "asia",
+			"overallAvg": 68.85
+		}
+	]
+}

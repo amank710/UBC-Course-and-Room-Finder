@@ -1,0 +1,2393 @@
+{
+	"title": "PASS_ApplyKeyWithMultipleRulesSectionsTest",
+	"input": {
+		"WHERE": {},
+		"OPTIONS": {
+			"COLUMNS": [
+				"sections_id",
+				"overallAvg",
+				"overallMax"
+			]
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"sections_id"
+			],
+			"APPLY": [
+				{
+					"overallAvg": {
+						"AVG": "sections_avg"
+					}
+				},
+				{
+					"overallMax": {
+						"MAX": "sections_avg"
+					}
+				}
+			]
+		}
+	},
+	"errorExpected": false,
+	"expected": [
+		{
+			"sections_id": "100",
+			"overallAvg": 74.24,
+			"overallMax": 89.27
+		},
+		{
+			"sections_id": "101",
+			"overallAvg": 72.15,
+			"overallMax": 96.5
+		},
+		{
+			"sections_id": "102",
+			"overallAvg": 72.2,
+			"overallMax": 93.22
+		},
+		{
+			"sections_id": "103",
+			"overallAvg": 73.4,
+			"overallMax": 94.25
+		},
+		{
+			"sections_id": "104",
+			"overallAvg": 72.03,
+			"overallMax": 89.33
+		},
+		{
+			"sections_id": "105",
+			"overallAvg": 70.31,
+			"overallMax": 89.15
+		},
+		{
+			"sections_id": "106",
+			"overallAvg": 74.38,
+			"overallMax": 85.04
+		},
+		{
+			"sections_id": "107",
+			"overallAvg": 76.49,
+			"overallMax": 79.89
+		},
+		{
+			"sections_id": "108",
+			"overallAvg": 75.95,
+			"overallMax": 82.39
+		},
+		{
+			"sections_id": "109",
+			"overallAvg": 82.2,
+			"overallMax": 90.25
+		},
+		{
+			"sections_id": "110",
+			"overallAvg": 73.63,
+			"overallMax": 93.75
+		},
+		{
+			"sections_id": "111",
+			"overallAvg": 75.11,
+			"overallMax": 90.62
+		},
+		{
+			"sections_id": "112",
+			"overallAvg": 72.29,
+			"overallMax": 87
+		},
+		{
+			"sections_id": "113",
+			"overallAvg": 74.41,
+			"overallMax": 84.29
+		},
+		{
+			"sections_id": "114",
+			"overallAvg": 73.59,
+			"overallMax": 86.37
+		},
+		{
+			"sections_id": "115",
+			"overallAvg": 76.45,
+			"overallMax": 83.83
+		},
+		{
+			"sections_id": "116",
+			"overallAvg": 71.52,
+			"overallMax": 75.52
+		},
+		{
+			"sections_id": "117",
+			"overallAvg": 76.57,
+			"overallMax": 85.48
+		},
+		{
+			"sections_id": "118",
+			"overallAvg": 75.03,
+			"overallMax": 82.82
+		},
+		{
+			"sections_id": "119",
+			"overallAvg": 79.62,
+			"overallMax": 85.82
+		},
+		{
+			"sections_id": "120",
+			"overallAvg": 72.62,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "121",
+			"overallAvg": 69.58,
+			"overallMax": 84.56
+		},
+		{
+			"sections_id": "122",
+			"overallAvg": 73.3,
+			"overallMax": 85.28
+		},
+		{
+			"sections_id": "123",
+			"overallAvg": 72.14,
+			"overallMax": 81.25
+		},
+		{
+			"sections_id": "125",
+			"overallAvg": 73.51,
+			"overallMax": 81.67
+		},
+		{
+			"sections_id": "126",
+			"overallAvg": 74.15,
+			"overallMax": 74.15
+		},
+		{
+			"sections_id": "127",
+			"overallAvg": 84.66,
+			"overallMax": 84.66
+		},
+		{
+			"sections_id": "130",
+			"overallAvg": 82.03,
+			"overallMax": 86.13
+		},
+		{
+			"sections_id": "131",
+			"overallAvg": 78.55,
+			"overallMax": 87.06
+		},
+		{
+			"sections_id": "135",
+			"overallAvg": 80.73,
+			"overallMax": 86.9
+		},
+		{
+			"sections_id": "140",
+			"overallAvg": 73.19,
+			"overallMax": 89.33
+		},
+		{
+			"sections_id": "141",
+			"overallAvg": 80.78,
+			"overallMax": 94.23
+		},
+		{
+			"sections_id": "148",
+			"overallAvg": 67.45,
+			"overallMax": 74.92
+		},
+		{
+			"sections_id": "149",
+			"overallAvg": 85.88,
+			"overallMax": 88.8
+		},
+		{
+			"sections_id": "150",
+			"overallAvg": 71.7,
+			"overallMax": 92.15
+		},
+		{
+			"sections_id": "151",
+			"overallAvg": 70.79,
+			"overallMax": 79.01
+		},
+		{
+			"sections_id": "152",
+			"overallAvg": 65.81,
+			"overallMax": 70
+		},
+		{
+			"sections_id": "153",
+			"overallAvg": 75.84,
+			"overallMax": 80.23
+		},
+		{
+			"sections_id": "154",
+			"overallAvg": 69.45,
+			"overallMax": 76.81
+		},
+		{
+			"sections_id": "155",
+			"overallAvg": 70.04,
+			"overallMax": 79.65
+		},
+		{
+			"sections_id": "157",
+			"overallAvg": 70.45,
+			"overallMax": 75.04
+		},
+		{
+			"sections_id": "158",
+			"overallAvg": 66.91,
+			"overallMax": 68.41
+		},
+		{
+			"sections_id": "159",
+			"overallAvg": 77.1,
+			"overallMax": 86.57
+		},
+		{
+			"sections_id": "160",
+			"overallAvg": 74.5,
+			"overallMax": 80.86
+		},
+		{
+			"sections_id": "161",
+			"overallAvg": 81.55,
+			"overallMax": 92.06
+		},
+		{
+			"sections_id": "163",
+			"overallAvg": 88.22,
+			"overallMax": 93.35
+		},
+		{
+			"sections_id": "164",
+			"overallAvg": 88.33,
+			"overallMax": 90.19
+		},
+		{
+			"sections_id": "167",
+			"overallAvg": 86.43,
+			"overallMax": 88.13
+		},
+		{
+			"sections_id": "170",
+			"overallAvg": 75.57,
+			"overallMax": 86.7
+		},
+		{
+			"sections_id": "171",
+			"overallAvg": 67.2,
+			"overallMax": 68.86
+		},
+		{
+			"sections_id": "172",
+			"overallAvg": 64.17,
+			"overallMax": 75.49
+		},
+		{
+			"sections_id": "173",
+			"overallAvg": 74.33,
+			"overallMax": 74.33
+		},
+		{
+			"sections_id": "178",
+			"overallAvg": 72.76,
+			"overallMax": 72.76
+		},
+		{
+			"sections_id": "180",
+			"overallAvg": 64.26,
+			"overallMax": 81.28
+		},
+		{
+			"sections_id": "182",
+			"overallAvg": 73.33,
+			"overallMax": 75.08
+		},
+		{
+			"sections_id": "183",
+			"overallAvg": 74.13,
+			"overallMax": 80
+		},
+		{
+			"sections_id": "184",
+			"overallAvg": 63.01,
+			"overallMax": 76.12
+		},
+		{
+			"sections_id": "190",
+			"overallAvg": 68.93,
+			"overallMax": 81.23
+		},
+		{
+			"sections_id": "191",
+			"overallAvg": 73.95,
+			"overallMax": 82.73
+		},
+		{
+			"sections_id": "200",
+			"overallAvg": 73.15,
+			"overallMax": 96.96
+		},
+		{
+			"sections_id": "201",
+			"overallAvg": 73.56,
+			"overallMax": 87.74
+		},
+		{
+			"sections_id": "202",
+			"overallAvg": 74.76,
+			"overallMax": 87.87
+		},
+		{
+			"sections_id": "203",
+			"overallAvg": 74.06,
+			"overallMax": 83.27
+		},
+		{
+			"sections_id": "204",
+			"overallAvg": 74.28,
+			"overallMax": 82.64
+		},
+		{
+			"sections_id": "205",
+			"overallAvg": 76.85,
+			"overallMax": 93.93
+		},
+		{
+			"sections_id": "206",
+			"overallAvg": 77.89,
+			"overallMax": 87.12
+		},
+		{
+			"sections_id": "207",
+			"overallAvg": 74.99,
+			"overallMax": 84.83
+		},
+		{
+			"sections_id": "208",
+			"overallAvg": 74.21,
+			"overallMax": 82.88
+		},
+		{
+			"sections_id": "209",
+			"overallAvg": 73.6,
+			"overallMax": 83.08
+		},
+		{
+			"sections_id": "210",
+			"overallAvg": 74.92,
+			"overallMax": 89.65
+		},
+		{
+			"sections_id": "211",
+			"overallAvg": 75.99,
+			"overallMax": 89.25
+		},
+		{
+			"sections_id": "212",
+			"overallAvg": 76.18,
+			"overallMax": 86
+		},
+		{
+			"sections_id": "213",
+			"overallAvg": 75.13,
+			"overallMax": 85.65
+		},
+		{
+			"sections_id": "214",
+			"overallAvg": 77.2,
+			"overallMax": 80.53
+		},
+		{
+			"sections_id": "215",
+			"overallAvg": 73.67,
+			"overallMax": 91.5
+		},
+		{
+			"sections_id": "216",
+			"overallAvg": 70.94,
+			"overallMax": 81.65
+		},
+		{
+			"sections_id": "217",
+			"overallAvg": 71.87,
+			"overallMax": 90.25
+		},
+		{
+			"sections_id": "218",
+			"overallAvg": 70.09,
+			"overallMax": 84.5
+		},
+		{
+			"sections_id": "219",
+			"overallAvg": 79.67,
+			"overallMax": 82.76
+		},
+		{
+			"sections_id": "220",
+			"overallAvg": 73.4,
+			"overallMax": 85.6
+		},
+		{
+			"sections_id": "221",
+			"overallAvg": 73,
+			"overallMax": 91.79
+		},
+		{
+			"sections_id": "222",
+			"overallAvg": 72.95,
+			"overallMax": 84.32
+		},
+		{
+			"sections_id": "223",
+			"overallAvg": 73.9,
+			"overallMax": 79.28
+		},
+		{
+			"sections_id": "224",
+			"overallAvg": 74.35,
+			"overallMax": 85.98
+		},
+		{
+			"sections_id": "225",
+			"overallAvg": 74.51,
+			"overallMax": 88.65
+		},
+		{
+			"sections_id": "226",
+			"overallAvg": 75.02,
+			"overallMax": 85.8
+		},
+		{
+			"sections_id": "227",
+			"overallAvg": 74.68,
+			"overallMax": 87.71
+		},
+		{
+			"sections_id": "228",
+			"overallAvg": 76.66,
+			"overallMax": 80.73
+		},
+		{
+			"sections_id": "229",
+			"overallAvg": 82.93,
+			"overallMax": 88.05
+		},
+		{
+			"sections_id": "230",
+			"overallAvg": 75.94,
+			"overallMax": 84.05
+		},
+		{
+			"sections_id": "231",
+			"overallAvg": 71.79,
+			"overallMax": 87
+		},
+		{
+			"sections_id": "232",
+			"overallAvg": 69.85,
+			"overallMax": 81.7
+		},
+		{
+			"sections_id": "233",
+			"overallAvg": 71.4,
+			"overallMax": 88.89
+		},
+		{
+			"sections_id": "234",
+			"overallAvg": 73.79,
+			"overallMax": 81
+		},
+		{
+			"sections_id": "235",
+			"overallAvg": 74.58,
+			"overallMax": 88.75
+		},
+		{
+			"sections_id": "236",
+			"overallAvg": 70.86,
+			"overallMax": 71.88
+		},
+		{
+			"sections_id": "238",
+			"overallAvg": 74.22,
+			"overallMax": 79.57
+		},
+		{
+			"sections_id": "239",
+			"overallAvg": 73.83,
+			"overallMax": 78.39
+		},
+		{
+			"sections_id": "240",
+			"overallAvg": 74.61,
+			"overallMax": 88.83
+		},
+		{
+			"sections_id": "241",
+			"overallAvg": 73.19,
+			"overallMax": 82.44
+		},
+		{
+			"sections_id": "243",
+			"overallAvg": 83.67,
+			"overallMax": 87.2
+		},
+		{
+			"sections_id": "244",
+			"overallAvg": 74.26,
+			"overallMax": 89
+		},
+		{
+			"sections_id": "245",
+			"overallAvg": 71.14,
+			"overallMax": 77.73
+		},
+		{
+			"sections_id": "249",
+			"overallAvg": 87.22,
+			"overallMax": 91.8
+		},
+		{
+			"sections_id": "250",
+			"overallAvg": 74.42,
+			"overallMax": 85.4
+		},
+		{
+			"sections_id": "251",
+			"overallAvg": 71.89,
+			"overallMax": 79.75
+		},
+		{
+			"sections_id": "252",
+			"overallAvg": 73.29,
+			"overallMax": 89.3
+		},
+		{
+			"sections_id": "253",
+			"overallAvg": 69.83,
+			"overallMax": 77.46
+		},
+		{
+			"sections_id": "254",
+			"overallAvg": 78.42,
+			"overallMax": 84.5
+		},
+		{
+			"sections_id": "255",
+			"overallAvg": 69.71,
+			"overallMax": 91.1
+		},
+		{
+			"sections_id": "256",
+			"overallAvg": 70.66,
+			"overallMax": 80.08
+		},
+		{
+			"sections_id": "257",
+			"overallAvg": 68.83,
+			"overallMax": 81.94
+		},
+		{
+			"sections_id": "259",
+			"overallAvg": 76.55,
+			"overallMax": 82.21
+		},
+		{
+			"sections_id": "260",
+			"overallAvg": 73.41,
+			"overallMax": 84.29
+		},
+		{
+			"sections_id": "261",
+			"overallAvg": 75.03,
+			"overallMax": 80.51
+		},
+		{
+			"sections_id": "262",
+			"overallAvg": 75.98,
+			"overallMax": 91
+		},
+		{
+			"sections_id": "263",
+			"overallAvg": 66.41,
+			"overallMax": 71.21
+		},
+		{
+			"sections_id": "264",
+			"overallAvg": 64.77,
+			"overallMax": 75.98
+		},
+		{
+			"sections_id": "265",
+			"overallAvg": 87.33,
+			"overallMax": 89.29
+		},
+		{
+			"sections_id": "270",
+			"overallAvg": 76.68,
+			"overallMax": 87.91
+		},
+		{
+			"sections_id": "271",
+			"overallAvg": 82.31,
+			"overallMax": 91.83
+		},
+		{
+			"sections_id": "272",
+			"overallAvg": 80.27,
+			"overallMax": 83.06
+		},
+		{
+			"sections_id": "273",
+			"overallAvg": 77.92,
+			"overallMax": 83.11
+		},
+		{
+			"sections_id": "274",
+			"overallAvg": 82.14,
+			"overallMax": 83.06
+		},
+		{
+			"sections_id": "275",
+			"overallAvg": 75.83,
+			"overallMax": 84.57
+		},
+		{
+			"sections_id": "276",
+			"overallAvg": 74.92,
+			"overallMax": 82.1
+		},
+		{
+			"sections_id": "278",
+			"overallAvg": 69.31,
+			"overallMax": 77.01
+		},
+		{
+			"sections_id": "279",
+			"overallAvg": 83.75,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "280",
+			"overallAvg": 70.63,
+			"overallMax": 81.13
+		},
+		{
+			"sections_id": "281",
+			"overallAvg": 74.55,
+			"overallMax": 84.6
+		},
+		{
+			"sections_id": "282",
+			"overallAvg": 69.68,
+			"overallMax": 82.2
+		},
+		{
+			"sections_id": "284",
+			"overallAvg": 77.32,
+			"overallMax": 81.34
+		},
+		{
+			"sections_id": "285",
+			"overallAvg": 67.25,
+			"overallMax": 67.25
+		},
+		{
+			"sections_id": "290",
+			"overallAvg": 73.36,
+			"overallMax": 83.79
+		},
+		{
+			"sections_id": "291",
+			"overallAvg": 74.46,
+			"overallMax": 86.81
+		},
+		{
+			"sections_id": "292",
+			"overallAvg": 73.6,
+			"overallMax": 89.68
+		},
+		{
+			"sections_id": "293",
+			"overallAvg": 68.66,
+			"overallMax": 78.7
+		},
+		{
+			"sections_id": "294",
+			"overallAvg": 71.85,
+			"overallMax": 77.86
+		},
+		{
+			"sections_id": "295",
+			"overallAvg": 72.06,
+			"overallMax": 80.18
+		},
+		{
+			"sections_id": "296",
+			"overallAvg": 76.24,
+			"overallMax": 82
+		},
+		{
+			"sections_id": "298",
+			"overallAvg": 74.81,
+			"overallMax": 83.52
+		},
+		{
+			"sections_id": "300",
+			"overallAvg": 75.71,
+			"overallMax": 98.98
+		},
+		{
+			"sections_id": "301",
+			"overallAvg": 76.25,
+			"overallMax": 90.11
+		},
+		{
+			"sections_id": "302",
+			"overallAvg": 74.68,
+			"overallMax": 89.12
+		},
+		{
+			"sections_id": "303",
+			"overallAvg": 77.09,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "304",
+			"overallAvg": 75.64,
+			"overallMax": 88.44
+		},
+		{
+			"sections_id": "305",
+			"overallAvg": 77.66,
+			"overallMax": 92.63
+		},
+		{
+			"sections_id": "306",
+			"overallAvg": 76.94,
+			"overallMax": 94.15
+		},
+		{
+			"sections_id": "307",
+			"overallAvg": 74.1,
+			"overallMax": 89.64
+		},
+		{
+			"sections_id": "308",
+			"overallAvg": 76.5,
+			"overallMax": 93.05
+		},
+		{
+			"sections_id": "309",
+			"overallAvg": 76.08,
+			"overallMax": 88.6
+		},
+		{
+			"sections_id": "310",
+			"overallAvg": 76.44,
+			"overallMax": 89.46
+		},
+		{
+			"sections_id": "311",
+			"overallAvg": 76.04,
+			"overallMax": 90.44
+		},
+		{
+			"sections_id": "312",
+			"overallAvg": 76.97,
+			"overallMax": 96.9
+		},
+		{
+			"sections_id": "313",
+			"overallAvg": 76.22,
+			"overallMax": 90
+		},
+		{
+			"sections_id": "314",
+			"overallAvg": 74.43,
+			"overallMax": 87.6
+		},
+		{
+			"sections_id": "315",
+			"overallAvg": 74.2,
+			"overallMax": 90.26
+		},
+		{
+			"sections_id": "316",
+			"overallAvg": 77.93,
+			"overallMax": 94.48
+		},
+		{
+			"sections_id": "317",
+			"overallAvg": 73.6,
+			"overallMax": 84.85
+		},
+		{
+			"sections_id": "318",
+			"overallAvg": 72.62,
+			"overallMax": 80.97
+		},
+		{
+			"sections_id": "319",
+			"overallAvg": 75.1,
+			"overallMax": 88.39
+		},
+		{
+			"sections_id": "320",
+			"overallAvg": 75.63,
+			"overallMax": 95.27
+		},
+		{
+			"sections_id": "321",
+			"overallAvg": 75.24,
+			"overallMax": 90.45
+		},
+		{
+			"sections_id": "322",
+			"overallAvg": 75.19,
+			"overallMax": 83.44
+		},
+		{
+			"sections_id": "323",
+			"overallAvg": 76.39,
+			"overallMax": 93.45
+		},
+		{
+			"sections_id": "324",
+			"overallAvg": 74.55,
+			"overallMax": 78.8
+		},
+		{
+			"sections_id": "325",
+			"overallAvg": 75.22,
+			"overallMax": 87.43
+		},
+		{
+			"sections_id": "326",
+			"overallAvg": 74.69,
+			"overallMax": 85.23
+		},
+		{
+			"sections_id": "327",
+			"overallAvg": 76.97,
+			"overallMax": 89.51
+		},
+		{
+			"sections_id": "328",
+			"overallAvg": 75.46,
+			"overallMax": 87.14
+		},
+		{
+			"sections_id": "329",
+			"overallAvg": 76.31,
+			"overallMax": 96.11
+		},
+		{
+			"sections_id": "330",
+			"overallAvg": 75.82,
+			"overallMax": 91.48
+		},
+		{
+			"sections_id": "331",
+			"overallAvg": 72.9,
+			"overallMax": 84.65
+		},
+		{
+			"sections_id": "332",
+			"overallAvg": 74.92,
+			"overallMax": 83.29
+		},
+		{
+			"sections_id": "333",
+			"overallAvg": 77.94,
+			"overallMax": 96.4
+		},
+		{
+			"sections_id": "334",
+			"overallAvg": 78.22,
+			"overallMax": 87.84
+		},
+		{
+			"sections_id": "335",
+			"overallAvg": 77.06,
+			"overallMax": 88.94
+		},
+		{
+			"sections_id": "336",
+			"overallAvg": 78.11,
+			"overallMax": 91
+		},
+		{
+			"sections_id": "337",
+			"overallAvg": 78.06,
+			"overallMax": 87.45
+		},
+		{
+			"sections_id": "338",
+			"overallAvg": 78.7,
+			"overallMax": 92.62
+		},
+		{
+			"sections_id": "339",
+			"overallAvg": 77.65,
+			"overallMax": 89.33
+		},
+		{
+			"sections_id": "340",
+			"overallAvg": 74.9,
+			"overallMax": 84.44
+		},
+		{
+			"sections_id": "341",
+			"overallAvg": 79.21,
+			"overallMax": 93.05
+		},
+		{
+			"sections_id": "342",
+			"overallAvg": 74.37,
+			"overallMax": 85.64
+		},
+		{
+			"sections_id": "343",
+			"overallAvg": 79.33,
+			"overallMax": 93.41
+		},
+		{
+			"sections_id": "344",
+			"overallAvg": 71,
+			"overallMax": 88.65
+		},
+		{
+			"sections_id": "345",
+			"overallAvg": 73.73,
+			"overallMax": 88.91
+		},
+		{
+			"sections_id": "346",
+			"overallAvg": 73.91,
+			"overallMax": 83.56
+		},
+		{
+			"sections_id": "347",
+			"overallAvg": 79.92,
+			"overallMax": 92.19
+		},
+		{
+			"sections_id": "348",
+			"overallAvg": 78.55,
+			"overallMax": 88.32
+		},
+		{
+			"sections_id": "349",
+			"overallAvg": 78.76,
+			"overallMax": 90.7
+		},
+		{
+			"sections_id": "350",
+			"overallAvg": 76.74,
+			"overallMax": 95.2
+		},
+		{
+			"sections_id": "351",
+			"overallAvg": 73.62,
+			"overallMax": 91.17
+		},
+		{
+			"sections_id": "352",
+			"overallAvg": 75.26,
+			"overallMax": 94.5
+		},
+		{
+			"sections_id": "353",
+			"overallAvg": 74.14,
+			"overallMax": 87.26
+		},
+		{
+			"sections_id": "354",
+			"overallAvg": 73.73,
+			"overallMax": 82.46
+		},
+		{
+			"sections_id": "355",
+			"overallAvg": 74.35,
+			"overallMax": 90.48
+		},
+		{
+			"sections_id": "356",
+			"overallAvg": 76.42,
+			"overallMax": 92.41
+		},
+		{
+			"sections_id": "357",
+			"overallAvg": 76.69,
+			"overallMax": 95.29
+		},
+		{
+			"sections_id": "358",
+			"overallAvg": 74.39,
+			"overallMax": 85.26
+		},
+		{
+			"sections_id": "359",
+			"overallAvg": 82.41,
+			"overallMax": 93.07
+		},
+		{
+			"sections_id": "360",
+			"overallAvg": 76.4,
+			"overallMax": 87.92
+		},
+		{
+			"sections_id": "361",
+			"overallAvg": 76.32,
+			"overallMax": 87.67
+		},
+		{
+			"sections_id": "362",
+			"overallAvg": 80.57,
+			"overallMax": 91.8
+		},
+		{
+			"sections_id": "363",
+			"overallAvg": 78.62,
+			"overallMax": 92.91
+		},
+		{
+			"sections_id": "364",
+			"overallAvg": 78.57,
+			"overallMax": 89.25
+		},
+		{
+			"sections_id": "365",
+			"overallAvg": 75.8,
+			"overallMax": 91.13
+		},
+		{
+			"sections_id": "366",
+			"overallAvg": 78.33,
+			"overallMax": 91.07
+		},
+		{
+			"sections_id": "367",
+			"overallAvg": 74.9,
+			"overallMax": 91.7
+		},
+		{
+			"sections_id": "368",
+			"overallAvg": 73.14,
+			"overallMax": 83.56
+		},
+		{
+			"sections_id": "369",
+			"overallAvg": 74.13,
+			"overallMax": 79.44
+		},
+		{
+			"sections_id": "370",
+			"overallAvg": 75.12,
+			"overallMax": 90.21
+		},
+		{
+			"sections_id": "371",
+			"overallAvg": 76.37,
+			"overallMax": 89.26
+		},
+		{
+			"sections_id": "372",
+			"overallAvg": 76.04,
+			"overallMax": 85.27
+		},
+		{
+			"sections_id": "373",
+			"overallAvg": 76.22,
+			"overallMax": 87.13
+		},
+		{
+			"sections_id": "374",
+			"overallAvg": 78.07,
+			"overallMax": 85.98
+		},
+		{
+			"sections_id": "375",
+			"overallAvg": 77.89,
+			"overallMax": 90.19
+		},
+		{
+			"sections_id": "376",
+			"overallAvg": 79.75,
+			"overallMax": 84.09
+		},
+		{
+			"sections_id": "377",
+			"overallAvg": 79.52,
+			"overallMax": 95.58
+		},
+		{
+			"sections_id": "378",
+			"overallAvg": 72.18,
+			"overallMax": 84.69
+		},
+		{
+			"sections_id": "379",
+			"overallAvg": 74.07,
+			"overallMax": 78.98
+		},
+		{
+			"sections_id": "380",
+			"overallAvg": 75.32,
+			"overallMax": 84.18
+		},
+		{
+			"sections_id": "381",
+			"overallAvg": 77.05,
+			"overallMax": 85.56
+		},
+		{
+			"sections_id": "382",
+			"overallAvg": 74.45,
+			"overallMax": 81.86
+		},
+		{
+			"sections_id": "383",
+			"overallAvg": 81.11,
+			"overallMax": 82.49
+		},
+		{
+			"sections_id": "384",
+			"overallAvg": 74.91,
+			"overallMax": 76.18
+		},
+		{
+			"sections_id": "385",
+			"overallAvg": 74.47,
+			"overallMax": 80.1
+		},
+		{
+			"sections_id": "386",
+			"overallAvg": 77.35,
+			"overallMax": 82.86
+		},
+		{
+			"sections_id": "387",
+			"overallAvg": 75.95,
+			"overallMax": 81.9
+		},
+		{
+			"sections_id": "388",
+			"overallAvg": 75.11,
+			"overallMax": 86.1
+		},
+		{
+			"sections_id": "389",
+			"overallAvg": 76.84,
+			"overallMax": 86.86
+		},
+		{
+			"sections_id": "390",
+			"overallAvg": 77.13,
+			"overallMax": 85.75
+		},
+		{
+			"sections_id": "391",
+			"overallAvg": 75.59,
+			"overallMax": 84.76
+		},
+		{
+			"sections_id": "392",
+			"overallAvg": 80.07,
+			"overallMax": 86.29
+		},
+		{
+			"sections_id": "393",
+			"overallAvg": 73.61,
+			"overallMax": 96.59
+		},
+		{
+			"sections_id": "394",
+			"overallAvg": 75.12,
+			"overallMax": 82
+		},
+		{
+			"sections_id": "395",
+			"overallAvg": 75.59,
+			"overallMax": 82.5
+		},
+		{
+			"sections_id": "396",
+			"overallAvg": 74.19,
+			"overallMax": 84.05
+		},
+		{
+			"sections_id": "397",
+			"overallAvg": 74.79,
+			"overallMax": 79
+		},
+		{
+			"sections_id": "398",
+			"overallAvg": 75.47,
+			"overallMax": 87.2
+		},
+		{
+			"sections_id": "399",
+			"overallAvg": 77.78,
+			"overallMax": 85.64
+		},
+		{
+			"sections_id": "400",
+			"overallAvg": 81.26,
+			"overallMax": 93.37
+		},
+		{
+			"sections_id": "401",
+			"overallAvg": 76.94,
+			"overallMax": 90
+		},
+		{
+			"sections_id": "402",
+			"overallAvg": 79.47,
+			"overallMax": 93.25
+		},
+		{
+			"sections_id": "403",
+			"overallAvg": 78.92,
+			"overallMax": 95.07
+		},
+		{
+			"sections_id": "404",
+			"overallAvg": 79.15,
+			"overallMax": 90
+		},
+		{
+			"sections_id": "405",
+			"overallAvg": 79.02,
+			"overallMax": 92.29
+		},
+		{
+			"sections_id": "406",
+			"overallAvg": 81,
+			"overallMax": 94.23
+		},
+		{
+			"sections_id": "407",
+			"overallAvg": 81.01,
+			"overallMax": 91.08
+		},
+		{
+			"sections_id": "408",
+			"overallAvg": 80.68,
+			"overallMax": 95.22
+		},
+		{
+			"sections_id": "409",
+			"overallAvg": 77.24,
+			"overallMax": 84.8
+		},
+		{
+			"sections_id": "410",
+			"overallAvg": 77.53,
+			"overallMax": 92.08
+		},
+		{
+			"sections_id": "411",
+			"overallAvg": 80.67,
+			"overallMax": 95.5
+		},
+		{
+			"sections_id": "412",
+			"overallAvg": 81.57,
+			"overallMax": 93.72
+		},
+		{
+			"sections_id": "413",
+			"overallAvg": 79.43,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "414",
+			"overallAvg": 80.47,
+			"overallMax": 86.73
+		},
+		{
+			"sections_id": "415",
+			"overallAvg": 78.63,
+			"overallMax": 95.67
+		},
+		{
+			"sections_id": "416",
+			"overallAvg": 81,
+			"overallMax": 93.72
+		},
+		{
+			"sections_id": "417",
+			"overallAvg": 76.06,
+			"overallMax": 85.67
+		},
+		{
+			"sections_id": "418",
+			"overallAvg": 77.13,
+			"overallMax": 89.89
+		},
+		{
+			"sections_id": "419",
+			"overallAvg": 77.98,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "420",
+			"overallAvg": 80.56,
+			"overallMax": 90.57
+		},
+		{
+			"sections_id": "421",
+			"overallAvg": 81.95,
+			"overallMax": 98.7
+		},
+		{
+			"sections_id": "422",
+			"overallAvg": 76.96,
+			"overallMax": 88.31
+		},
+		{
+			"sections_id": "423",
+			"overallAvg": 81.9,
+			"overallMax": 94
+		},
+		{
+			"sections_id": "424",
+			"overallAvg": 81.35,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "425",
+			"overallAvg": 80.47,
+			"overallMax": 92.12
+		},
+		{
+			"sections_id": "426",
+			"overallAvg": 81.6,
+			"overallMax": 92.1
+		},
+		{
+			"sections_id": "427",
+			"overallAvg": 80.81,
+			"overallMax": 89.7
+		},
+		{
+			"sections_id": "428",
+			"overallAvg": 79.34,
+			"overallMax": 89.62
+		},
+		{
+			"sections_id": "429",
+			"overallAvg": 71.58,
+			"overallMax": 79.1
+		},
+		{
+			"sections_id": "430",
+			"overallAvg": 80.15,
+			"overallMax": 94.08
+		},
+		{
+			"sections_id": "431",
+			"overallAvg": 80.23,
+			"overallMax": 94.86
+		},
+		{
+			"sections_id": "432",
+			"overallAvg": 80.62,
+			"overallMax": 96.21
+		},
+		{
+			"sections_id": "433",
+			"overallAvg": 79.48,
+			"overallMax": 91.17
+		},
+		{
+			"sections_id": "434",
+			"overallAvg": 78.33,
+			"overallMax": 86.81
+		},
+		{
+			"sections_id": "435",
+			"overallAvg": 77.4,
+			"overallMax": 85
+		},
+		{
+			"sections_id": "436",
+			"overallAvg": 82.12,
+			"overallMax": 95.47
+		},
+		{
+			"sections_id": "437",
+			"overallAvg": 81.06,
+			"overallMax": 94.08
+		},
+		{
+			"sections_id": "438",
+			"overallAvg": 79.79,
+			"overallMax": 92.87
+		},
+		{
+			"sections_id": "439",
+			"overallAvg": 82.33,
+			"overallMax": 93.71
+		},
+		{
+			"sections_id": "440",
+			"overallAvg": 80.14,
+			"overallMax": 91.21
+		},
+		{
+			"sections_id": "441",
+			"overallAvg": 78.44,
+			"overallMax": 92.67
+		},
+		{
+			"sections_id": "442",
+			"overallAvg": 77.78,
+			"overallMax": 90.81
+		},
+		{
+			"sections_id": "443",
+			"overallAvg": 73.49,
+			"overallMax": 84.67
+		},
+		{
+			"sections_id": "444",
+			"overallAvg": 74.44,
+			"overallMax": 84.8
+		},
+		{
+			"sections_id": "445",
+			"overallAvg": 79.24,
+			"overallMax": 91.25
+		},
+		{
+			"sections_id": "446",
+			"overallAvg": 78.05,
+			"overallMax": 91.46
+		},
+		{
+			"sections_id": "447",
+			"overallAvg": 81.03,
+			"overallMax": 89
+		},
+		{
+			"sections_id": "448",
+			"overallAvg": 78.36,
+			"overallMax": 83.74
+		},
+		{
+			"sections_id": "449",
+			"overallAvg": 85.97,
+			"overallMax": 98.8
+		},
+		{
+			"sections_id": "450",
+			"overallAvg": 76.29,
+			"overallMax": 90.75
+		},
+		{
+			"sections_id": "451",
+			"overallAvg": 78.45,
+			"overallMax": 90.09
+		},
+		{
+			"sections_id": "452",
+			"overallAvg": 79.5,
+			"overallMax": 89.3
+		},
+		{
+			"sections_id": "453",
+			"overallAvg": 76.59,
+			"overallMax": 87.57
+		},
+		{
+			"sections_id": "454",
+			"overallAvg": 80.43,
+			"overallMax": 89.5
+		},
+		{
+			"sections_id": "455",
+			"overallAvg": 75.05,
+			"overallMax": 82.44
+		},
+		{
+			"sections_id": "456",
+			"overallAvg": 76.9,
+			"overallMax": 90.39
+		},
+		{
+			"sections_id": "457",
+			"overallAvg": 78.06,
+			"overallMax": 91.63
+		},
+		{
+			"sections_id": "458",
+			"overallAvg": 79.54,
+			"overallMax": 88.33
+		},
+		{
+			"sections_id": "459",
+			"overallAvg": 81.27,
+			"overallMax": 90.44
+		},
+		{
+			"sections_id": "460",
+			"overallAvg": 75.19,
+			"overallMax": 91.73
+		},
+		{
+			"sections_id": "461",
+			"overallAvg": 81.36,
+			"overallMax": 94.42
+		},
+		{
+			"sections_id": "462",
+			"overallAvg": 81.12,
+			"overallMax": 94.33
+		},
+		{
+			"sections_id": "463",
+			"overallAvg": 78.93,
+			"overallMax": 91.26
+		},
+		{
+			"sections_id": "464",
+			"overallAvg": 78.02,
+			"overallMax": 92.36
+		},
+		{
+			"sections_id": "465",
+			"overallAvg": 78.6,
+			"overallMax": 90.29
+		},
+		{
+			"sections_id": "466",
+			"overallAvg": 78.12,
+			"overallMax": 89.5
+		},
+		{
+			"sections_id": "467",
+			"overallAvg": 82.25,
+			"overallMax": 92.26
+		},
+		{
+			"sections_id": "468",
+			"overallAvg": 76.99,
+			"overallMax": 82.86
+		},
+		{
+			"sections_id": "469",
+			"overallAvg": 80.35,
+			"overallMax": 91.26
+		},
+		{
+			"sections_id": "470",
+			"overallAvg": 78.94,
+			"overallMax": 87.82
+		},
+		{
+			"sections_id": "471",
+			"overallAvg": 80.28,
+			"overallMax": 91.3
+		},
+		{
+			"sections_id": "472",
+			"overallAvg": 78.87,
+			"overallMax": 88.57
+		},
+		{
+			"sections_id": "473",
+			"overallAvg": 78.74,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "474",
+			"overallAvg": 79.73,
+			"overallMax": 88.57
+		},
+		{
+			"sections_id": "475",
+			"overallAvg": 77,
+			"overallMax": 89.71
+		},
+		{
+			"sections_id": "476",
+			"overallAvg": 73.38,
+			"overallMax": 79
+		},
+		{
+			"sections_id": "477",
+			"overallAvg": 77.12,
+			"overallMax": 87.51
+		},
+		{
+			"sections_id": "478",
+			"overallAvg": 76.58,
+			"overallMax": 84.99
+		},
+		{
+			"sections_id": "479",
+			"overallAvg": 81.58,
+			"overallMax": 87.39
+		},
+		{
+			"sections_id": "480",
+			"overallAvg": 79.24,
+			"overallMax": 89.4
+		},
+		{
+			"sections_id": "481",
+			"overallAvg": 78.99,
+			"overallMax": 90.32
+		},
+		{
+			"sections_id": "482",
+			"overallAvg": 82.56,
+			"overallMax": 95.11
+		},
+		{
+			"sections_id": "483",
+			"overallAvg": 79.27,
+			"overallMax": 85.93
+		},
+		{
+			"sections_id": "484",
+			"overallAvg": 79.69,
+			"overallMax": 85.03
+		},
+		{
+			"sections_id": "485",
+			"overallAvg": 77.9,
+			"overallMax": 91.56
+		},
+		{
+			"sections_id": "486",
+			"overallAvg": 79.9,
+			"overallMax": 88.94
+		},
+		{
+			"sections_id": "487",
+			"overallAvg": 78.11,
+			"overallMax": 90.33
+		},
+		{
+			"sections_id": "488",
+			"overallAvg": 79.31,
+			"overallMax": 83.18
+		},
+		{
+			"sections_id": "489",
+			"overallAvg": 79.64,
+			"overallMax": 88.42
+		},
+		{
+			"sections_id": "490",
+			"overallAvg": 80.54,
+			"overallMax": 92.4
+		},
+		{
+			"sections_id": "491",
+			"overallAvg": 78.23,
+			"overallMax": 93.3
+		},
+		{
+			"sections_id": "492",
+			"overallAvg": 82.69,
+			"overallMax": 88.22
+		},
+		{
+			"sections_id": "493",
+			"overallAvg": 78.2,
+			"overallMax": 88.81
+		},
+		{
+			"sections_id": "494",
+			"overallAvg": 77.1,
+			"overallMax": 89.54
+		},
+		{
+			"sections_id": "495",
+			"overallAvg": 80.17,
+			"overallMax": 94.75
+		},
+		{
+			"sections_id": "496",
+			"overallAvg": 88.36,
+			"overallMax": 90.75
+		},
+		{
+			"sections_id": "497",
+			"overallAvg": 77.05,
+			"overallMax": 86.39
+		},
+		{
+			"sections_id": "498",
+			"overallAvg": 77.73,
+			"overallMax": 88.5
+		},
+		{
+			"sections_id": "499",
+			"overallAvg": 82.24,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "500",
+			"overallAvg": 85.18,
+			"overallMax": 97.5
+		},
+		{
+			"sections_id": "501",
+			"overallAvg": 84.97,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "502",
+			"overallAvg": 84.73,
+			"overallMax": 96.44
+		},
+		{
+			"sections_id": "503",
+			"overallAvg": 84.44,
+			"overallMax": 94.5
+		},
+		{
+			"sections_id": "504",
+			"overallAvg": 84.46,
+			"overallMax": 95.78
+		},
+		{
+			"sections_id": "505",
+			"overallAvg": 85.04,
+			"overallMax": 96.23
+		},
+		{
+			"sections_id": "506",
+			"overallAvg": 85.43,
+			"overallMax": 95.67
+		},
+		{
+			"sections_id": "507",
+			"overallAvg": 84.7,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "508",
+			"overallAvg": 86.26,
+			"overallMax": 96.27
+		},
+		{
+			"sections_id": "509",
+			"overallAvg": 85.79,
+			"overallMax": 98.71
+		},
+		{
+			"sections_id": "510",
+			"overallAvg": 85.37,
+			"overallMax": 95.67
+		},
+		{
+			"sections_id": "511",
+			"overallAvg": 84.29,
+			"overallMax": 94.29
+		},
+		{
+			"sections_id": "512",
+			"overallAvg": 86.27,
+			"overallMax": 94.2
+		},
+		{
+			"sections_id": "513",
+			"overallAvg": 83.86,
+			"overallMax": 92.45
+		},
+		{
+			"sections_id": "514",
+			"overallAvg": 85.44,
+			"overallMax": 95.36
+		},
+		{
+			"sections_id": "515",
+			"overallAvg": 84.32,
+			"overallMax": 96.8
+		},
+		{
+			"sections_id": "516",
+			"overallAvg": 86.25,
+			"overallMax": 96.25
+		},
+		{
+			"sections_id": "517",
+			"overallAvg": 84.99,
+			"overallMax": 92.83
+		},
+		{
+			"sections_id": "518",
+			"overallAvg": 85.05,
+			"overallMax": 95.75
+		},
+		{
+			"sections_id": "519",
+			"overallAvg": 88.06,
+			"overallMax": 98.45
+		},
+		{
+			"sections_id": "520",
+			"overallAvg": 84.7,
+			"overallMax": 96.46
+		},
+		{
+			"sections_id": "521",
+			"overallAvg": 84.99,
+			"overallMax": 96.47
+		},
+		{
+			"sections_id": "522",
+			"overallAvg": 83.72,
+			"overallMax": 93.91
+		},
+		{
+			"sections_id": "523",
+			"overallAvg": 83.22,
+			"overallMax": 93.11
+		},
+		{
+			"sections_id": "524",
+			"overallAvg": 85.29,
+			"overallMax": 94.33
+		},
+		{
+			"sections_id": "525",
+			"overallAvg": 85.31,
+			"overallMax": 97.25
+		},
+		{
+			"sections_id": "526",
+			"overallAvg": 86.94,
+			"overallMax": 96.33
+		},
+		{
+			"sections_id": "527",
+			"overallAvg": 85.19,
+			"overallMax": 99.78
+		},
+		{
+			"sections_id": "528",
+			"overallAvg": 85.63,
+			"overallMax": 96
+		},
+		{
+			"sections_id": "529",
+			"overallAvg": 84.9,
+			"overallMax": 93.86
+		},
+		{
+			"sections_id": "530",
+			"overallAvg": 85.69,
+			"overallMax": 95.7
+		},
+		{
+			"sections_id": "531",
+			"overallAvg": 86.31,
+			"overallMax": 95.63
+		},
+		{
+			"sections_id": "532",
+			"overallAvg": 85.18,
+			"overallMax": 97.48
+		},
+		{
+			"sections_id": "533",
+			"overallAvg": 84.87,
+			"overallMax": 95.96
+		},
+		{
+			"sections_id": "534",
+			"overallAvg": 87.94,
+			"overallMax": 97.78
+		},
+		{
+			"sections_id": "535",
+			"overallAvg": 86.41,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "536",
+			"overallAvg": 85.8,
+			"overallMax": 94.5
+		},
+		{
+			"sections_id": "537",
+			"overallAvg": 85.61,
+			"overallMax": 95.75
+		},
+		{
+			"sections_id": "538",
+			"overallAvg": 81.5,
+			"overallMax": 86.6
+		},
+		{
+			"sections_id": "539",
+			"overallAvg": 86.13,
+			"overallMax": 91.82
+		},
+		{
+			"sections_id": "540",
+			"overallAvg": 85.17,
+			"overallMax": 92.4
+		},
+		{
+			"sections_id": "541",
+			"overallAvg": 83.53,
+			"overallMax": 98.75
+		},
+		{
+			"sections_id": "542",
+			"overallAvg": 85.96,
+			"overallMax": 91.5
+		},
+		{
+			"sections_id": "543",
+			"overallAvg": 83.61,
+			"overallMax": 93.2
+		},
+		{
+			"sections_id": "544",
+			"overallAvg": 86.25,
+			"overallMax": 94.67
+		},
+		{
+			"sections_id": "545",
+			"overallAvg": 88.28,
+			"overallMax": 96.83
+		},
+		{
+			"sections_id": "546",
+			"overallAvg": 86.93,
+			"overallMax": 92.08
+		},
+		{
+			"sections_id": "547",
+			"overallAvg": 87.08,
+			"overallMax": 91.55
+		},
+		{
+			"sections_id": "548",
+			"overallAvg": 85.48,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "549",
+			"overallAvg": 85.92,
+			"overallMax": 97.69
+		},
+		{
+			"sections_id": "550",
+			"overallAvg": 83.5,
+			"overallMax": 96.94
+		},
+		{
+			"sections_id": "551",
+			"overallAvg": 87.11,
+			"overallMax": 96.09
+		},
+		{
+			"sections_id": "552",
+			"overallAvg": 85.27,
+			"overallMax": 94.33
+		},
+		{
+			"sections_id": "553",
+			"overallAvg": 88.37,
+			"overallMax": 95.6
+		},
+		{
+			"sections_id": "554",
+			"overallAvg": 85.2,
+			"overallMax": 94.71
+		},
+		{
+			"sections_id": "555",
+			"overallAvg": 85.07,
+			"overallMax": 93.2
+		},
+		{
+			"sections_id": "556",
+			"overallAvg": 83.65,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "557",
+			"overallAvg": 84.91,
+			"overallMax": 92.45
+		},
+		{
+			"sections_id": "558",
+			"overallAvg": 87.99,
+			"overallMax": 93.79
+		},
+		{
+			"sections_id": "559",
+			"overallAvg": 87.77,
+			"overallMax": 96.5
+		},
+		{
+			"sections_id": "560",
+			"overallAvg": 85.94,
+			"overallMax": 94.7
+		},
+		{
+			"sections_id": "561",
+			"overallAvg": 84.66,
+			"overallMax": 93.12
+		},
+		{
+			"sections_id": "562",
+			"overallAvg": 85.95,
+			"overallMax": 96.36
+		},
+		{
+			"sections_id": "563",
+			"overallAvg": 84.4,
+			"overallMax": 94
+		},
+		{
+			"sections_id": "564",
+			"overallAvg": 85.42,
+			"overallMax": 96.25
+		},
+		{
+			"sections_id": "565",
+			"overallAvg": 84.72,
+			"overallMax": 96.06
+		},
+		{
+			"sections_id": "566",
+			"overallAvg": 82.97,
+			"overallMax": 95.37
+		},
+		{
+			"sections_id": "567",
+			"overallAvg": 86.78,
+			"overallMax": 93.75
+		},
+		{
+			"sections_id": "568",
+			"overallAvg": 87.97,
+			"overallMax": 96.9
+		},
+		{
+			"sections_id": "569",
+			"overallAvg": 83.04,
+			"overallMax": 92.92
+		},
+		{
+			"sections_id": "570",
+			"overallAvg": 85.5,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "571",
+			"overallAvg": 85.32,
+			"overallMax": 90.81
+		},
+		{
+			"sections_id": "572",
+			"overallAvg": 86.5,
+			"overallMax": 93.5
+		},
+		{
+			"sections_id": "573",
+			"overallAvg": 84.11,
+			"overallMax": 89.14
+		},
+		{
+			"sections_id": "574",
+			"overallAvg": 87.03,
+			"overallMax": 99.19
+		},
+		{
+			"sections_id": "575",
+			"overallAvg": 86.21,
+			"overallMax": 96.1
+		},
+		{
+			"sections_id": "576",
+			"overallAvg": 86.7,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "577",
+			"overallAvg": 85.9,
+			"overallMax": 93.75
+		},
+		{
+			"sections_id": "578",
+			"overallAvg": 85.82,
+			"overallMax": 98.58
+		},
+		{
+			"sections_id": "579",
+			"overallAvg": 87.35,
+			"overallMax": 92.5
+		},
+		{
+			"sections_id": "580",
+			"overallAvg": 86.75,
+			"overallMax": 93.47
+		},
+		{
+			"sections_id": "581",
+			"overallAvg": 87.28,
+			"overallMax": 94.75
+		},
+		{
+			"sections_id": "582",
+			"overallAvg": 85.17,
+			"overallMax": 91.6
+		},
+		{
+			"sections_id": "583",
+			"overallAvg": 88.3,
+			"overallMax": 93.58
+		},
+		{
+			"sections_id": "584",
+			"overallAvg": 89.48,
+			"overallMax": 96.33
+		},
+		{
+			"sections_id": "585",
+			"overallAvg": 83.4,
+			"overallMax": 93.2
+		},
+		{
+			"sections_id": "586",
+			"overallAvg": 89.58,
+			"overallMax": 95.36
+		},
+		{
+			"sections_id": "587",
+			"overallAvg": 83.15,
+			"overallMax": 91.5
+		},
+		{
+			"sections_id": "588",
+			"overallAvg": 85.91,
+			"overallMax": 92.83
+		},
+		{
+			"sections_id": "589",
+			"overallAvg": 87.44,
+			"overallMax": 96.33
+		},
+		{
+			"sections_id": "590",
+			"overallAvg": 84.16,
+			"overallMax": 91.17
+		},
+		{
+			"sections_id": "591",
+			"overallAvg": 89.01,
+			"overallMax": 97.33
+		},
+		{
+			"sections_id": "592",
+			"overallAvg": 89.57,
+			"overallMax": 95.9
+		},
+		{
+			"sections_id": "593",
+			"overallAvg": 88.1,
+			"overallMax": 93.59
+		},
+		{
+			"sections_id": "594",
+			"overallAvg": 87.87,
+			"overallMax": 94.75
+		},
+		{
+			"sections_id": "595",
+			"overallAvg": 84.53,
+			"overallMax": 96.47
+		},
+		{
+			"sections_id": "596",
+			"overallAvg": 88.01,
+			"overallMax": 97.09
+		},
+		{
+			"sections_id": "597",
+			"overallAvg": 86.81,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "598",
+			"overallAvg": 86.57,
+			"overallMax": 91
+		},
+		{
+			"sections_id": "599",
+			"overallAvg": 87.16,
+			"overallMax": 98
+		},
+		{
+			"sections_id": "600",
+			"overallAvg": 82.78,
+			"overallMax": 88.4
+		},
+		{
+			"sections_id": "601",
+			"overallAvg": 85.69,
+			"overallMax": 93.2
+		},
+		{
+			"sections_id": "602",
+			"overallAvg": 85.44,
+			"overallMax": 90.33
+		},
+		{
+			"sections_id": "603",
+			"overallAvg": 87.17,
+			"overallMax": 91.79
+		},
+		{
+			"sections_id": "606",
+			"overallAvg": 92.27,
+			"overallMax": 97.67
+		},
+		{
+			"sections_id": "607",
+			"overallAvg": 86.52,
+			"overallMax": 86.71
+		},
+		{
+			"sections_id": "620",
+			"overallAvg": 93,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "621",
+			"overallAvg": 79.52,
+			"overallMax": 82
+		},
+		{
+			"sections_id": "626",
+			"overallAvg": 84.56,
+			"overallMax": 89.74
+		},
+		{
+			"sections_id": "627",
+			"overallAvg": 87.4,
+			"overallMax": 91.84
+		},
+		{
+			"sections_id": "628",
+			"overallAvg": 86.58,
+			"overallMax": 91.86
+		},
+		{
+			"sections_id": "632",
+			"overallAvg": 92.5,
+			"overallMax": 94.2
+		},
+		{
+			"sections_id": "634",
+			"overallAvg": 84.49,
+			"overallMax": 87
+		},
+		{
+			"sections_id": "635",
+			"overallAvg": 87.03,
+			"overallMax": 91.2
+		},
+		{
+			"sections_id": "640",
+			"overallAvg": 89.46,
+			"overallMax": 91.5
+		},
+		{
+			"sections_id": "654",
+			"overallAvg": 85.1,
+			"overallMax": 86.75
+		},
+		{
+			"sections_id": "657",
+			"overallAvg": 78.83,
+			"overallMax": 79
+		},
+		{
+			"sections_id": "660",
+			"overallAvg": 84.47,
+			"overallMax": 87
+		},
+		{
+			"sections_id": "662",
+			"overallAvg": 84.86,
+			"overallMax": 86.17
+		},
+		{
+			"sections_id": "671",
+			"overallAvg": 83.37,
+			"overallMax": 87
+		},
+		{
+			"sections_id": "672",
+			"overallAvg": 84.51,
+			"overallMax": 86
+		},
+		{
+			"sections_id": "682",
+			"overallAvg": 93.19,
+			"overallMax": 95
+		},
+		{
+			"sections_id": "683",
+			"overallAvg": 93.52,
+			"overallMax": 94.69
+		},
+		{
+			"sections_id": "684",
+			"overallAvg": 90.68,
+			"overallMax": 93.25
+		},
+		{
+			"sections_id": "693",
+			"overallAvg": 85.64,
+			"overallMax": 88.18
+		},
+		{
+			"sections_id": "695",
+			"overallAvg": 83.38,
+			"overallMax": 86.84
+		},
+		{
+			"sections_id": "698",
+			"overallAvg": 88.36,
+			"overallMax": 93
+		},
+		{
+			"sections_id": "699",
+			"overallAvg": 86.72,
+			"overallMax": 88.5
+		},
+		{
+			"sections_id": "721",
+			"overallAvg": 84.13,
+			"overallMax": 85.75
+		},
+		{
+			"sections_id": "722",
+			"overallAvg": 87.13,
+			"overallMax": 90.5
+		},
+		{
+			"sections_id": "724",
+			"overallAvg": 89.63,
+			"overallMax": 90
+		}
+	]
+}
