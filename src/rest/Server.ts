@@ -2,7 +2,7 @@ import express, {Application, Request, Response} from "express";
 import * as http from "http";
 import cors from "cors";
 import InsightFacade from "../controller/InsightFacade";
-import {InsightDatasetKind} from "../controller/IInsightFacade";
+import {InsightDatasetKind, NotFoundError} from "../controller/IInsightFacade";
 
 export default class Server {
 	private readonly port: number;
@@ -95,7 +95,7 @@ export default class Server {
 				const result = await insightFacade.addDataset(id, content, kind);
 				res.status(200).json({result});
 			} catch (err: any) {
-				res.status(err.code === "NotFoundError" ? 404 : 400).json({error: err.message});
+				res.status(400).json({error: err.message});
 			}
 		});
 		this.express.delete("/dataset/:id", async (req: Request, res: Response) => {
@@ -105,7 +105,11 @@ export default class Server {
 				const result = await insightFacade.removeDataset(id);
 				res.status(200).json({result});
 			} catch (err: any) {
-				res.status(err.code === "NotFoundError" ? 404 : 400).json({error: err.message});
+				if(err instanceof NotFoundError) {
+					res.status(404).json({error: err.message});
+				} else {
+					res.status(400).json({error: err.message});
+				}
 			}
 		});
 		this.express.post("/query", async (req: Request, res: Response) => {

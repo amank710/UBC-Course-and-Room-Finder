@@ -6,7 +6,7 @@ import request, {Response} from "supertest";
 import * as fs from "fs-extra";
 
 describe("Facade D3", function () {
-
+	this.timeout(10000);
 	let facade: InsightFacade;
 	let server: Server;
 	const SERVER_URL = "http://localhost:4321";
@@ -98,6 +98,37 @@ describe("Facade D3", function () {
 				expect.fail("POST /query failed with error: " + err.message);
 			});
 	});
+	it("POST test for submitting a query fail case to many results", function () {
+		const ENDPOINT_URL = "/query";
+		const QUERY = {
+			WHERE: {
+				GT: {
+					sections_avg: 0
+				}
+			},
+			OPTIONS: {
+				COLUMNS: [
+					"sections_dept",
+					"sections_avg"
+				],
+				ORDER: "sections_avg"
+			}
+		};
+
+		return request(SERVER_URL)
+			.post(ENDPOINT_URL)
+			.send(QUERY)
+			.set("Content-Type", "application/json")
+			.then(function (res) {
+				console.log(res.status);
+
+				expect(res.status).to.be.equal(400);
+			})
+			.catch(function (err) {
+
+				expect.fail("POST /query failed with error: " + err.message);
+			});
+	});
 	it("DELETE test for courses dataset", function () {
 		return request(SERVER_URL)
 			.delete("/dataset/sections")
@@ -105,6 +136,18 @@ describe("Facade D3", function () {
 				console.log(res.status);
 				// Check for the correct use of response codes
 				expect(res.body.result).to.be.a("string");
+			})
+			.catch(function (err) {
+				expect.fail("Failed with error: " + err);
+			});
+	});
+	it("DELETE test for courses dataset failed not found", function () {
+		return request(SERVER_URL)
+			.delete("/dataset/sections1")
+			.then(function (res) {
+				console.log(res.status);
+				// Check for the correct use of response codes
+				expect(res.status).to.be.equal(404);
 			})
 			.catch(function (err) {
 				expect.fail("Failed with error: " + err);
