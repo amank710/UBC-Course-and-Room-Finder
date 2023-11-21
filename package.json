@@ -9,6 +9,7 @@
 		"node": ">= 18 < 19"
 	},
 	"dependencies": {
+		"chart.js": "^4.4.0",
 		"cors": "^2.8.5",
 		"decimal.js": "10.4.3",
 		"express": "4.18.2",

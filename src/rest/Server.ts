@@ -1,6 +1,8 @@
 import express, {Application, Request, Response} from "express";
 import * as http from "http";
 import cors from "cors";
+import InsightFacade from "../controller/InsightFacade";
+import {InsightDatasetKind} from "../controller/IInsightFacade";
 
 export default class Server {
 	private readonly port: number;
@@ -18,7 +20,7 @@ export default class Server {
 		// NOTE: you can serve static frontend files in from your express server
 		// by uncommenting the line below. This makes files in ./frontend/public
 		// accessible at http://localhost:<port>/
-		// this.express.use(express.static("./frontend/public"))
+		this.express.use(express.static("./frontend/public"));
 	}
 
 	/**
@@ -83,9 +85,48 @@ export default class Server {
 		// This is an example endpoint this you can invoke by accessing this URL in your browser:
 		// http://localhost:4321/echo/hello
 		this.express.get("/echo/:msg", Server.echo);
-
-		// TODO: your other endpoints should go here
-
+		this.express.put("/dataset/:id/:kind", async (req: Request, res: Response) => {
+			try {
+				console.log("here");
+				const id = req.params.id;
+				const kind = req.params.kind as InsightDatasetKind;
+				const content = req.body.toString("base64");
+				const insightFacade = new InsightFacade();
+				const result = await insightFacade.addDataset(id, content, kind);
+				res.status(200).json({result});
+			} catch (err: any) {
+				res.status(err.code === "NotFoundError" ? 404 : 400).json({error: err.message});
+			}
+		});
+		this.express.delete("/dataset/:id", async (req: Request, res: Response) => {
+			try {
+				const id = req.params.id;
+				const insightFacade = new InsightFacade();
+				const result = await insightFacade.removeDataset(id);
+				res.status(200).json({result});
+			} catch (err: any) {
+				res.status(err.code === "NotFoundError" ? 404 : 400).json({error: err.message});
+			}
+		});
+		this.express.post("/query", async (req: Request, res: Response) => {
+			try {
+				const query = req.body;
+				const insightFacade = new InsightFacade();
+				const result = await insightFacade.performQuery(query);
+				res.status(200).json({result});
+			} catch (err: any) {
+				res.status(400).json({error: err.message});
+			}
+		});
+		this.express.get("/datasets", async (_req: Request, res: Response) => {
+			try {
+				const insightFacade = new InsightFacade();
+				const result = await insightFacade.listDatasets();
+				res.status(200).json({result});
+			} catch (err: any) {
+				res.status(400).json({error: err.message});
+			}
+		});
 	}
 
 	// The next two methods handle the echo service.
