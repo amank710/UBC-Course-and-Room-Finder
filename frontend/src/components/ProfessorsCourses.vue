@@ -72,7 +72,6 @@ export default {
 				}
 			}
 			// Got this code from ChatGPT
-			console.log(query);
 			fetch(`http://localhost:4321/query`, {
 				method: 'POST',
 				body: JSON.stringify(query),
@@ -81,9 +80,8 @@ export default {
 				}
 			})
 				.then(response => {
-					console.log(response)
 					if (!response.ok) {
-						throw new Error('Network response was not ok');
+						throw new Error('Fields cannot be blank. Please try again');
 					}
 					return response.json();
 				})
@@ -98,7 +96,6 @@ export default {
 					this.localProfessorName = '';
 				})
 				.catch(error => {
-					console.log(error)
 					this.error = error.message;
 				});
 		}

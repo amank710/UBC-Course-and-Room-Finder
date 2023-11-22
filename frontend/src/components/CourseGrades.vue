@@ -147,6 +147,18 @@ export default {
 								beginAtZero: false,
 								ticks: {
 									padding: 10
+								},
+								title: {
+									display: true,
+									text: 'Average Grade', // Y-axis label
+									color: '#666'
+								}
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'Year', // X-axis label
+									color: '#666'
 								}
 							}
 						}

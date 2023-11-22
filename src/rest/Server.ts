@@ -87,7 +87,6 @@ export default class Server {
 		this.express.get("/echo/:msg", Server.echo);
 		this.express.put("/dataset/:id/:kind", async (req: Request, res: Response) => {
 			try {
-				console.log("here");
 				const id = req.params.id;
 				const kind = req.params.kind as InsightDatasetKind;
 				const content = req.body.toString("base64");
